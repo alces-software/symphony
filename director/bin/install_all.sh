@@ -1,3 +1,4 @@
+#!/bin/bash
 ################################################################################
 # (c) Copyright 2007-2014 Alces Software Ltd                                   #
 #                                                                              #
@@ -22,7 +23,6 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony
+SYMPHONY_HOME=/var/lib/symphony/
 
-#Client name
-CLIENT_NAME=testclient
+$SYMPHONY_HOME/director/bin/install_keys.sh

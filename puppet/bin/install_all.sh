@@ -25,7 +25,5 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-echo "Installing bash profile wrapper:"
-cp -v ${SYMPHONY_HOME}/profile/sh/symphony.sh /etc/profile.d/
-chmod 644 /etc/profile.d/symphony.sh
-echo "DONE"
+$SYMPHONY_HOME/puppet/bin/install_environments.sh
+

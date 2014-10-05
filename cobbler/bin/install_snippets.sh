@@ -1,3 +1,4 @@
+#!/bin/bash
 ################################################################################
 # (c) Copyright 2007-2014 Alces Software Ltd                                   #
 #                                                                              #
@@ -22,7 +23,13 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony
+SYMPHONY_HOME=/var/lib/symphony/
+COBBLER_HOME=/var/lib/cobbler
 
-#Client name
-CLIENT_NAME=testclient
+if [ -d $COBBLER_HOME/snippets ]; then
+  echo "Installing symphony cobbler snippets to $COBBLER_HOME/snippets/symphony/"
+  if [ ! -d $COBBLER_HOME/snippets/symphony ]; then mkdir $COBBLER_HOME/snippets/symphony/; fi
+  cp -pav $SYMPHONY_HOME/cobbler/snippets/* $COBBLER_HOME/snippets/symphony/
+fi
+
+echo DONE

@@ -1,3 +1,4 @@
+#!/bin/bash
 ################################################################################
 # (c) Copyright 2007-2014 Alces Software Ltd                                   #
 #                                                                              #
@@ -22,7 +23,18 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony
+SYMPHONY_HOME=/var/lib/symphony/
+PUPPET_ENV=/etc/puppet/environments
 
-#Client name
-CLIENT_NAME=testclient
+if [ -d $PUPPET_ENV ]; then
+  echo "Installing symphony puppet environments to $PUPPET_ENV"
+  if [ -d $PUPPET_ENV/symphony ]; then 
+    echo "Exisiting files detected - backing up"
+    mv -v $PUPPET_ENV/symphony $PUPPET_ENV/symphony.$$.`date +"%m%d%Y"`
+   echo DONE
+  fi
+  cp -av $SYMPHONY_HOME/puppet/environments/symphony $PUPPET_ENV/.
+  chown puppet:puppet -R $PUPPET_ENV
+  (cd $PUPPET_ENV/symphony && git init && git add * && git commit -a -m 'Initial commit')
+  echo DONE
+fi

@@ -1,3 +1,4 @@
+#!/bin/bash
 ################################################################################
 # (c) Copyright 2007-2014 Alces Software Ltd                                   #
 #                                                                              #
@@ -22,12 +23,8 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-export SYMPHONY_HOME=/var/lib/symphony/
+SYMPHONY_HOME=/var/lib/symphony/
 
-if [ -d "${SYMPHONY_HOME}/profile/sh/profile.d/" ]; then
-  for a in "${SYMPHONY_HOME}/profile/sh/profile.d/"/*.sh; do
-      if [ -r "$a" ]; then
-	  source $a
-      fi
-  done
-fi
+$SYMPHONY_HOME/cobbler/bin/install_templates.sh
+$SYMPHONY_HOME/cobbler/bin/install_snippets.sh
+

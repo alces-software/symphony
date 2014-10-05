@@ -1,3 +1,4 @@
+#!/bin/bash
 ################################################################################
 # (c) Copyright 2007-2014 Alces Software Ltd                                   #
 #                                                                              #
@@ -22,10 +23,23 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony
-. ${SYMPHONY_HOME}/etc/vars.sh
 
-#Custom PS1 with cluster domain name
-if [ "$PS1" ]; then
-  PS1="[\u@\h\[\e[1;34m\](${ENVIRONMENT_NAME})\[\e[0m\] \W]\\$ "
-fi
+GEN_DIR=/tmp/symphonygenconfig.$$
+SITE_CONFIG=$GEN_DIR/site.yml
+HOST_CONFIG=$GEN_DIR/host.yml
+
+echo "Creating Gen dir.."
+mkdir -p $GEN_DIR
+
+echo "-----site.yml-----"
+echo "---"
+echo "symphonydirector::clientname: democlient" 
+echo "symphonydirector::customization::directorkey: \"`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`\""
+echo "------------------"
+
+echo "-----host.yml-----"
+
+echo "------------------"
+
+echo "Cleaning up.."
+rm -rf $GEN_DIR

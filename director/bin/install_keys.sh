@@ -1,3 +1,4 @@
+#!/bin/bash
 ################################################################################
 # (c) Copyright 2007-2014 Alces Software Ltd                                   #
 #                                                                              #
@@ -22,7 +23,15 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony
+SYMPHONY_HOME=/var/lib/symphony/
 
-#Client name
-CLIENT_NAME=testclient
+echo "Generating key.."
+ssh-keygen -f /root/.ssh/id_symphony -N ''
+echo DONE
+
+echo "Instaling ssh config.."
+cat << EOF > /root/.ssh/config
+Host *
+  IdentityFile ~/.ssh/id_symphony
+EOF
+echo DONE

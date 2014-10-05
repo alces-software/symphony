@@ -22,7 +22,7 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony
-
-#Client name
-CLIENT_NAME=testclient
+#Custom PS1 with client name
+if [ "$PS1" ]; then
+  PS1="[\u@\h\[\e[1;34m\](<%=@clientname%>)\[\e[0m\] \W]\\$ "
+fi
