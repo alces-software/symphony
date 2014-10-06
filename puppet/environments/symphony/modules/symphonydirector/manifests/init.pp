@@ -7,11 +7,16 @@
 class symphonydirector (
   #Client name - to be used throughout symphony
   $clientname = hiera('symphonydirector::clientname'),
+  #Role (symphony-director is master, all else are slave)
+  $role = $symphony_directorrole
 )
 {
+
   class { 'symphonydirector::customization':
+    role => $role,
     clientname => $clientname,
     install_directorkey => hiera('symphonydirector::customization::install_directorkey',true),
+    install_syslog => hiera('symphonydirector::customization::install_syslog',true),
     #SSH public key for root@symphony-director
     directorkey => hiera('symphonydirector::customization::directorkey')
   }

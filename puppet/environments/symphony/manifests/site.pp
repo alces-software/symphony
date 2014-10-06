@@ -8,6 +8,8 @@ filebucket { main: server => puppet }
 Package { allow_virtual => true }
 File { backup => main }
 Exec { path => "/usr/bin:/usr/sbin/:/bin:/sbin" }
+
 node default {
-  class { 'symphonydirector': }
+  class { 'symphony::profile::generic':
+  }
 }

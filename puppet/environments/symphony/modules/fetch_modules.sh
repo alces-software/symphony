@@ -24,28 +24,16 @@
 #                                                                              #
 ################################################################################
 
-GEN_DIR=/tmp/symphonygenconfig.$$
-SITE_CONFIG=$GEN_DIR/site.yml
-HOST_CONFIG=$GEN_DIR/host.yml
+check () {
+  if ! [ -d $1/.git ]; then
+    echo "Failed to clone $1 module" >&2
+    exit 1
+  fi
+}
 
-echo "Creating Gen dir.."
-mkdir -p $GEN_DIR
+cd `dirname $0`
 
-echo "-----site.yml-----"
-echo "---"
-echo "#Client name string"
-echo "symphonydirector::clientname: democlient" 
-echo "#RSA ssh key for root@director"
-echo "symphonydirector::customization::directorkey: \"`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`\""
-echo "#Install director ssh key to root"
-echo "symphonydirector::customization::install_directorkey: true"
-echo "#Enable syslog pushing"
-echo "symphonydirector::customization::install_syslog: true"
-echo "------------------"
-
-echo "-----host.yml-----"
-
-echo "------------------"
-
-echo "Cleaning up.."
-rm -rf $GEN_DIR
+git clone https://github.com/ste78/puppet-multitemplate.git puppet-multitemplate
+check puppet-multitemplate || exit 1
+git clone https://github.com/ste78/puppetlabs-stdlib.git --branch 3.2.x stdlib
+check stdlib || exit 1

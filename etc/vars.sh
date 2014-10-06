@@ -24,5 +24,15 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony
 
-#Client name
-CLIENT_NAME=testclient
+
+#REPO TREE FOR DISTRO
+RELEASE=`cat /etc/redhat-release`
+case $RELEASE in
+  "CentOS Linux release 7.0.1406 (Core) ")
+    TREE=centos/7.0
+    ;;
+  *)
+    echo "Unable to determine distro tree" >&2
+    exit 1
+    ;;
+esac

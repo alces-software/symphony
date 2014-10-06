@@ -33,18 +33,12 @@ mkdir -p $GEN_DIR
 
 echo "-----site.yml-----"
 echo "---"
-echo "#Client name string"
-echo "symphonydirector::clientname: democlient" 
-echo "#RSA ssh key for root@director"
-echo "symphonydirector::customization::directorkey: \"`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`\""
-echo "#Install director ssh key to root"
-echo "symphonydirector::customization::install_directorkey: true"
-echo "#Enable syslog pushing"
-echo "symphonydirector::customization::install_syslog: true"
+echo "#Install local repo configs"
+echo "symphonyrepo::yum::install_repoconfigs: true"
 echo "------------------"
 
 echo "-----host.yml-----"
-
+echo "---"
 echo "------------------"
 
 echo "Cleaning up.."

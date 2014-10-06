@@ -23,29 +23,31 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
+SYMPHONY_HOME=/var/lib/symphony/
 
-GEN_DIR=/tmp/symphonygenconfig.$$
-SITE_CONFIG=$GEN_DIR/site.yml
-HOST_CONFIG=$GEN_DIR/host.yml
+. $SYMPHONY_HOME/etc/vars.sh
 
-echo "Creating Gen dir.."
-mkdir -p $GEN_DIR
 
-echo "-----site.yml-----"
-echo "---"
-echo "#Client name string"
-echo "symphonydirector::clientname: democlient" 
-echo "#RSA ssh key for root@director"
-echo "symphonydirector::customization::directorkey: \"`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`\""
-echo "#Install director ssh key to root"
-echo "symphonydirector::customization::install_directorkey: true"
-echo "#Enable syslog pushing"
-echo "symphonydirector::customization::install_syslog: true"
-echo "------------------"
+yum -e 0 -y --config http://symphony-repo/configs/$TREE/yum.conf --enablerepo epel --enablerepo puppet-base --enablerepo puppet-deps install puppet
 
-echo "-----host.yml-----"
+cat << EOF > /etc/puppet/puppet.conf
+[main]
+vardir = /var/lib/puppet
+logdir = /var/log/puppet
+rundir = /var/run/puppet
+ssldir = \$vardir/ssl
+[agent]
+pluginsync      = true
+report          = false
+ignoreschedules = true
+daemon          = false
+ca_server       = symphony-director
+certname        = `hostname -s`
+environment     = production
+server          = symphony-director
+EOF
 
-echo "------------------"
+systemctl enable puppet
 
-echo "Cleaning up.."
-rm -rf $GEN_DIR
+#Generate puppet signing request (cobbler will sort out the rest)
+/usr/bin/puppet agent --test --waitforcert 0 --server symphony-director --environment symphony

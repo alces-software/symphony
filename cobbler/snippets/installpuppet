@@ -13,10 +13,10 @@ pluginsync      = true
 report          = false
 ignoreschedules = true
 daemon          = false
-ca_server       = symphony
-certname        = $name
+ca_server       = symphony-director
+certname        = $hostname
 environment     = production
-server          = symphony
+server          = symphony-director
 EOF
 
 systemctl enable puppet

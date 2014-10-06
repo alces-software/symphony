@@ -1,0 +1,55 @@
+[centos]
+name=CentOS Base
+baseurl=http://symphony-repo/pulp/repos/centos/7.0/os/
+enabled=1
+skip_if_unavailable=1
+gpgcheck=0
+priority=10
+
+[centos-updates]
+name=CentOS Updates
+baseurl=http://symphony-repo/pulp/repos/centos/7.0/updates/
+enabled=1
+skip_if_unavailable=1
+gpgcheck=0
+priority=10
+
+[epel]
+name=Epel
+baseurl=http://symphony-repo/pulp/repos/epel7/
+enabled=0
+skip_if_unavailable=1
+gpgcheck=0
+priority=11
+
+[pulp]
+name=Pulp
+baseurl=http://symphony-repo/pulp/repos/pulp/el7/
+enabled=0
+skip_if_unavailable=1
+gpgcheck=0
+priority=9
+
+[cobbler]
+name=Cobbler
+baseurl=http://symphony-repo/pulp/repos/cobbler/el7/
+enabled=0
+skip_if_unavailable=1
+gpgcheck=0
+priority=9
+
+[puppet-base]
+name=Puppet Base
+baseurl=http://symphony-repo/pulp/repos/puppet/base/el7
+enabled=0
+skip_if_unavailable=1
+gpgcheck=0
+priority=9
+
+[puppet-deps]
+name=Puppet Deps
+baseurl=http://symphony-repo/pulp/repos/puppet/deps/el7
+enabled=0
+skip_if_unavailable=1
+gpgcheck=0
+priority=9

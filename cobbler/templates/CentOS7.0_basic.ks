@@ -69,4 +69,5 @@ $SNIPPET('post_anamon')
 # Start final steps
 $SNIPPET('kickstart_done')
 # End final steps
+$SNIPPET('symphony/runpuppet')
 %end

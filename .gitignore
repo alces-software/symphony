@@ -1,1 +1,3 @@
 /cobbler/distro_files/*
+/puppet/environments/symphony/modules/puppet-multitemplate
+/puppet/environments/symphony/modules/stdlib

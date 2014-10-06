@@ -1,0 +1,1 @@
+puppet agent -t --environment=symphony --server symphony-director --certname $hostname
