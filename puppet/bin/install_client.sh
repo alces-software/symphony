@@ -51,3 +51,7 @@ systemctl enable puppet
 
 #Generate puppet signing request (cobbler will sort out the rest)
 /usr/bin/puppet agent --test --waitforcert 0 --server symphony-director --environment symphony
+
+echo "==========================================================================="
+echo "Please login to symphony-director and sign the certificate for this machine"
+echo "# puppet cert sign `hostname -s`"

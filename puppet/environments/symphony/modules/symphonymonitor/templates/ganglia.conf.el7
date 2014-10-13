@@ -1,0 +1,11 @@
+  #
+  # Ganglia monitoring system php web frontend
+  #
+  
+  Alias /ganglia /usr/share/ganglia
+
+  <Location /ganglia>
+    Order allow,deny
+    Allow from all
+    Require all granted
+  </Location>

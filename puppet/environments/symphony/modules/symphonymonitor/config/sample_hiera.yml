@@ -1,0 +1,3 @@
+---
+#Enable install/config of ganglia (default:true)
+symphonymonitor::ganglia::install_ganglia: true

@@ -31,3 +31,13 @@ Facter.add("symphony_reporole") do
     end
   end
 end
+
+Facter.add("symphony_monitorrole") do
+  setcode do
+    if Facter.value('hostname') == 'symphony-monitor'
+      'master'
+    else
+      'slave'
+    end
+  end
+end

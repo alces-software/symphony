@@ -1,0 +1,25 @@
+#Client name string
+symphonydirector::clientname: democlient
+#RSA ssh key for root@director
+symphonydirector::customization::directorkey: %DIRECTORKEY%
+#Install director ssh key to root
+symphonydirector::customization::install_directorkey: true
+#Enable syslog pushing
+symphonydirector::customization::install_syslog: true
+
+#TIME
+#Enable ntp config
+symphonydirector::time::install_ntp: true
+#Add additional ntp servers (to os default)
+#symphonydirector::time::additionalntpservers: 
+# - '0.centos.pool.ntp.org'
+
+#MAIL
+#Enable postfix setup
+symphonydirector::mail::install_postfix: true
+#External mail relay for your domain
+symphonydirector::mail::externalrelay: %MAILRELAY%
+#Internal mail domain to send mail as
+symphonydirector::mail::maildomain: %DOMAIN%
+#Mail from address - this usually needs to be an email address your relay server will relay for
+symphonydirector::mail::mailfrom: %MAILFROM%

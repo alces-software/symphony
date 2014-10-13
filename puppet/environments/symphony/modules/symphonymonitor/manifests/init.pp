@@ -4,17 +4,16 @@
 ## Copyright (c) 2008-2014 Alces Software Ltd
 ##
 ################################################################################
-class symphonyrepo (
+class symphonymonitor (
   #Client name - to be used throughout symphony
   $clientname = $symphonydirector::clientname,
   #role - master or slave
-  $role = $symphony_reporole
+  $role = $symphony_monitorrole
 )
 {
-
-  class { 'symphonyrepo::yum':
-    install_repoconfigs => hiera('symphonyrepo::yum::install_repoconfigs',true),
-    enablerepos => hiera('symphonyrepo::yum::enable_symphonyrepos',[])
-    
+  class { 'symphonymonitor::ganglia':
+    install_ganglia => hiera('symphonymonitor::ganglia::install_ganglia',true),
+    clientname => $clientname,
+    role => $role,
   }
 }

@@ -1,3 +1,6 @@
 /cobbler/distro_files/*
-/puppet/environments/symphony/modules/puppet-multitemplate
+/puppet/environments/symphony/modules/multitemplate
 /puppet/environments/symphony/modules/stdlib
+/puppet/environments/symphony/modules/ntp
+/puppet/environments/symphony/modules/ganglia
+/puppet/environments/symphony/modules/firewalld

@@ -24,28 +24,12 @@
 #                                                                              #
 ################################################################################
 
-GEN_DIR=/tmp/symphonygenconfig.$$
-SITE_CONFIG=$GEN_DIR/site.yml
-HOST_CONFIG=$GEN_DIR/host.yml
+DOMAIN=prv.cluster.local
+MAILRELAY=smtp.alces-software.com
+MAILFROM='test@alces-software.com'
 
-echo "Creating Gen dir.."
-mkdir -p $GEN_DIR
-
-echo "-----site.yml-----"
-echo "---"
-echo "#Client name string"
-echo "symphonydirector::clientname: democlient" 
-echo "#RSA ssh key for root@director"
-echo "symphonydirector::customization::directorkey: \"`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`\""
-echo "#Install director ssh key to root"
-echo "symphonydirector::customization::install_directorkey: true"
-echo "#Enable syslog pushing"
-echo "symphonydirector::customization::install_syslog: true"
-echo "------------------"
-
-echo "-----host.yml-----"
-
-echo "------------------"
-
-echo "Cleaning up.."
-rm -rf $GEN_DIR
+sed `dirname $0`/config/sample_hiera.yml \
+-e "s|%DIRECTORKEY%|`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`|g" \
+-e "s|%DOMAIN%|$DOMAIN|g" \
+-e "s|%MAILRELAY%|$MAILRELAY|g" \
+-e "s|%MAILFROM%|$MAILFROM|g" 

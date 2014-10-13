@@ -20,4 +20,18 @@ class symphonydirector (
     #SSH public key for root@symphony-director
     directorkey => hiera('symphonydirector::customization::directorkey')
   }
+
+  class { 'symphonydirector::time': 
+    install_ntp => hiera('symphonydirector::time::install_ntp',true),
+    additionalntpservers => hiera('symphonydirector::time::additionalntpservers',[])
+  }
+
+  class { 'symphonydirector::mail':
+    role => $role,
+    install_postfix => hiera('symphonydirector::mail::install_postfix',true),
+    externalrelay => hiera('symphonydirector::mail::externalrelay'),
+    maildomain => hiera('symphonydirector::mail::maildomain'),
+    mailfrom => hiera('symphonydirector::mail::mailfrom'),
+  }
+    
 }

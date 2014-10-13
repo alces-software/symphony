@@ -5,7 +5,8 @@
 ##
 ################################################################################
 class symphonyrepo::yum (
-  $install_repoconfigs
+  $install_repoconfigs,
+  $enablerepos
 )
 {
   if $install_repoconfigs {
@@ -14,6 +15,7 @@ class symphonyrepo::yum (
       mode=>0644,
       owner=>'root',
       group=>'root',
+      replace=>'no',
       content=>template("symphonyrepo/yum/$symphony_operatingsystem.erb"),
       notify=>Exec['yumclean']
     }
@@ -30,6 +32,9 @@ class symphonyrepo::yum (
     package {'yum-plugin-priorities':
       require=>File['/etc/yum.repos.d/symphony.repo'],
       ensure=>installed,
+    }
+    symphonyrepo::yum::enablerepo { $enablerepos: 
+      require=>File['/etc/yum.repos.d/symphony.repo']
     }
   }
 }

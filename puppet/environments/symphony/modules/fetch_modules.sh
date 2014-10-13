@@ -33,7 +33,13 @@ check () {
 
 cd `dirname $0`
 
-git clone https://github.com/ste78/puppet-multitemplate.git puppet-multitemplate
-check puppet-multitemplate || exit 1
-git clone https://github.com/ste78/puppetlabs-stdlib.git --branch 3.2.x stdlib
+git clone https://github.com/ste78/puppet-multitemplate.git multitemplate
+check multitemplate || exit 1
+git clone https://github.com/puppetlabs/puppetlabs-stdlib.git -b 4.3.2 stdlib
 check stdlib || exit 1
+git clone https://github.com/puppetlabs/puppetlabs-ntp.git -b 3.2.1 ntp
+check ntp || exit 1
+git clone https://github.com/jpopelka/puppet-firewalld.git -b v0.2.2 firewalld
+check firewalld || exit 1
+git clone https://github.com/jhoblitt/puppet-ganglia -b v1.3.0 ganglia
+check ganglia || exit 1
