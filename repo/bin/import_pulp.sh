@@ -34,6 +34,10 @@ if [ -z $GROUP ]; then
   exit 1
 fi
 
+if ! [ -f /var/www/html/configs/ ]; then
+  ln -snf $SYMPHONY_HOME/repo/yumconfigs /var/www/html/configs 
+fi
+
 case $GROUP in
   centos6.5) 
     #base
@@ -42,6 +46,8 @@ case $GROUP in
     #updates
     pulp-admin rpm repo create --repo-id=centos6.5-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6.5/updates/x86_64/ --serve-http=true --relative-url=centos/6.5/updates
     pulp-admin rpm repo sync run --repo-id centos6.5-updates --bg
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
     ;;
   el6other)
     #epel
@@ -67,6 +73,8 @@ case $GROUP in
     #updates
     pulp-admin rpm repo create --repo-id=centos7.0-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7.0.1406/updates/x86_64/ --serve-http=true --relative-url=centos/7.0/updates
     pulp-admin rpm repo sync run --repo-id centos7.0-updates --bg
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum.conf
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum.conf
     ;;
   el7other)
     #epel
