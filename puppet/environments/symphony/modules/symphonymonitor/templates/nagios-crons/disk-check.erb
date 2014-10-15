@@ -1,0 +1,15 @@
+#!/bin/bash
+# script to check for node RAID errors
+## NB - Create a genders group called "raidcheck" to enable checks on those nodes
+[[ ! -x /usr/bin/nodeattr ]] && exit 0
+[[ ! -d /var/spool/nagios/raid-check ]] && mkdir -p /var/spool/nagios/raid-check && chown -R nagios /var/spool/nagios/raid-check
+
+. /etc/profile
+
+for node in `nodeattr -s raidcheck`
+do
+   if [ "`ssh $node hostname -s 2> /dev/null | awk '{print $1}'`" == "$node" ] ; then
+      ssh $node /opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -lALL -a0 2> /dev/null | grep State | awk '{print $3}' > /var/spool/nagios/raid-check/$node.raid.out 2>&1
+   fi
+done
+

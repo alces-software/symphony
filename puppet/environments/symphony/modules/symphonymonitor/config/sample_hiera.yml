@@ -1,3 +1,5 @@
 ---
 #Enable install/config of ganglia (default:true)
 symphonymonitor::ganglia::install_ganglia: true
+#Enable install/config of nagios (default:true)
+symphonymonitor::nagios::install_nagios: true

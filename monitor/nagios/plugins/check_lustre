@@ -1,0 +1,91 @@
+#!/usr/bin/env ruby
+################################################################################
+# (c) Copyright 2007-2011 Alces Software Ltd                                   #
+#                                                                              #
+# HPC Cluster Toolkit                                                          #
+#                                                                              #
+# This file/package is part of the HPC Cluster Toolkit                         #
+#                                                                              #
+# This is free software: you can redistribute it and/or modify it under        #
+# the terms of the GNU Affero General Public License as published by the Free  #
+# Software Foundation, either version 3 of the License, or (at your option)    #
+# any later version.                                                           #
+#                                                                              #
+# This file is distributed in the hope that it will be useful, but WITHOUT     #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License #
+# for more details.                                                            #
+#                                                                              #
+# You should have received a copy of the GNU Affero General Public License     #
+# along with this product.  If not, see <http://www.gnu.org/licenses/>.        #
+#                                                                              #
+# For more information on Alces Software, please visit:                        #
+# http://www.alces-software.org/                                               #
+#                                                                              #
+################################################################################
+require ::File::join(::File::dirname(__FILE__),'alces-nagios.rb')
+#TYPE:
+#HEALTH - check Lustres general idea of the system health
+#PING - lnet ping another lnet host, requires target=mds1.ib@o2ib0 
+#MDT - is mdt present, requires target=MDT0000
+#OST - is ost present, requires target=OST0000
+
+LUSTRE_PROC='/proc/fs/lustre/'
+
+class NagiosChecker < Alces::NagiosCheck
+  def execute
+    required_option(:type)
+    case option(:type).to_s.upcase
+    when 'HEALTH'
+      health_file=::File::join(LUSTRE_PROC,'health_check')
+      self.respond!(CRIT,'Lustre modules not loaded') unless ::File::exists?(health_file)
+      health=::File::read(health_file).chomp
+      if health != "healthy"
+        respond!(WARN,health)
+      end
+    when 'MDT'
+      required_option(:target)
+      fsname=option(:fsname) || 'lustre'
+      mdt_dir=::File::join(LUSTRE_PROC,'mdt',"#{fsname}-#{option(:target)}")
+      self.respond!(CRIT,'Lustre MDT Not present') unless ::File::directory?(mdt_dir)
+    when 'PING'
+      required_option(:target)
+      unless system("/usr/sbin/lctl ping #{option(:target)} 5 &>/dev/null")
+        respond!(CRIT,'Ping failed')
+      end
+    when 'OSC'
+      required_option(:target)
+      devices=::File::join(LUSTRE_PROC,'devices')
+      self.respond!(CRIT,'Lustre OST Not present') unless system("/bin/grep 'UP' #{devices} | /bin/grep -q #{option(:target)}")
+    when 'OST'
+      required_option(:target)
+      fsname=option(:fsname) || 'lustre'
+      ost_dir=::File::join(LUSTRE_PROC,'obdfilter',"#{fsname}-#{option(:target)}")
+      self.respond!(CRIT,'Lustre OST Not present') unless ::File::directory?(ost_dir)
+    when 'OST_SPACE'
+      required_option(:target)
+      fsname=option(:fsname) || 'lustre'
+      ost_dir=::File::join(LUSTRE_PROC,'obdfilter',"#{fsname}-#{option(:target)}")
+      self.respond!(CRIT,'Lustre OST Not present') unless ::File::directory?(ost_dir)
+      kbytesavail=::File::read(::File::join(ost_dir,'kbytesavail')).chomp.to_i
+      kbytestotal=::File::read(::File::join(ost_dir,'kbytestotal')).chomp.to_i
+      percentage_avail=kbytesavail.percent_of(kbytestotal).round
+      if option(:critical).to_s.empty?
+        respond!(OK,"#{kbytesavail} Available of #{kbytestotal}: #{percentage_avail}% Available")
+      else
+        if percentage_avail <= option(:critical).to_i
+          respond!(CRIT,"#{kbytesavail} Available of #{kbytestotal}: #{percentage_avail}% Available")
+        else
+          respond!(OK,"#{kbytesavail} Available of #{kbytestotal}: #{percentage_avail}% Available") 
+        end
+      end
+    else
+      respond!(CRIT,'Unknown type')
+    end
+  end  
+end
+
+if $0 == __FILE__
+  checker=NagiosChecker.new.respond!
+end
+

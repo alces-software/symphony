@@ -41,3 +41,9 @@ Facter.add("symphony_monitorrole") do
     end
   end
 end
+
+Facter.add("symphony_machinetype") do
+  setcode do
+    'generic'
+  end
+end

@@ -1,0 +1,43 @@
+#!/bin/bash
+################################################################################
+# (c) Copyright 2007-2011 Alces Software Ltd                                   #
+#                                                                              #
+# HPC Cluster Toolkit                                                          #
+#                                                                              #
+# This file/package is part of the HPC Cluster Toolkit                         #
+#                                                                              #
+# This is free software: you can redistribute it and/or modify it under        #
+# the terms of the GNU Affero General Public License as published by the Free  #
+# Software Foundation, either version 3 of the License, or (at your option)    #
+# any later version.                                                           #
+#                                                                              #
+# This file is distributed in the hope that it will be useful, but WITHOUT     #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License #
+# for more details.                                                            #
+#                                                                              #
+# You should have received a copy of the GNU Affero General Public License     #
+# along with this product.  If not, see <http://www.gnu.org/licenses/>.        #
+#                                                                              #
+# For more information on Alces Software, please visit:                        #
+# http://www.alces-software.org/                                               #
+#                                                                              #
+################################################################################
+
+# Script to check for predictive failure events on a Dell H700 or H710 RAID card
+# N.B. This script needs to be run with SUDO by the nagios user
+
+# Check RAID monitor application is present and executable
+[[ -x /opt/MegaRAID/MegaCli/MegaCli64 ]] || exit 3
+
+# the command to run to check the service
+checkcommand=`/opt/MegaRAID/MegaCli/MegaCli64 -AdpEventLog -GetEvents -f /var/tmp/PERC_H700_out.log -a0 > /dev/null 2>&1 ; grep -c "Predicti" /tmp/PERC_H700_out.log | awk '{print $1}'`
+
+if [ `echo $checkcommand | awk '{print $1}'` -gt 0 ] ; then
+   echo "RAID adapter registered $checkcommand predictive failure warnings"
+   exit 1
+else
+   echo "RAID adapter okay"
+   exit 0
+fi
+

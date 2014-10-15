@@ -15,6 +15,7 @@ class symphony::profile::generic (
     stage=>configure,
   }
   class { 'symphonymonitor':
+    profile=>$profile,
     stage=>configure,
   }
 }

@@ -1,0 +1,216 @@
+define host{
+	name				generic
+	use				linux-server
+	register			0
+	notifications_enabled		1
+}
+
+define service{
+        name                            nrpe-service           ; The name of this service template
+        use                             generic-service         ; Inherit default values from the generic-service definition
+        check_period                    24x7                    ; The service can be checked at any time of the day
+        max_check_attempts              4                       ; Re-check the service up to 4 times in order to determine its final (hard) state
+        normal_check_interval           5                       ; Check the service every 5 minutes under normal conditions
+        retry_check_interval            1                       ; Re-check the service every minute until a hard state can be determined
+        contact_groups                  admins                  ; Notifications get sent out to everyone in the 'admins' group
+        notification_options            w,u,c,r                 ; Send notifications about warning, unknown, critical, and recovery events
+        notification_interval           60                      ; Re-notify about service problems every hour
+        notification_period             24x7                    ; Notifications can be sent out at any time
+        register                        0                       ; DONT REGISTER THIS DEFINITION - ITS NOT A REAL SERVICE, JUST A TEMPLATE!
+        }
+
+define service{
+        name                            daily-service           ; The name of this service template
+        use                             generic-service         ; Inherit default values from the generic-service definition
+        check_period                    24x7                    ; The service can be checked at any time of the day
+        max_check_attempts              4                       ; Re-check the service up to 4 times in order to determine its final (hard) state
+        normal_check_interval           1440                    ; Check the service every day under normal conditions
+        retry_check_interval            1                       ; Re-check the service every minute until a hard state can be determined
+        contact_groups                  admins                  ; Notifications get sent out to everyone in the 'admins' group
+        notification_options            w,u,c,r                 ; Send notifications about warning, unknown, critical, and recovery events
+        notification_interval           1440                    ; Re-notify about service problems every day
+        notification_period             24x7                    ; Notifications can be sent out at any time
+        register                        0                       ; DONT REGISTER THIS DEFINITION - ITS NOT A REAL SERVICE, JUST A TEMPLATE!
+        }
+
+define service{
+        name                            hourly-service          ; The name of this service template
+        use                             generic-service         ; Inherit default values from the generic-service definition
+        check_period                    24x7                    ; The service can be checked at any time of the day
+        max_check_attempts              4                       ; Re-check the service up to 4 times in order to determine its final (hard) state
+        normal_check_interval           60                      ; Check the service every hour under normal conditions
+        retry_check_interval            30                      ; Re-check the service every 30 mins until a hard state can be determined
+        contact_groups                  admins                  ; Notifications get sent out to everyone in the 'admins' group
+        notification_options            w,u,c,r                 ; Send notifications about warning, unknown, critical, and recovery events
+        notification_interval           1440                    ; Re-notify about service problems every day
+        notification_period             24x7                    ; Notifications can be sent out at any time
+        register                        0                       ; DONT REGISTER THIS DEFINITION - ITS NOT A REAL SERVICE, JUST A TEMPLATE!
+        }
+
+
+define host{
+        use                     generic
+        host_name               symphony-director
+        alias                   symphony-director.prv.cluster.local
+        address                 symphony-director
+        }
+
+define host{
+        use                     generic
+        host_name               symphony-repo
+        alias                   symphony-repo.prv.cluster.local
+        address                 symphony-repo
+        }
+
+define host{
+        use                     generic
+        host_name               symphony-monitor
+        alias                   symphony-monitor.prv.cluster.local
+        address                 symphony-monitor
+        }
+
+#define host{
+#        use                     generic
+#        host_name               symphony-director
+#        alias                   symphony-director.prv.cluster.local
+#        address                 symphony-director
+#        }
+
+define hostgroup{
+        hostgroup_name  symphony
+        alias           Symphony nodes
+        members         symphony-director,symphony-repo,symphony-monitor
+        }
+
+#define hostgroup{
+#        hostgroup_name	generic
+#        alias		Generic nodes
+#        members		
+#}
+
+define service{
+        use                             local-service
+        hostgroup_name                  symphony
+        service_description             PING
+	check_command			check_ping!100.0,20%!500.0,60%
+        }
+
+#define service{
+#	use 			nrpe-service
+#	hostgroup_name 		symphony
+#	service_description 	load
+#	check_command 		check_nrpe!check_load
+#}
+
+#define service{
+#	use 			nrpe-service
+#	hostgroup_name		symphony
+#	service_description 	users
+#	check_command 		check_nrpe!check_users
+#}
+
+#define service{
+#	use 			nrpe-service
+#	hostgroup_name		symphony
+#	service_description 	root disk
+#	check_command 		check_nrpe!check_disk
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     storage var partition
+#        check_command           check_nrpe!check_disk_var
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     storage tmp partition
+#        check_command           check_nrpe!check_disk_tmp
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     storage opt-alces partition
+#        check_command           check_nrpe!check_disk_alces
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     storage opt-gridware partition
+#        check_command           check_nrpe!check_disk_gridware
+#}
+
+#define service{
+#	use 			nrpe-service
+#	hostgroup_name 		symphony
+#	service_description 	zombie procs
+#	check_command 		check_nrpe!check_zombie_procs
+#}
+
+#define service{
+#	use 			nrpe-service
+#	hostgroup_name		symphony
+#	service_description 	total procs
+#	check_command 		check_nrpe!check_total_procs
+#}
+
+#define service{
+#        use                     daily-service
+#        hostgroup_name          symphony
+#        service_description     Check for memory ECC errors
+#        check_command           check_ECC-IPMI!$HOSTNAME$
+#        }
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     Power supply redundancy
+#        check_command           check_nrpe!check_PSUs
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphnony
+#        service_description     PERC H7X0 system disk status
+#        check_command           check_nrpe!check_PERC_H7X0
+#}
+
+#define service{
+#        use                     local-service
+#        hostgroup_name          symphony
+#        service_description     Check grid-engine status
+#        check_command           check_GE
+#        }
+
+#define service{
+#        use                     daily-service
+#        hostgroup_name          symphony
+#        service_description     Check dirvish backup status
+#        check_command           check_dirvish
+#        }
+
+#define service{
+#        use                     local-service
+#        hostgroup_name          compute
+#        service_description     Check for high load via ganglia
+#        check_command           check_load_ganglia!$HOSTNAME$
+#        }
+
+#define service{
+#        use                     local-service
+#        hostgroup_name          symphony
+#        service_description     Check for air inlet temperature
+#        check_command           check_inlettemp!$HOSTNAME$
+#        }
+
+#define service{
+#        use                             nrpe-service
+#        name                            check_smart_attributes_sda
+#        hostgroup_name                  compute
+#        service_description             SMART data for disk SDA
+#        check_command                   check_nrpe!check_smart_attributes_sda
+#        }

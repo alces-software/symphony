@@ -1,0 +1,54 @@
+#!/bin/bash
+################################################################################
+# (c) Copyright 2007-2011 Alces Software Ltd                                   #
+#                                                                              #
+# HPC Cluster Toolkit                                                          #
+#                                                                              #
+# This file/package is part of the HPC Cluster Toolkit                         #
+#                                                                              #
+# This is free software: you can redistribute it and/or modify it under        #
+# the terms of the GNU Affero General Public License as published by the Free  #
+# Software Foundation, either version 3 of the License, or (at your option)    #
+# any later version.                                                           #
+#                                                                              #
+# This file is distributed in the hope that it will be useful, but WITHOUT     #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License #
+# for more details.                                                            #
+#                                                                              #
+# You should have received a copy of the GNU Affero General Public License     #
+# along with this product.  If not, see <http://www.gnu.org/licenses/>.        #
+#                                                                              #
+# For more information on Alces Software, please visit:                        #
+# http://www.alces-software.org/                                               #
+#                                                                              #
+################################################################################
+
+# Script to check the status of the grid-engine master daemon via qping
+
+# Set site variables (edit as necessary)
+geloc=/opt/gridware/ge
+qping=$geloc/bin/lx24-amd64/qping
+
+# Check monitor application is present and executable
+[[ -x $qping ]] || exit 3
+
+qmaster=`cat $geloc/default/common/act_qmaster`
+qmasterport=6444
+
+# Source grid engine settings
+. /etc/profile.d/ge.sh
+
+# Run the monitor command grab the output and the exit status
+$qping -info $qmaster $qmasterport qmaster 1 > /var/tmp/qping.out 2> /dev/null
+exitcode=$?
+
+if [ $exitcode -eq 0 ] ; then
+   echo "Grid-engine status is okay - `grep clients /var/tmp/qping.out | awk '{print $5}'` connected clients"
+   rm -f /var/tmp/qping.out
+   exit 0
+else
+   echo "Detected grid-engine status warning - see /var/tmp/qping.out"
+   exit 1
+fi
+

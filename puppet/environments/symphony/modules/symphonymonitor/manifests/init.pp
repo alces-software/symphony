@@ -8,12 +8,20 @@ class symphonymonitor (
   #Client name - to be used throughout symphony
   $clientname = $symphonydirector::clientname,
   #role - master or slave
-  $role = $symphony_monitorrole
+  $role = $symphony_monitorrole,
+  #profile - profile name from symphony base modules
+  $profile = 'generic'
 )
 {
   class { 'symphonymonitor::ganglia':
     install_ganglia => hiera('symphonymonitor::ganglia::install_ganglia',true),
     clientname => $clientname,
     role => $role,
+  }
+
+  class { 'symphonymonitor::nagios':
+    install_nagios=> hiera('symphonymonitor::nagios::install_nagios',true),
+    role => $role,
+    profile => $profile,
   }
 }

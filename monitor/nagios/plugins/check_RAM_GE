@@ -1,0 +1,106 @@
+#!/bin/bash
+################################################################################
+# (c) Copyright 2007-2011 Alces Software Ltd                                   #
+#                                                                              #
+# HPC Cluster Toolkit                                                          #
+#                                                                              #
+# This file/package is part of the HPC Cluster Toolkit                         #
+#                                                                              #
+# This is free software: you can redistribute it and/or modify it under        #
+# the terms of the GNU Affero General Public License as published by the Free  #
+# Software Foundation, either version 3 of the License, or (at your option)    #
+# any later version.                                                           #
+#                                                                              #
+# This file is distributed in the hope that it will be useful, but WITHOUT     #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License #
+# for more details.                                                            #
+#                                                                              #
+# You should have received a copy of the GNU Affero General Public License     #
+# along with this product.  If not, see <http://www.gnu.org/licenses/>.        #
+#                                                                              #
+# For more information on Alces Software, please visit:                        #
+# http://www.alces-software.org/                                               #
+#                                                                              #
+################################################################################
+
+# Script to check memory availability via grid-engine
+. /etc/profile.d/alces-profiles.sh > /dev/null 2>&1
+
+export SGE_CELL="etc"
+export SGE_CLUSTER_NAME="cluster"
+export SGE_EXECD_PORT="6445"
+export SGE_QMASTER_PORT="6444"
+export SGE_ROOT="/opt/alces/pkg/services/gridscheduler/2011.11p1_155"
+PATH=$PATH:/opt/alces/pkg/services/gridscheduler/2011.11p1_155/bin/linux-x64/
+qping=/opt/alces/pkg/services/gridscheduler/2011.11p1_155/bin/linux-x64/qping
+
+target=$1
+if [ "$target" == "" ] ; then
+   echo "No target system provided"
+   exit 3
+fi
+
+# Set site variables (edit as necessary)
+module -s load services/gridscheduler > /dev/null 2>&1
+qhost=qhost
+
+# Check monitor application is present and executable
+[[ -x `which $qhost` ]] || exit 3
+
+qmaster=`cat $SGE_ROOT/etc/common/act_qmaster`
+qmasterport=6444
+
+# Run the monitor command and grab the output for the client we want
+# format is:
+# hostname                arch           CPUs load  total    used   swap     swap-used
+# node10                  linux-x64       8  6.00   47.1G    9.6G   16.0G     0.0
+outputline=`$qhost | grep -i $target`
+
+# Check for grid-engine not being available
+if [ "$outputline" == "" ] ; then
+   echo "No data for $target available"
+   exit 0
+fi
+
+# Check for gridengine being available, but node being down
+if [ `echo $outputline | awk '{print $4}'` == "-" ] ; then
+   echo "No data for $target available"
+   exit 0
+fi
+
+phyram=`echo $outputline | awk '{print $5}' | cut -d. -f1`
+usedram=`echo $outputline | awk '{print $6}' | cut -d. -f1`
+
+# Check in case we're using KB or MB of RAM
+if [ `echo $outputline | awk '{print $6}' | egrep -c "K|M" | awk '{print $1}'` -ge 1 ] ; then
+   usedram=1
+fi
+
+swap=`echo $outputline | awk '{print $7}' | cut -d. -f1`
+swapused=`echo $outputline | awk '{print $8}' | cut -d. -f1`
+
+# Check in case we're using KB or MB of swap
+if [ `echo $outputline | awk '{print $8}' | egrep -c "K|M" | awk '{print $1}'` -ge 1 ] ; then
+   swapused=1
+fi
+
+totalram=`expr $phyram + $swap`
+usedram=`expr $usedram + $swapused`
+alarm1=`expr $usedram \* 110 \/ 100`
+alarm2=`expr $usedram \* 125 \/ 100`
+
+if [ $usedram -gt $alarm1 ] ; then
+   echo "host $target has $phyram GB RAM with $usedram GB used (${totalram}GB total)"
+   exit 1
+elif [ $usedram -gt $alarm2 ] ; then
+   echo "host $target has $phyram GB RAM with $usedram GB used (${totalram}GB total)"
+   exit 2
+else
+   echo "host $target has $phyram GB RAM with $usedram GB used (${totalram}GB total)"
+   exit 0
+fi
+
+exit 3
+
+

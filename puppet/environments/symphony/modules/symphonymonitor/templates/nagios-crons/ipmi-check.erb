@@ -1,0 +1,15 @@
+#!/bin/bash
+# script to retrieve IPMI sensors output
+## N.B. Create a genders group called "ipmicheck" to enable checks on nodes
+
+[[ ! -x /usr/bin/nodeattr ]] && exit 0
+[[ ! -d /var/spool/nagios/ipmi-check ]] && mkdir -p /var/spool/nagios/ipmi-check && chown -R nagios /var/spool/nagios/ipmi-check
+
+. /etc/profile
+
+for node in `nodeattr -s ipmicheck`
+do
+   ipmi-sensors -h $node.bmc > /var/spool/nagios/ipmi-check/$node.ipmi.out 2>&1
+done
+
+
