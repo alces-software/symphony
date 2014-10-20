@@ -1,0 +1,1 @@
+yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf --enablerepo=epel --enablerepo=symphony install vconfig

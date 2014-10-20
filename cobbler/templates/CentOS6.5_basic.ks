@@ -40,18 +40,15 @@ $SNIPPET('kickstart_start')
 $SNIPPET('pre_install_network_config')
 # Enable installation monitoring
 $SNIPPET('pre_anamon')
-%end
 
 #PACKAGES
 %packages --ignoremissing
 $SNIPPET('func_install_if_enabled')
 $SNIPPET('symphony/packages')
-%end
 
 #POSTSCRIPTS
 %post --nochroot
 $SNIPPET('log_ks_post_nochroot')
-%end
 %post
 $SNIPPET('log_ks_post')
 $SNIPPET('symphony/symphonyrepoinstall')
@@ -73,4 +70,3 @@ $SNIPPET('post_anamon')
 $SNIPPET('kickstart_done')
 # End final steps
 $SNIPPET('symphony/runpuppet')
-%end

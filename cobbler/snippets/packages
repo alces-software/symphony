@@ -1,2 +1,5 @@
 #Required for cobbler completion
+
+#For cobbler postscripts
 wget
+vconfig
