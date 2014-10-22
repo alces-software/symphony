@@ -1,1 +1,5 @@
-systemctl disable NetworkManager
+if ( [ -e /usr/bin/systemctl ] ); then
+  systemctl disable NetworkManager
+else
+  chkconfig NetworkManager off
+fi
