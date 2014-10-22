@@ -25,4 +25,5 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
+git clone https://github.com/alces-software/oztemplates.git tools/oztemplates/
 git clone https://github.com/alces-software/symphony-nagiosplugins.git monitor/nagios/plugins

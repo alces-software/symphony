@@ -6,3 +6,4 @@
 /puppet/environments/symphony/modules/firewalld
 /puppet/environments/symphony/modules/symphonyrepo/templates/yum/
 /monitor/nagios/plugins
+/tools/*
