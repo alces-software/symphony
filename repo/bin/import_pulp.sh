@@ -97,6 +97,10 @@ case $GROUP in
     pulp-admin rpm repo create --repo-id=symphony-el7 --feed=http://download.alces-software.com/repos/symphony/el7/ --serve-http=true --relative-url=symphony/el7
     pulp-admin rpm repo sync run --bg --repo-id=symphony-el7
     ;;
+  el6symphony)
+    pulp-admin rpm repo create --repo-id=symphony-el6 --feed=http://download.alces-software.com/repos/symphony/el6/ --serve-http=true --relative-url=symphony/el6
+    pulp-admin rpm repo sync run --bg --repo-id=symphony-el6
+    ;;
   *)
     echo "Unknown Group" >&2
     exit 1
