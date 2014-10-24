@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6.5 el6other centos7.0 el7other el7symphony"
+AVAILABLE_GROUPS="centos6.5 el6other centos7.0 el7other el7symphonyi rhel6 rhelhpcnode6"
 
 GROUP=$1
 
@@ -48,6 +48,39 @@ case $GROUP in
     pulp-admin rpm repo sync run --repo-id centos6.5-updates --bg
     cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
     cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
+    ;;
+  rhel6)
+    if [ -f /etc/pulp/rhel.pem ]; then 
+      #base
+      pulp-admin rpm repo create --repo-id=rhel6 --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/os --serve-http=true --relative-url=rhel/6/os/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
+      pulp-admin rpm repo sync run --repo-id rhel6 --bg
+      #optional
+      pulp-admin rpm repo create --repo-id=rhel6-optional --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/optional/os --serve-http=true --relative-url=rhel/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
+      pulp-admin rpm repo sync run --repo-id rhel6-optional --bg
+      cat $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum.conf
+      cat $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum.conf
+    else
+      echo "Can't locate rhel server entitlement certificate (/etc/pulp/rhel.pem), please refer to symphony wiki" >&2
+      exit 1
+    fi
+    ;;
+  rhelhpcnode6)
+    if [ -f /etc/pulp/rhel-hpcnode.pem ]; then
+      #hpccomputenodebase
+      pulp-admin rpm repo create --repo-id=rhelhpcnode6 --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/os --serve-http=true --relative-url=rhelcomputenode/6/os/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
+      pulp-admin rpm repo sync run --repo-id rhelhpcnode6 --bg
+      #hpccomputenodeoptional
+      pulp-admin rpm repo create --repo-id=rhelhpcnode6-optional --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/optional/os --serve-http=true --relative-url=rhelcomputenode/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
+      pulp-admin rpm repo sync run --repo-id rhelhpcnode6-optional --bg
+      #hpccomputenodesuplimentary
+      pulp-admin rpm repo create --repo-id=rhelhpcnode6-supplementary --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/supplementary/os --serve-http=true --relative-url=rhelcomputenode/6/supplementary/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
+      pulp-admin rpm repo sync run --repo-id rhelhpcnode6-supplementary --bg
+      cat $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum.conf
+      cat $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum.conf
+    else
+      echo "Can't locate rhel HPC Compute Node entitlement certificate (/etc/pulp/rhel-hpcnode.pem), please refer to the symphony wiki" >&2
+      exit 1
+    fi
     ;;
   el6other)
     #epel
