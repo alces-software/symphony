@@ -6,14 +6,24 @@
 ################################################################################
 class symphonydirector::time (
   $install_ntp,
+  $role,
   $additionalntpservers
 )
 {
-
   include 'ntp::params'
-  if $install_ntp {
-    class { '::ntp':
-      servers => concat($additionalntpservers,$ntp::params::servers),
-    }
+  if $role == 'master' {
+    if $install_ntp {
+      class { '::ntp':
+        servers => concat($additionalntpservers,$ntp::params::servers),
+        iburst_enable => true
+      }
+    } 
+  } else {
+    if $install_ntp {
+      class { '::ntp':
+        servers => concat($additionalntpservers,$ntp::params::servers),
+        iburst_enable => true
+      }
+    }  
   }
 }

@@ -23,7 +23,8 @@ class symphonydirector (
 
   class { 'symphonydirector::time': 
     install_ntp => hiera('symphonydirector::time::install_ntp',true),
-    additionalntpservers => hiera('symphonydirector::time::additionalntpservers',[])
+    additionalntpservers => hiera('symphonydirector::time::additionalntpservers',[]),
+    role => $role,
   }
 
   class { 'symphonydirector::mail':

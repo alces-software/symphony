@@ -51,6 +51,7 @@ $SNIPPET('symphony/packages')
 #POSTSCRIPTS
 %post --nochroot
 $SNIPPET('log_ks_post_nochroot')
+$SNIPPET('symphony/fixtime')
 %end
 %post
 $SNIPPET('log_ks_post')
