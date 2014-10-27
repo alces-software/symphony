@@ -32,5 +32,7 @@ if [ ! -d templates/yum ]; then
 fi
 curl $SYMPHONY_REPO_URL/centos/7.0/yum-repos.conf > templates/yum/CentOS7.0.erb
 curl $SYMPHONY_REPO_URL/centos/6.5/yum-repos.conf > templates/yum/CentOS6.5.erb
+curl $SYMPHONY_REPO_URL/rhel/6/yum-repos.conf > templates/yum/RHEL6.erb
+curl $SYMPHONY_REPO_URL/rhelhpcnode/6/yum-repos.conf > templates/yum/RHELHPCNODE6.erb
 chown puppet:puppet -R templates/yum
 

@@ -134,6 +134,14 @@ case $GROUP in
     pulp-admin rpm repo create --repo-id=symphony-el6 --feed=http://download.alces-software.com/repos/symphony/el6/ --serve-http=true --relative-url=symphony/el6
     pulp-admin rpm repo sync run --bg --repo-id=symphony-el6
     ;;
+  el6alceshpc)
+    pulp-admin rpm repo create --repo-id=alceshpc-base-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/base/ --serve-http=true --relative-url=alceshpc/el6/base
+    pulp-admin rpm repo sync run --bg --repo-id=alceshpc-base-el6
+    pulp-admin rpm repo create --repo-id=alceshpc-extras-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/extras/ --serve-http=true --relative-url=alceshpc/el6/extras
+    pulp-admin rpm repo sync run --bg --repo-id=alceshpc-extras-el6
+    pulp-admin rpm repo create --repo-id=alceshpc-extraslustreserver-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/extras-lustreserver/ --serve-http=true --relative-url=alceshpc/el6/extraslustreserver/
+    pulp-admin rpm repo sync run --bg --repo-id=alceshpc-extraslustreserver-el6
+    ;;
   *)
     echo "Unknown Group" >&2
     exit 1
