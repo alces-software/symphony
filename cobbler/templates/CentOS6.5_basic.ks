@@ -57,6 +57,7 @@ $SNIPPET('symphony/symphonyrepoinstall')
 $SNIPPET('symphony/disablenetworkmanager')
 $SNIPPET('symphony/installpuppet')
 $SNIPPET('symphony/hardhostfile')
+$SNIPPET('symphony/alceshpc')
 # Start yum configuration 
 $yum_config_stanza
 # End yum configuration

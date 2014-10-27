@@ -1,0 +1,12 @@
+if ! [ -z $alceshpcmachine ]; then
+  MACHINE=$alceshpcmachine
+else
+  MACHINE=genericmachine
+fi
+
+cat << EOF > /etc/alces_stack.yaml
+---
+:machine: $MACHINE
+:role: master
+:hostname: `hostname -s`
+EOF
