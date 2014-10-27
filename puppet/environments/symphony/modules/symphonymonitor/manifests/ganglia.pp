@@ -6,6 +6,7 @@
 ################################################################################
 class symphonymonitor::ganglia (
   $install_ganglia,
+  $masterdns,
   $clientname,
   $role,
 )
@@ -16,7 +17,7 @@ class symphonymonitor::ganglia (
       #cluster_owner      => '',
       #cluster_url        => 'www.example.org',
       udp_recv_channel   => [ { port => 8649, ttl => 1 } ],
-      udp_send_channel   => [ { port => 8649 , mcast_join => "symphony-monitor.$domain"} ],
+      udp_send_channel   => [ { port => 8649 , mcast_join => "$masterdns"} ],
       tcp_accept_channel => [ { port => 8659 } ],
     }
     if $role == 'master' {

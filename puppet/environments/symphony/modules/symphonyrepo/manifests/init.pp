@@ -11,7 +11,7 @@ class symphonyrepo (
   $role = $symphony_reporole
 )
 {
-
+  $masterdns = hiera('symphonymonitor::masterdns','symphony-repo')
   class { 'symphonyrepo::yum':
     install_repoconfigs => hiera('symphonyrepo::yum::install_repoconfigs',true),
     enablerepos => hiera('symphonyrepo::yum::enable_symphonyrepos',[])

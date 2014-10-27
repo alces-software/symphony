@@ -11,7 +11,7 @@ class symphonydirector (
   $role = $symphony_directorrole
 )
 {
-
+  $masterdns = hiera('symphonymonitor::masterdns','symphony-monitor')
   class { 'symphonydirector::customization':
     role => $role,
     clientname => $clientname,

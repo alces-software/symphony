@@ -13,8 +13,10 @@ class symphonymonitor (
   $profile = 'generic'
 )
 {
+  $masterdns = hiera('symphonymonitor::masterdns','symphony-monitor')
   class { 'symphonymonitor::ganglia':
     install_ganglia => hiera('symphonymonitor::ganglia::install_ganglia',true),
+    masterdns => $masterdns,
     clientname => $clientname,
     role => $role,
   }
