@@ -1,0 +1,4 @@
+bootloader --location=mbr
+zerombr
+clearpart --all --initlabel
+autopart

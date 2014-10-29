@@ -7,6 +7,6 @@ fi
 cat << EOF > /etc/alces_stack.yaml
 ---
 :machine: $MACHINE
-:role: master
+:role: slave
 :hostname: `hostname -s`
 EOF

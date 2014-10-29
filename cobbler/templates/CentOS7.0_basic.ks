@@ -28,10 +28,7 @@ $yum_repo_stanza
 $SNIPPET('network_config')
 
 #DISK
-bootloader --location=mbr
-zerombr
-clearpart --all --initlabel
-autopart
+%include /tmp/disk.part
 
 #PRESCRIPT
 %pre
@@ -40,6 +37,7 @@ $SNIPPET('kickstart_start')
 $SNIPPET('pre_install_network_config')
 # Enable installation monitoring
 $SNIPPET('pre_anamon')
+$SNIPPET('symphony/disk')
 %end
 
 #PACKAGES

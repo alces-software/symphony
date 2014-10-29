@@ -1,0 +1,17 @@
+DISKFILE=/tmp/disk
+#if not $varExists('disk1')
+#set global $disk1 = 'sda'
+#end if
+#if $varExists('serial')
+#set global $bootloaderappend = 'console=tty0 console=' + $serial
+#else
+#set global $bootloaderappend = ''
+#end if
+cat > $DISKFILE << EOF
+#if $varExists('disklayout')
+#set $template = "symphony/disklayouts/" + $disklayout
+$SNIPPET($template)
+#else
+$SNIPPET('symphony/disklayouts/auto')
+#end if
+EOF
