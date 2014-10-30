@@ -1,5 +1,5 @@
 #install it now to avoid accidental install and breakages later
-yum -y -e0 install NetworkManager
+yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf install NetworkManager
 if ( [ -e /usr/bin/systemctl ] ); then
   systemctl disable NetworkManager
 else

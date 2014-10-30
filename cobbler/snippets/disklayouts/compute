@@ -1,5 +1,5 @@
 zerombr
-bootloader --location=mbr --driveorder=$disk1 --append=$bootloaderappend
+bootloader --location=mbr --driveorder=$disk1 --append="$bootloaderappend"
 clearpart --all --initlabel
 
 #Disk partitioning information

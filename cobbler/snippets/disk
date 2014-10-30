@@ -1,4 +1,4 @@
-DISKFILE=/tmp/disk
+DISKFILE=/tmp/disk.part
 #if not $varExists('disk1')
 #set global $disk1 = 'sda'
 #end if
