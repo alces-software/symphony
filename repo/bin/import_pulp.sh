@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6.5 el6other centos7.0 el7other el7symphonyi rhel6 rhelhpcnode6"
+AVAILABLE_GROUPS="centos6.5 el6other centos7.0 el7other el7symphonyi rhel6 rhelhpcnode6 el6alceshpc"
 
 GROUP=$1
 
