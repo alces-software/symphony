@@ -7,3 +7,4 @@
 /puppet/environments/symphony/modules/symphonyrepo/templates/yum/
 /monitor/nagios/plugins
 /tools/*
+/repo/iso/*

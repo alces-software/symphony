@@ -50,13 +50,25 @@ case $GROUP in
     cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
     ;;
   rhel6)
+    if ! [ -f $SYMPHONY_HOME/repo/iso/rhel6.iso ]; then
+      echo "Boot ISO not found, please download the boot ISO and place in $SYMPHONY_HOME/repo/iso/rhel6.iso" >&2
+      exit 1
+    else
+      mkdir -p /var/www/html/static/rhel/6/boot/
+      mkdir /tmp/symphonyiso.$$
+      mount -o loop $SYMPHONY_HOME/repo/iso/rhel6.iso /tmp/symphonyiso.$$
+      rsync -pa /tmp/symphonyiso.$$/* /var/www/html/static/rhel/6/boot/.
+      umount /tmp/symphonyiso.$$
+      rmdir /tmp/symphonyiso.$$
+      chown -R apache:apache /var/www/html/static
+    fi
     if [ -f /etc/pulp/rhel.pem ]; then 
       #base
-      pulp-admin rpm repo create --repo-id=rhel6 --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/os --serve-http=true --relative-url=rhel/6/os/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
-      pulp-admin rpm repo sync run --repo-id rhel6 --bg
+#      pulp-admin rpm repo create --repo-id=rhel6 --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/os --serve-http=true --relative-url=rhel/6/os/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
+#      pulp-admin rpm repo sync run --repo-id rhel6 --bg
       #optional
-      pulp-admin rpm repo create --repo-id=rhel6-optional --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/optional/os --serve-http=true --relative-url=rhel/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
-      pulp-admin rpm repo sync run --repo-id rhel6-optional --bg
+#      pulp-admin rpm repo create --repo-id=rhel6-optional --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/optional/os --serve-http=true --relative-url=rhel/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
+#      pulp-admin rpm repo sync run --repo-id rhel6-optional --bg
       cat $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum.conf
       cat $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum.conf
     else
@@ -65,16 +77,28 @@ case $GROUP in
     fi
     ;;
   rhelhpcnode6)
+    if ! [ -f $SYMPHONY_HOME/repo/iso/rhelhpcnode6.iso ]; then
+      echo "Boot ISO not found, please download the boot ISO and place in $SYMPHONY_HOME/repo/iso/rhelhpcnode6.iso" >&2
+      exit 1
+    else
+      mkdir -p /var/www/html/static/rhelcomputenode/6/boot/
+      mkdir /tmp/symphonyiso.$$
+      mount -o loop $SYMPHONY_HOME/repo/iso/rhelhpcnode6.iso /tmp/symphonyiso.$$
+      rsync -pa /tmp/symphonyiso.$$/* /var/www/html/static/rhelcomputenode/6/boot/.
+      umount /tmp/symphonyiso.$$
+      rmdir /tmp/symphonyiso.$$ 
+      chown -R apache:apache /var/www/html/static
+    fi
     if [ -f /etc/pulp/rhel-hpcnode.pem ]; then
       #hpccomputenodebase
-      pulp-admin rpm repo create --repo-id=rhelhpcnode6 --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/os --serve-http=true --relative-url=rhelcomputenode/6/os/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
-      pulp-admin rpm repo sync run --repo-id rhelhpcnode6 --bg
+#      pulp-admin rpm repo create --repo-id=rhelhpcnode6 --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/os --serve-http=true --relative-url=rhelcomputenode/6/os/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
+#      pulp-admin rpm repo sync run --repo-id rhelhpcnode6 --bg
       #hpccomputenodeoptional
-      pulp-admin rpm repo create --repo-id=rhelhpcnode6-optional --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/optional/os --serve-http=true --relative-url=rhelcomputenode/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
-      pulp-admin rpm repo sync run --repo-id rhelhpcnode6-optional --bg
+#      pulp-admin rpm repo create --repo-id=rhelhpcnode6-optional --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/optional/os --serve-http=true --relative-url=rhelcomputenode/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
+#      pulp-admin rpm repo sync run --repo-id rhelhpcnode6-optional --bg
       #hpccomputenodesuplimentary
-      pulp-admin rpm repo create --repo-id=rhelhpcnode6-supplementary --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/supplementary/os --serve-http=true --relative-url=rhelcomputenode/6/supplementary/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
-      pulp-admin rpm repo sync run --repo-id rhelhpcnode6-supplementary --bg
+#      pulp-admin rpm repo create --repo-id=rhelhpcnode6-supplementary --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/supplementary/os --serve-http=true --relative-url=rhelcomputenode/6/supplementary/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
+#      pulp-admin rpm repo sync run --repo-id rhelhpcnode6-supplementary --bg
       cat $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum.conf
       cat $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/rhelhpcnode/6/yum.conf
     else
