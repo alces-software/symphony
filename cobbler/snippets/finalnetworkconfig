@@ -1,0 +1,4 @@
+if [ -f /etc/sysconfig/network-scripts/ifcfg-bmc ]; then
+  sed -i -e 's/^ONBOOT=.*$/ONBOOT=no/g' /etc/sysconfig/network-scripts/ifcfg-bmc
+fi
+rm -v /etc/udev/rules.d/*-persistent-net.rules

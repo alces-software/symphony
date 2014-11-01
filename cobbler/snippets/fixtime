@@ -1,1 +1,2 @@
 ntpdate $server
+hwclock --systohc

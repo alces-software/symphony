@@ -1,0 +1,2 @@
+#Scub all pre-configured eth devices
+rm -v /etc/sysconfig/network-scripts/ifcfg-eth*

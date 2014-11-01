@@ -1,8 +1,8 @@
 #Hard code the host file (for when symphony DNS server is not being used)
 cat << EOD >> /etc/hosts
 
-#SYMPNONY
-10.78.254.1	symphony-director.prv.cluster.local symphony-director
-10.78.254.3	symphony-repo.prv.cluster.local symphony-repo
-10.78.254.4	symphony-monitor.prv.cluster.local symphony-monitor
+#SYMPHONY
+10.78.254.1	symphony-director.mgt.symphony.local symphony-director
+10.78.254.3	symphony-repo.mgt.symphony.local symphony-repo
+10.78.254.4	symphony-monitor.mgt.symphnony.local symphony-monitor
 EOD

@@ -1,0 +1,47 @@
+#Setup IPMI/BMC/iLO etc
+#requires ksmeta
+# - ipmiset - set ipmi params (def false) 
+# - ipmilanchannel (def 2)
+# - ipminetmask (def 255.255.255.0)
+# - ipmiuserid (def 1)
+# - ipmigateway (def notset)
+# Also requires power address/user/password to be set in cobbler
+if ! [ -z $ipmiset ]; then
+  [ -z $ipmilanchannel ] && IPMI_LANCHANNEL=2 || IPMI_LANCHANNEL=$ipmilanchannel
+  [ -z $ipminetmask ] && IPMI_NETMASK=255.255.255.0 || IPMI_NETMASK=$ipminetmask
+  [ -z $ipmiuserid ] && IPMI_USERID=1 || IPMI_USERID=$ipmiuserid
+  [ -z $ipmigateway ] || IPMI_GATEWAY=$ipmigateway
+  IPMI_USERNAME=$power_user
+  IPMI_PASSWORD="${power_pass}"
+  if ! [ -z $power_address ]; then 
+    #install and start ipmi tools
+    yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf install ipmitool
+    service ipmi start
+    sleep 1
+    #dump current settings so they are logged
+    ipmitool lan print $IPMI_LANCHANNEL
+    ipmitool user list 2
+    #setup network config
+    ipmitool lan set $IPMI_LANCHANNEL ipsrc static
+    sleep 2
+    ipmitool lan set $IPMI_LANCHANNEL ipaddr $power_address
+    sleep 2
+    ipmitool lan set $IPMI_LANCHANNEL netmask $IPMI_NETMASK
+    sleep 2
+    if ! [ -z $IPMI_GATEWAY ]; then
+      ipmitool lan set $IPMI_LANCHANNEL defgw ipaddr $IPMI_GATEWAY
+      sleep 2
+    fi
+    if ! [ -z $power_user ] && ! [ -z $power_pass ]; then
+      ipmitool user set name $IPMI_USERID $power_user
+      sleep 2
+      ipmitool user set password $IPMI_USERID $power_pass
+      sleep 2
+    fi
+    #dump current settings so they are logged
+    ipmitool lan print $IPMI_LANCHANNEL
+    ipmitool user list 2
+    #reset device
+    ipmitool mc reset cold
+  fi
+fi

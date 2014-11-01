@@ -57,6 +57,9 @@ $SNIPPET('symphony/symphonyrepoinstall')
 $SNIPPET('symphony/disablenetworkmanager')
 $SNIPPET('symphony/installpuppet')
 $SNIPPET('symphony/hardhostfile')
+$SNIPPET('symphony/infiniband')
+$SNIPPET('symphony/ipmi')
+$SNIPPET('symphony/scrubifcfg')
 # Start yum configuration 
 $yum_config_stanza
 # End yum configuration
@@ -71,5 +74,6 @@ $SNIPPET('post_anamon')
 # Start final steps
 $SNIPPET('kickstart_done')
 # End final steps
+$SNIPPET('symphony/finalnetworkconfig')
 $SNIPPET('symphony/runpuppet')
 %end
