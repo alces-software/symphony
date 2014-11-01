@@ -33,8 +33,8 @@ if [ -d $PUPPET_ENV ]; then
     mv -v $PUPPET_ENV/symphony $PUPPET_ENV/symphony.$$.`date +"%m%d%Y"`
    echo DONE
   fi
-  cp -av $SYMPHONY_HOME/puppet/environments/symphony $PUPPET_ENV/.
+  ln -snf $SYMPHONY_HOME/puppet/environments/symphony $PUPPET_ENV/.
   chown puppet:puppet -R $PUPPET_ENV
-  (cd $PUPPET_ENV/symphony && git init && git add * && git commit -a -m 'Initial commit')
+  #(cd $PUPPET_ENV/symphony && git init && git add * && git commit -a -m 'Initial commit')
   echo DONE
 fi
