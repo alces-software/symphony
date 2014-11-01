@@ -51,28 +51,28 @@ define service{
 define host{
         use                     generic
         host_name               symphony-director
-        alias                   symphony-director.prv.cluster.local
+        alias                   symphony-director.mgt.symphony.local
         address                 symphony-director
         }
 
 define host{
         use                     generic
         host_name               symphony-repo
-        alias                   symphony-repo.prv.cluster.local
+        alias                   symphony-repo.mgt.symphony.local
         address                 symphony-repo
         }
 
 define host{
         use                     generic
         host_name               symphony-monitor
-        alias                   symphony-monitor.prv.cluster.local
+        alias                   symphony-monitor.mgt.symphony.local
         address                 symphony-monitor
         }
 
 #define host{
 #        use                     generic
 #        host_name               symphony-director
-#        alias                   symphony-director.prv.cluster.local
+#        alias                   symphony-director.mgt.symphony.local
 #        address                 symphony-director
 #        }
 

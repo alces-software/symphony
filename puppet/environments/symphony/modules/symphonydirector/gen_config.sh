@@ -24,7 +24,7 @@
 #                                                                              #
 ################################################################################
 
-DOMAIN=prv.cluster.local
+DOMAIN=mgt.syphony.local
 MAILRELAY=smtp.alces-software.com
 MAILFROM='test@alces-software.com'
 

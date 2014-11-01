@@ -32,7 +32,7 @@ class symphonyrepo::yum (
     package {'yum-plugin-priorities':
       require=>File['/etc/yum.repos.d/symphony.repo'],
       ensure=>installed,
-    }
+    }  
     symphonyrepo::yum::enablerepo { $enablerepos: 
       require=>File['/etc/yum.repos.d/symphony.repo']
     }
