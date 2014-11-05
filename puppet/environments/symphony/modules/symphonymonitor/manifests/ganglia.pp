@@ -34,7 +34,7 @@ class symphonymonitor::ganglia (
       }
       class{ 'ganglia::web':
         ganglia_ip => '127.0.0.1',
-        ganglia_port => 8651,
+        ganglia_port => 8652,
       }
       file { '/etc/httpd/conf.d/ganglia.conf':
         ensure=>present,
