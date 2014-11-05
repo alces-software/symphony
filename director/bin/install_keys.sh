@@ -33,5 +33,6 @@ echo "Instaling ssh config.."
 cat << EOF > /root/.ssh/config
 Host *
   IdentityFile ~/.ssh/id_symphony
+  StrictHostKeyChecking no
 EOF
 echo DONE
