@@ -8,7 +8,13 @@ require 'yaml'
 
 Facter.add("symphony_operatingsystem") do
   setcode do
-    "#{Facter.value('os')['name']}#{Facter.value('os')['release']['major']}.#{Facter.value('os')['release']['minor']}"
+    if File::exists? '/etc/redhat-release'
+      if ! File::read('/etc/redhat-release').to_s.match('ComputeNode').nil?
+        val="RHELCOMPUTENODE#{Facter.value('os')['release']['major']}.#{Facter.value('os')['release']['minor']}"
+      end
+    end
+    val||="#{Facter.value('os')['name']}#{Facter.value('os')['release']['major']}.#{Facter.value('os')['release']['minor']}"
+    val
   end
 end
 
