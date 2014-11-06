@@ -24,7 +24,7 @@
 #                                                                              #
 ################################################################################
 
-DOMAIN=mgt.syphony.local
+DOMAIN=mgt.symphony.local
 MAILRELAY=smtp.alces-software.com
 MAILFROM='test@alces-software.com'
 
