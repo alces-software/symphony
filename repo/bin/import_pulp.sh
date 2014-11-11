@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6.5 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc"
+AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc"
 
 GROUP=$1
 
@@ -39,15 +39,15 @@ if ! [ -f /var/www/html/configs/ ]; then
 fi
 
 case $GROUP in
-  centos6.5) 
+  centos6) 
     #base
-    pulp-admin rpm repo create --repo-id=centos6.5 --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6.5/os/x86_64/ --serve-http=true --relative-url=centos/6.5/os/
-    pulp-admin rpm repo sync run --repo-id centos6.5 --bg
+    pulp-admin rpm repo create --repo-id=centos6 --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6/os/x86_64/ --serve-http=true --relative-url=centos/6/os/
+    pulp-admin rpm repo sync run --repo-id centos6 --bg
     #updates
-    pulp-admin rpm repo create --repo-id=centos6.5-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6.5/updates/x86_64/ --serve-http=true --relative-url=centos/6.5/updates
-    pulp-admin rpm repo sync run --repo-id centos6.5-updates --bg
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/6.5/yum.conf
+    pulp-admin rpm repo create --repo-id=centos6-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6/updates/x86_64/ --serve-http=true --relative-url=centos/6/updates
+    pulp-admin rpm repo sync run --repo-id centos6-updates --bg
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum.conf
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum.conf
     ;;
   rhel6)
     #Create a boot path from supplied iso
@@ -125,15 +125,15 @@ case $GROUP in
     pulp-admin rpm repo create --repo-id=puppet-base-el6 --feed=https://yum.puppetlabs.com/el/6/products/x86_64 --serve-http=true --relative-url=puppet/base/el6
     pulp-admin rpm repo sync run --bg --repo-id=puppet-base-el6
     ;;
-  centos7.0)
+  centos7)
     #base
-    pulp-admin rpm repo create --repo-id=centos7.0 --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7.0.1406/os/x86_64/ --serve-http=true --relative-url=centos/7.0/os/
-    pulp-admin rpm repo sync run --repo-id centos7.0 --bg
+    pulp-admin rpm repo create --repo-id=centos7 --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7/os/x86_64/ --serve-http=true --relative-url=centos/7/os/
+    pulp-admin rpm repo sync run --repo-id centos7 --bg
     #updates
-    pulp-admin rpm repo create --repo-id=centos7.0-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7.0.1406/updates/x86_64/ --serve-http=true --relative-url=centos/7.0/updates
-    pulp-admin rpm repo sync run --repo-id centos7.0-updates --bg
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum.conf
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/7.0/yum.conf
+    pulp-admin rpm repo create --repo-id=centos7-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7/updates/x86_64/ --serve-http=true --relative-url=centos/7/updates
+    pulp-admin rpm repo sync run --repo-id centos7-updates --bg
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum.conf
+    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum.conf
     ;;
   el7other)
     #epel
