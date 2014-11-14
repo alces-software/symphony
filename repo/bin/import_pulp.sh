@@ -46,8 +46,6 @@ case $GROUP in
     #updates
     pulp-admin rpm repo create --repo-id=centos6-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6/updates/x86_64/ --serve-http=true --relative-url=centos/6/updates
     pulp-admin rpm repo sync run --repo-id centos6-updates --bg
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum.conf
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/6/yum.conf
     ;;
   rhel6)
     #Create a boot path from supplied iso
@@ -70,8 +68,6 @@ case $GROUP in
       #optional
       pulp-admin rpm repo create --repo-id=rhel6-optional --feed=https://cdn.redhat.com/content/dist/rhel/server/6/6Server/x86_64/optional/os --serve-http=true --relative-url=rhel/6/optional/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel.pem --feed-key=/etc/pulp/rhel.pem
       pulp-admin rpm repo sync run --repo-id rhel6-optional --bg
-      cat $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum.conf
-      cat $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/rhel/6/yum.conf
     else
       echo "Can't locate rhel server entitlement certificate (/etc/pulp/rhel.pem), please refer to symphony wiki" >&2
       exit 1
@@ -101,8 +97,6 @@ case $GROUP in
       #hpccomputenodesuplimentary
       pulp-admin rpm repo create --repo-id=rhelhpcnode6-supplementary --feed=https://cdn.redhat.com/content/dist/rhel/computenode/6/6ComputeNode/x86_64/supplementary/os --serve-http=true --relative-url=rhelcomputenode/6/supplementary/ --feed-ca-cert=/etc/rhsm/ca/redhat-uep.pem --feed-cert=/etc/pulp/rhel-hpcnode.pem --feed-key=/etc/pulp/rhel-hpcnode.pem
       pulp-admin rpm repo sync run --repo-id rhelhpcnode6-supplementary --bg
-      cat $SYMPHONY_HOME/repo/yumconfigs/rhelcomputenode/6/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/rhelcomputenode/6/yum.conf
-      cat $SYMPHONY_HOME/repo/yumconfigs/rhelcomputenode/6/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/rhelcomputenode/6/yum.conf
     else
       echo "Can't locate rhel HPC Compute Node entitlement certificate (/etc/pulp/rhel-hpcnode.pem), please refer to the symphony wiki" >&2
       exit 1
@@ -132,8 +126,6 @@ case $GROUP in
     #updates
     pulp-admin rpm repo create --repo-id=centos7-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7/updates/x86_64/ --serve-http=true --relative-url=centos/7/updates
     pulp-admin rpm repo sync run --repo-id centos7-updates --bg
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum-main.conf > $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum.conf
-    cat $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum-repos.conf >> $SYMPHONY_HOME/repo/yumconfigs/centos/7/yum.conf
     ;;
   el7other)
     #epel
