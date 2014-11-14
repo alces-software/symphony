@@ -83,6 +83,7 @@ function centos7 {
 
 function el6other {
    STATE=$EL6OTHER
+   epel $STATE $CONFDIR $VERS
    pulp $STATE $CONFDIR $VERS
    cobbler $STATE $CONFDIR $VERS
    puppet-base $STATE $CONFDIR $VERS
@@ -101,6 +102,7 @@ function el6alceshpc {
 
 function el7other {
    STATE=$EL7OTHER
+   epel $STATE $CONFDIR $VERS
    pulp $STATE $CONFDIR $VERS
    cobbler $STATE $CONFDIR $VERS
    puppet-base $STATE $CONFDIR $VERS
