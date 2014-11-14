@@ -53,7 +53,7 @@ function rhel6 {
    VERS=6
    CONFDIR="rhel/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHEL6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    el6other
    el6symphony
    el6alceshpc
@@ -63,7 +63,7 @@ function rhelcomputenode6 {
    VERS=6
    CONFDIR="rhelcomputenode/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHELCOMPUTENODE6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    el6other
    el6symphony
    el6alceshpc
@@ -74,7 +74,7 @@ function centos7 {
    VERS=7
    CONFDIR="centos/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS7.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    el7other
    el7symphony
 }
