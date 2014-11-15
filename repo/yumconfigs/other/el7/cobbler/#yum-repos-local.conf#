@@ -1,8 +1,0 @@
-[cobbler]
-name=Cobbler
-baseurl=
-enabled=0
-skip_if_unavailable=1
-gpgcheck=0
-priority=9
-
