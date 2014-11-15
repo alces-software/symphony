@@ -43,6 +43,7 @@ function centos6 {
    CONFDIR="centos/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el6other
    el6symphony
    el6alceshpc
@@ -54,6 +55,7 @@ function rhel6 {
    CONFDIR="rhel/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHEL6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHEL6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el6other
    el6symphony
    el6alceshpc
@@ -64,6 +66,7 @@ function rhelcomputenode6 {
    CONFDIR="rhelcomputenode/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHELCOMPUTENODE6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHELCOMPUTENODE6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el6other
    el6symphony
    el6alceshpc
@@ -75,6 +78,7 @@ function centos7 {
    CONFDIR="centos/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS7.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS7.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el7other
    el7symphony
 }
@@ -119,30 +123,37 @@ function el7symphony {
 
 function epel {
    cat $BASEDIR/../yumconfigs/other/el$3/epel/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/other/el$3/epel/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function pulp {
    cat $BASEDIR/../yumconfigs/other/el$3/pulp/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/other/el$3/pulp/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function cobbler {
    cat $BASEDIR/../yumconfigs/other/el$3/cobbler/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/other/el$3/cobbler/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function puppet-base {
    cat $BASEDIR/../yumconfigs/other/el$3/puppet/base/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/other/el$3/puppet/base/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function puppet-deps {
    cat $BASEDIR/../yumconfigs/other/el$3/puppet/deps/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/other/el$3/puppet/deps/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function symphony {
    cat $BASEDIR/../yumconfigs/alces/symphony/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/alces/symphony/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function alceshpc {
    cat $BASEDIR/../yumconfigs/alces/alceshpc/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/alces/alceshpc/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 #FUNCTIONS TO RUN
