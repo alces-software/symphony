@@ -72,4 +72,4 @@ source $CONFIGFILE
 echo "$GROUP is now set to ${!GROUP}"
 
 echo "Now building writing configuration files..."
-./write_configs.sh
+$SYMPHONY_HOME/repo/bin/write_configs.sh
