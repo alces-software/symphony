@@ -42,8 +42,8 @@ function centos6 {
    VERS=6
    CONFDIR="centos/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el6other
    el6symphony
    el6alceshpc
@@ -54,8 +54,8 @@ function rhel6 {
    VERS=6
    CONFDIR="rhel/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHEL6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHEL6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el6other
    el6symphony
    el6alceshpc
@@ -65,8 +65,8 @@ function rhelcomputenode6 {
    VERS=6
    CONFDIR="rhelcomputenode/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHELCOMPUTENODE6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$RHELCOMPUTENODE6.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el6other
    el6symphony
    el6alceshpc
@@ -77,8 +77,31 @@ function centos7 {
    VERS=7
    CONFDIR="centos/$VERS"
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS7.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
-   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$CENTOS7.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
+   el7other
+   el7symphony
+}
+
+function sl6 {
+   STATE=$SL6
+   VERS=6
+   CONFDIR="sl/$VERS"
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
+   el6other
+   el6symphony
+   el6alceshpc
+}
+
+function sl7 {
+   STATE=$SL7
+   VERS=7
+   CONFDIR="sl/$VERS"
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-main.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum.conf
+   cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf >> $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el7other
    el7symphony
 }
@@ -165,4 +188,7 @@ echo -e "Building yum.conf Files for RHEL6 HPC Compute Nodes...\n"
 rhelcomputenode6
 echo -e "Building yum.conf Files for CentOS7...\n"
 centos7
-
+echo -e "Building yum.conf Files for Scientific Linux 6...\n"
+sl6
+echo -e "Building yum.conf Files for Scientific Linux 7...\n"
+sl7

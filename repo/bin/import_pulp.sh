@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc"
+AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7"
 
 GROUP=$1
 
@@ -46,6 +46,28 @@ case $GROUP in
     #updates
     pulp-admin rpm repo create --repo-id=centos6-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/6/updates/x86_64/ --serve-http=true --relative-url=centos/6/updates
     pulp-admin rpm repo sync run --repo-id centos6-updates --bg
+    ;;
+  sl6)
+    #base
+    pulp-admin rpm repo create --repo-id=sl6 --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/6x/x86_64/os/ --serve-http=true --relative-url=sl/6/os/
+    pulp-admin rpm repo sync run --repo-id sl6 --bg
+    #fastbugs
+    pulp-admin rpm repo create --repo-id=sl6-fastbugs --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/6x/x86_64/updates/fastbugs/ --serve-http=true --relative-url=sl/6/fastbugs
+    pulp-admin rpm repo sync run --repo-id centos6-fastbugs --bg
+    #security
+    pulp-admin rpm repo create --repo-id=sl6-security --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/6x/x86_64/updates/security/ --serve-http=true --relative-url=sl/6/security
+    pulp-admin rpm repo sync run --repo-id centos6-security --bg
+    ;;
+  sl7)
+    #base
+    pulp-admin rpm repo create --repo-id=sl7 --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/os/ --serve-http=true --relative-url=sl/7/os/
+    pulp-admin rpm repo sync run --repo-id sl7 --bg
+    #fastbugs
+    pulp-admin rpm repo create --repo-id=sl7-fastbugs --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/updates/fastbugs/ --serve-http=true --relative-url=sl/7/fastbugs
+    pulp-admin rpm repo sync run --repo-id centos7-fastbugs --bg
+    #security
+    pulp-admin rpm repo create --repo-id=sl7-security --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/updates/security/ --serve-http=true --relative-url=sl/67/security
+    pulp-admin rpm repo sync run --repo-id centos7-security --bg
     ;;
   rhel6)
     #Create a boot path from supplied iso
