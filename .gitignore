@@ -1,3 +1,4 @@
+
 /cobbler/distro_files/*
 /puppet/environments/symphony/modules/multitemplate
 /puppet/environments/symphony/modules/stdlib
@@ -8,3 +9,4 @@
 /monitor/nagios/plugins
 /tools/*
 /repo/iso/*
+/puppet/environments/symphony/hieradata/site.yaml
