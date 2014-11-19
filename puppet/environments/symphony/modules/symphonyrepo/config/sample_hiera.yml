@@ -1,4 +1,3 @@
----
 #Enable configuration of yum repos via pulp on symphony-repo (default:true)
 symphonyrepo::yum::install_repoconfigs: true
 #which symphony repos to enable
