@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6.5 centos7.0 rhel6 rhelcomputenode6"
+AVAILABLE_GROUPS="centos6 centos7 rhel6 rhelcomputenode6"
 
 GROUP=$1
 
@@ -34,35 +34,95 @@ if [ -z $GROUP ]; then
   exit 1
 fi
 
+REPOBASE=$2
+[ -z "$REPOBASE" ] && REPOBASE=alces
+
 case $GROUP in
-  centos6.5) 
+  centos6)
+    case $REPOBASE in
+      local)
+        BASEURL="http://symphony-repo/pulp/repos/centos/6/os/images/pxeboot/"
+        INSTALLURL="http://symphony-repo/pulp/repos/centos/6/os/"
+        ;;
+      alces)
+        BASEURL="http://repo.alces-software.com/pulp/repos/centos/6/os/images/pxeboot/"
+        INSTALLURL="http://repo.alces-software.com/pulp/repos/centos/6/os/"
+        ;;
+      *)
+        BASEURL="http://www.mirrorservice.org/sites/mirror.centos.org/6/os/x86_64/images/pxeboot/"
+        INSTALLURL="http://www.mirrorservice.org/sites/mirror.centos.org/6/os/x86_64/"
+        ;;
+    esac
+    #Get distro files
+    curl $BASEURL/initrd.img > /var/lib/symphony/cobbler/distro_files/CentOS6_initrd
+    curl $BASEURL/vmlinuz > /var/lib/symphony/cobbler/distro_files/CentOS6_kernel
+    #Create distro
+    cobbler distro add --name CentOS6 --kernel=/var/lib/symphony/cobbler/distro_files/CentOS6_kernel --initrd=/var/lib/symphony/cobbler/distro_files/CentOS6_initrd --arch=x86_64 --ksmeta="tree=centos/6 url=$INSTALLURL" --breed redhat --os-version=rhel6 --kopts="syslog=@@server@@" --clobber
+    #Create Profile
+    cobbler profile add --name CentOS6 --distro CentOS6 --kickstart /var/lib/cobbler/kickstarts/symphony/CentOS6_basic.ks --clobber
     ;;
   rhel6)
     #Get distro files
-    curl http://symphony-repo/static/rhel/6/boot/images/pxeboot/initrd.img > /var/lib/symphony/cobbler/distro_files/RHEL6_initrd
-    curl http://symphony-repo/static/rhel/6/boot/images/pxeboot/vmlinuz > /var/lib/symphony/cobbler/distro_files/RHEL6_kernel
+    case $REPOBASE in
+      local)
+        BASEURL="http://symphony-repo/static/rhel/6/boot/images/pxeboot/"
+        INSTALLURL="http://symphony-repo/static/rhel/6/boot/images/pxeboot/"
+        ;;
+      *)
+        #Alces
+        BASEURL="http://repo.alces-software.com/static/rhel/6/boot/images/pxeboot/"
+        INSTALLURL="http://repo.alces-software.com/static/rhel/6/boot/"
+        ;;
+    esac
+    curl $BASEURL/initrd.img > /var/lib/symphony/cobbler/distro_files/RHEL6_initrd
+    curl $BASEURL/vmlinuz > /var/lib/symphony/cobbler/distro_files/RHEL6_kernel
     #Create distro
-    cobbler distro add --name RHEL6 --kernel=/var/lib/symphony/cobbler/distro_files/RHEL6_kernel --initrd=/var/lib/symphony/cobbler/distro_files/RHEL6_initrd --arch=x86_64 --ksmeta="tree=rhel/6" --breed redhat --os-version=rhel6 --kopts="syslog=@@server@@"
+    cobbler distro add --name RHEL6 --kernel=/var/lib/symphony/cobbler/distro_files/RHEL6_kernel --initrd=/var/lib/symphony/cobbler/distro_files/RHEL6_initrd --arch=x86_64 --ksmeta="tree=rhel/6 url=$INSTALL_URL" --breed redhat --os-version=rhel6 --kopts="syslog=@@server@@" --clobber
     #Create Profile
-    cobbler profile add --name RHEL6 --distro RHEL6 --kickstart /var/lib/cobbler/kickstarts/symphony/RHEL6_basic.ks
+    cobbler profile add --name RHEL6 --distro RHEL6 --kickstart /var/lib/cobbler/kickstarts/symphony/RHEL6_basic.ks --clobber
     ;;
   rhelcomputenode6)
     #Get distro files
-    curl http://symphony-repo/static/rhelcomputenode/6/boot/images/pxeboot/initrd.img > /var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_initrd
-    curl http://symphony-repo/static/rhelcomputenode/6/boot/images/pxeboot/vmlinuz > /var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_kernel
+    case $REPOBASE in
+      local)
+        BASEURL="http://symphony-repo/static/rhelcomputenode/6/boot/images/pxeboot/"
+        INSTALLURL="http://symphony-repo/static/rhelcomputenode/6/boot/"
+        ;;
+      *)
+        #Alces
+        BASEURL="http://repo.alces-software.com/static/rhelcomputenode/6/boot/images/pxeboot/"
+        INSTALLURL="http://repo.alces-software.com/static/rhelcomputenode/6/boot/"
+        ;;
+    esac
+    curl $BASEURL/initrd.img > /var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_initrd
+    curl $BASEURL/vmlinuz > /var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_kernel
     #Create distro
-    cobbler distro add --name RHELCOMPUTENODE6 --kernel=/var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_kernel --initrd=/var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_initrd --arch=x86_64 --ksmeta="tree=rhelcomputenode/6" --breed redhat --os-version=rhel6 --kopts="syslog=@@server@@"
+    cobbler distro add --name RHELCOMPUTENODE6 --kernel=/var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_kernel --initrd=/var/lib/symphony/cobbler/distro_files/RHELCOMPUTENODE6_initrd --arch=x86_64 --ksmeta="tree=rhelcomputenode/6 url=$INSTALL_URL" --breed redhat --os-version=rhel6 --kopts="syslog=@@server@@" --clobber
     #Create Profile
-    cobbler profile add --name RHELCOMPUTENODE6 --distro RHELCOMPUTENODE6 --kickstart /var/lib/cobbler/kickstarts/symphony/RHELCOMPUTENODE6_basic.ks
+    cobbler profile add --name RHELCOMPUTENODE6 --distro RHELCOMPUTENODE6 --kickstart /var/lib/cobbler/kickstarts/symphony/RHELCOMPUTENODE6_basic.ks --clobber
     ;;
-  centos7.0)
+  centos7)
+    case $REPOBASE in
+      local)
+        BASEURL="http://symphony-repo/pulp/repos/centos/7/os/images/pxeboot/"
+        INSTALLURL="http://symphony-repo/pulp/repos/centos/7/os/"
+        ;;
+      alces)
+        BASEURL="http://repo.alces-software.com/pulp/repos/centos/7/os/images/pxeboot/"
+        INSTALLURL="http://repo.alces-software.com/pulp/repos/centos/7/os/"
+        ;;
+      *)
+        BASEURL="http://www.mirrorservice.org/sites/mirror.centos.org/7/os/x86_64/images/pxeboot/"
+        INSTALLURL="http://www.mirrorservice.org/sites/mirror.centos.org/7/os/x86_64/"
+        ;;
+    esac
     #Get distro files
-    curl http://symphony-repo/pulp/repos/centos/7.0/os/images/pxeboot/initrd.img > /var/lib/symphony/cobbler/distro_files/CentOS7.0_initrd
-    curl http://symphony-repo/pulp/repos/centos/7.0/os/images/pxeboot/vmlinuz > /var/lib/symphony/cobbler/distro_files/CentOS7.0_kernel
+    curl $BASEURL/initrd.img > /var/lib/symphony/cobbler/distro_files/CentOS7_initrd
+    curl $BASEURL/vmlinuz > /var/lib/symphony/cobbler/distro_files/CentOS7_kernel
     #Create distro
-    cobbler distro add --name CentOS7.0 --kernel=/var/lib/symphony/cobbler/distro_files/CentOS7.0_kernel --initrd=/var/lib/symphony/cobbler/distro_files/CentOS7.0_initrd --arch=x86_64 --ksmeta="tree=centos/7.0" --breed redhat --os-version=rhel7 --kopts="syslog=@@server@@"
+    cobbler distro add --name CentOS7 --kernel=/var/lib/symphony/cobbler/distro_files/CentOS7_kernel --initrd=/var/lib/symphony/cobbler/distro_files/CentOS7_initrd --arch=x86_64 --ksmeta="tree=centos/7 url=$INSTALLURL" --breed redhat --os-version=rhel7 --kopts="syslog=@@server@@" --clobber
     #Create Profile
-    cobbler profile add --name CentOS7.0 --distro CentOS7.0 --kickstart /var/lib/cobbler/kickstarts/symphony/CentOS7.0_basic.ks
+    cobbler profile add --name CentOS7 --distro CentOS7 --kickstart /var/lib/cobbler/kickstarts/symphony/CentOS7_basic.ks --clobber
     ;;
   *)
     echo "Unknown Group" >&2
