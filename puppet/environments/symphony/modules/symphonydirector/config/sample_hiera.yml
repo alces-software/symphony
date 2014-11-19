@@ -1,5 +1,5 @@
 #Client name string
-symphonydirector::clientname: democlient
+symphonydirector::clientname: unconfigured
 #RSA ssh key for root@director
 symphonydirector::customization::directorkey: %DIRECTORKEY%
 #Install director ssh key to root

@@ -34,10 +34,6 @@ if [ -z $GROUP ]; then
   exit 1
 fi
 
-if ! [ -f /var/www/html/configs/ ]; then
-  ln -snf $SYMPHONY_HOME/repo/yumconfigs /var/www/html/configs 
-fi
-
 case $GROUP in
   centos6) 
     #base

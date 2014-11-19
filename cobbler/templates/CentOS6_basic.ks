@@ -21,7 +21,7 @@ lang en_GB
 timezone  Europe/London
 
 #REPOS
-url --url=http://symphony-repo/pulp/repos/$tree/os/
+url --url=$url
 $yum_repo_stanza
 
 #NETWORK
@@ -38,25 +38,24 @@ $SNIPPET('pre_install_network_config')
 # Enable installation monitoring
 $SNIPPET('pre_anamon')
 $SNIPPET('symphony/disk')
-%end
 
 #PACKAGES
 %packages --ignoremissing
 $SNIPPET('func_install_if_enabled')
 $SNIPPET('symphony/packages')
-%end
 
 #POSTSCRIPTS
 %post --nochroot
 $SNIPPET('log_ks_post_nochroot')
 $SNIPPET('symphony/fixtime')
-%end
+
 %post
 $SNIPPET('log_ks_post')
 $SNIPPET('symphony/symphonyrepoinstall')
 $SNIPPET('symphony/disablenetworkmanager')
 $SNIPPET('symphony/installpuppet')
 $SNIPPET('symphony/hardhostfile')
+$SNIPPET('symphony/alceshpc')
 $SNIPPET('symphony/infiniband')
 $SNIPPET('symphony/ipmi')
 $SNIPPET('symphony/scrubifcfg')
@@ -76,4 +75,3 @@ $SNIPPET('kickstart_done')
 # End final steps
 $SNIPPET('symphony/finalnetworkconfig')
 $SNIPPET('symphony/runpuppet')
-%end

@@ -21,9 +21,9 @@ lang en_GB
 timezone  Europe/London
 
 #REPOS
-url --url=http://symphony-repo/static/$tree/boot/
-repo --name rhel6os --baseurl=http://symphony-repo/pulp/repos/$tree/os/
-repo --name rhel6optional --baseurl=http://symphony-repo/pulp/repos/$tree/optional/
+url --url=$url
+#repo --name rhel6os --baseurl=http://symphony-repo/pulp/repos/$tree/os/
+#repo --name rhel6optional --baseurl=http://symphony-repo/pulp/repos/$tree/optional/
 $yum_repo_stanza
 
 #NETWORK
