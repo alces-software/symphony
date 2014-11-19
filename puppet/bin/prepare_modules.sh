@@ -27,3 +27,14 @@ SYMPHONY_HOME=/var/lib/symphony/
 ENV_HOME=/var/lib/symphony/puppet/environments/symphony/
 
 $ENV_HOME/modules/symphonyrepo/fetch_templates.sh
+cd $ENV_HOME/modules/symphonydirector/
+./gen_config.sh > ../../hieradata/site.yaml
+cd $ENV_HOME/modules/symphonyrepo/
+./gen_config.sh >> ../../hieradata/site.yaml
+./fetch_templates.sh
+cd $ENV_HOME/modules/symphonymonitor/
+./gen_config.sh >> ../../hieradata/site.yaml
+cd $ENV_HOME/modules/
+./fetch_modules.sh
+
+
