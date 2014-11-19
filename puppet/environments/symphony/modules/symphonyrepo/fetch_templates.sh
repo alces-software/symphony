@@ -24,7 +24,7 @@
 #                                                                              #
 ################################################################################
 
-SYMPHONY_REPO_URL="http://symphony-repo/configs/"
+SYMPHONY_REPO_URL="http://repo.alces-software.com/configs/"
 
 cd `dirname $0`
 if [ ! -d templates/yum ]; then
