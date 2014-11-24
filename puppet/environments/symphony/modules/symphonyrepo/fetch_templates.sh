@@ -24,7 +24,7 @@
 #                                                                              #
 ################################################################################
 
-SYMPHONY_REPO_URL="http://repo.alces-software.com/configs/"
+SYMPHONY_REPO_URL="http://symphony-repo/configs/"
 
 cd `dirname $0`
 if [ ! -d templates/yum ]; then
@@ -34,5 +34,7 @@ curl $SYMPHONY_REPO_URL/centos/7/yum-repos.conf > templates/yum/CentOS7.erb
 curl $SYMPHONY_REPO_URL/centos/6/yum-repos.conf > templates/yum/CentOS6.erb
 curl $SYMPHONY_REPO_URL/rhel/6/yum-repos.conf > templates/yum/RHEL6.erb
 curl $SYMPHONY_REPO_URL/rhelcomputenode/6/yum-repos.conf > templates/yum/RHELCOMPUTENODE6.erb
+curl $SYMPHONY_REPO_URL/sl/6/yum-repos.conf > templates/yum/Scientific6.erb
+curl $SYMPHONY_REPO_URL/sl/7/yum-repos.conf > templates/yum/Scientific7.erb
 chown puppet:puppet -R templates/yum
 
