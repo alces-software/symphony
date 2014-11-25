@@ -49,10 +49,10 @@ case $GROUP in
     pulp-admin rpm repo sync run --repo-id sl6 --bg
     #fastbugs
     pulp-admin rpm repo create --repo-id=sl6-fastbugs --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/6x/x86_64/updates/fastbugs/ --serve-http=true --relative-url=sl/6/fastbugs
-    pulp-admin rpm repo sync run --repo-id centos6-fastbugs --bg
+    pulp-admin rpm repo sync run --repo-id sl6-fastbugs --bg
     #security
     pulp-admin rpm repo create --repo-id=sl6-security --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/6x/x86_64/updates/security/ --serve-http=true --relative-url=sl/6/security
-    pulp-admin rpm repo sync run --repo-id centos6-security --bg
+    pulp-admin rpm repo sync run --repo-id sl6-security --bg
     ;;
   sl7)
     #base
@@ -60,10 +60,10 @@ case $GROUP in
     pulp-admin rpm repo sync run --repo-id sl7 --bg
     #fastbugs
     pulp-admin rpm repo create --repo-id=sl7-fastbugs --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/updates/fastbugs/ --serve-http=true --relative-url=sl/7/fastbugs
-    pulp-admin rpm repo sync run --repo-id centos7-fastbugs --bg
+    pulp-admin rpm repo sync run --repo-id sl7-fastbugs --bg
     #security
-    pulp-admin rpm repo create --repo-id=sl7-security --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/updates/security/ --serve-http=true --relative-url=sl/67/security
-    pulp-admin rpm repo sync run --repo-id centos7-security --bg
+    pulp-admin rpm repo create --repo-id=sl7-security --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/updates/security/ --serve-http=true --relative-url=sl/7/security
+    pulp-admin rpm repo sync run --repo-id sl7-security --bg
     ;;
   rhel6)
     #Create a boot path from supplied iso
