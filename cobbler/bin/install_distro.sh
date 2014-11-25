@@ -155,7 +155,7 @@ case $GROUP in
         ;;
       alces)
         BASEURL="http://repo.alces-software.com/pulp/repos/sl/7/os/images/pxeboot/"
-        INSTALLURL="http://repo.alces-software.com/pulp/sl/centos/7/os/"
+        INSTALLURL="http://repo.alces-software.com/pulp/sl/7/os/"
         ;;
       *)
         BASEURL="http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/os/images/pxeboot"
