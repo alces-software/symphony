@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7"
+AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno"
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONFIGFILE="${BASEDIR}/../etc/yum-sources.conf"

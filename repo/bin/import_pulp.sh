@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7"
+AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno"
 
 GROUP=$1
 
@@ -144,6 +144,9 @@ case $GROUP in
     #updates
     pulp-admin rpm repo create --repo-id=centos7-updates --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7/updates/x86_64/ --serve-http=true --relative-url=centos/7/updates
     pulp-admin rpm repo sync run --repo-id centos7-updates --bg
+    #extras
+    pulp-admin rpm repo create --repo-id=centos7-extras --feed=http://www.mirrorservice.org/sites/mirror.centos.org/7/extras/x86_64/ --serve-http=true --relative-url=centos/7/extras
+    pulp-admin rpm repo sync run --repo-id centos7-extras --bg
     ;;
   el7other)
     #epel
@@ -178,6 +181,10 @@ case $GROUP in
     pulp-admin rpm repo create --repo-id=alceshpc-extraslustreserver-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/extras-lustreserver/ --serve-http=true --relative-url=alceshpc/el6/extraslustreserver/
     pulp-admin rpm repo sync run --bg --repo-id=alceshpc-extraslustreserver-el6
     ;;
+  
+  el7rdojuno)
+    pulp-admin rpm repo create --repo-id=el7rdojuno --feed=https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7/ --serve-http=true --relative-url=rdo/juno/el7
+    pulp-admin rpm repo sync run --bg --repo-id=el7rdojuno
   *)
     echo "Unknown Group" >&2
     exit 1
