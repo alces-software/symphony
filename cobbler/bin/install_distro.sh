@@ -166,7 +166,7 @@ case $GROUP in
     curl $BASEURL/initrd.img > /var/lib/symphony/cobbler/distro_files/SL7_initrd
     curl $BASEURL/vmlinuz > /var/lib/symphony/cobbler/distro_files/SL7_kernel
     #Create distro 
-    cobbler distro add --name SL7 --kernel=/var/lib/symphony/cobbler/distro_files/SL7_kernel --initrd=/var/lib/symphony/cobbler/distro_files/SL7_initrd --arch=x86_64 --ksmeta="tree=centos/7 url=$INSTALLURL" --breed redhat --os-version=rhel7 --kopts="syslog=@@server@@" --clobber
+    cobbler distro add --name SL7 --kernel=/var/lib/symphony/cobbler/distro_files/SL7_kernel --initrd=/var/lib/symphony/cobbler/distro_files/SL7_initrd --arch=x86_64 --ksmeta="tree=sl/7 url=$INSTALLURL" --breed redhat --os-version=rhel7 --kopts="syslog=@@server@@" --clobber
     #Create Profile 
     cobbler profile add --name SL7 --distro SL7 --kickstart /var/lib/cobbler/kickstarts/symphony/SL7_basic.ks --clobber
     ;;
