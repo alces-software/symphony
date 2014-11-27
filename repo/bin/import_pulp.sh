@@ -185,7 +185,8 @@ case $GROUP in
   el7rdojuno)
     pulp-admin rpm repo create --repo-id=el7rdojuno --feed=https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7/ --serve-http=true --relative-url=rdo/juno/el7
     pulp-admin rpm repo sync run --bg --repo-id=el7rdojuno
-  *)
+    ;;
+   *)
     echo "Unknown Group" >&2
     exit 1
     ;;
