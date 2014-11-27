@@ -1,1 +1,3 @@
+if [ -z '$skip_puppet' ]; then
 puppet agent -t --environment=symphony --server symphony-director --certname $hostname
+fi
