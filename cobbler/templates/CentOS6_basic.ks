@@ -51,6 +51,8 @@ $SNIPPET('symphony/fixtime')
 
 %post
 $SNIPPET('log_ks_post')
+$SNIPPET('symphony/firstrun')
+$SNIPPET('symphony/yumupdate')
 $SNIPPET('symphony/symphonyrepoinstall')
 $SNIPPET('symphony/disablenetworkmanager')
 $SNIPPET('symphony/installpuppet')
@@ -74,4 +76,5 @@ $SNIPPET('post_anamon')
 $SNIPPET('kickstart_done')
 # End final steps
 $SNIPPET('symphony/finalnetworkconfig')
+$SNIPPET('symphony/enrollipa')
 $SNIPPET('symphony/runpuppet')

@@ -1,0 +1,3 @@
+if [ -z "$skip_update" ]; then
+  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf update
+fi
