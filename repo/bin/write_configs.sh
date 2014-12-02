@@ -47,6 +47,7 @@ function centos6 {
    el6other
    el6symphony
    el6alceshpc
+   el6rdoicehouse
 }
 
 function rhel6 {
@@ -59,6 +60,7 @@ function rhel6 {
    el6other
    el6symphony
    el6alceshpc
+   el6rdoicehouse
 }
 function rhelcomputenode6 {
    STATE=$RHELCOMPUTENODE6
@@ -70,6 +72,7 @@ function rhelcomputenode6 {
    el6other
    el6symphony
    el6alceshpc
+   el6rdoicehouse
 }
 
 function centos7 {
@@ -82,6 +85,7 @@ function centos7 {
    el7other
    el7symphony
    el7rdojuno
+   el7rdoicehouse
 }
 
 function sl6 {
@@ -94,6 +98,7 @@ function sl6 {
    el6other
    el6symphony
    el6alceshpc
+   el6rdoicehouse
 }
 
 function sl7 {
@@ -106,6 +111,7 @@ function sl7 {
    el7other
    el7symphony
    el7rdojuno
+   el7rdoicehouse
 }
 
 #REPOSITORY GROUP
@@ -148,6 +154,16 @@ function el7rdojuno {
    rdojuno $STATE $CONFDIR $VERS
 }
 
+function el6rdoicehouse {
+   STATE=$EL6RDOICEHOUSE
+   rdoicehouse $STATE $CONFDIR $VERS
+}
+
+function el7rdoicehouse {
+   STATE=$EL7RDOICEHOUSE
+   rdoicehouse $STATE $CONFDIR $VERS
+}
+
 #PACKAGE REPOSITORIES
 
 function epel {
@@ -188,6 +204,11 @@ function alceshpc {
 function rdojuno {
    cat $BASEDIR/../yumconfigs/rdo/juno/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
    cat $BASEDIR/../yumconfigs/rdo/juno/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
+}
+
+function rdoicehouse {
+   cat $BASEDIR/../yumconfigs/rdo/icehouse/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/rdo/icehouse/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 #FUNCTIONS TO RUN

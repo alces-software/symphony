@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno"
+AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno el6rdoicehouse el7rdoicehouse"
 
 GROUP=$1
 
@@ -186,6 +186,15 @@ case $GROUP in
     pulp-admin rpm repo create --repo-id=el7rdojuno --feed=https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7/ --serve-http=true --relative-url=rdo/juno/el7
     pulp-admin rpm repo sync run --bg --repo-id=el7rdojuno
     ;;
+  el7rdoicehouse)
+    pulp-admin rpm repo create --repo-id=el7rdoicehouse --feed=https://repos.fedorapeople.org/repos/openstack/openstack-icehouse/epel-7/ --serve-http=true --relative-url=rdo/icehouse/el7
+    pulp-admin rpm repo sync run --bg --repo-id=el7rdoicehouse
+    ;;
+  el6rdoicehouse)
+    pulp-admin rpm repo create --repo-id=el6rdoicehouse --feed=https://repos.fedorapeople.org/repos/openstack/openstack-icehouse/epel-6/ --serve-http=true --relative-url=rdo/icehouse/el6
+    pulp-admin rpm repo sync run --bg --repo-id=el6rdoicehouse
+    ;;
+
    *)
     echo "Unknown Group" >&2
     exit 1
