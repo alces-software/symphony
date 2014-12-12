@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno el6rdoicehouse el7rdoicehouse"
+AVAILABLE_GROUPS="centos6 el6other centos7.0 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno el6rdoicehouse el7rdoicehouse el6ceph-giant el7ceph-giant"
 
 GROUP=$1
 
@@ -193,6 +193,31 @@ case $GROUP in
   el6rdoicehouse)
     pulp-admin rpm repo create --repo-id=el6rdoicehouse --feed=https://repos.fedorapeople.org/repos/openstack/openstack-icehouse/epel-6/ --serve-http=true --relative-url=rdo/icehouse/el6
     pulp-admin rpm repo sync run --bg --repo-id=el6rdoicehouse
+    ;;
+  el7ceph-giant)
+    pulp-admin rpm repo create --repo-id=el7ceph-giant-x86_64 --feed=http://ceph.com/rpm-giant/el7/x86_64 --serve-http=true --relative-url=ceph/giant/el7/x86_64
+    pulp-admin rpm repo sync run --bg --repo-id=el7ceph-giant-x86_64
+    pulp-admin rpm repo create --repo-id=el7ceph-giant-noarch --feed=http://ceph.com/rpm-giant/el7/noarch --serve-http=true --relative-url=ceph/giant/el7/noarch 
+    pulp-admin rpm repo sync run --bg --repo-id=el7ceph-giant-noarch
+    pulp-admin rpm repo create --repo-id=el7ceph-giant-apache --feed=http://gitbuilder.ceph.com/apache2-rpm-centos7-x86_64-basic/ref/master --serve-http=true --relative-url=ceph/giant/el7/apache
+    pulp-admin rpm repo sync run --bg --repo-id=el7ceph-giant-apache
+    pulp-admin rpm repo create --repo-id=el7ceph-giant-fastcgi --feed=http://gitbuilder.ceph.com/mod_fastcgi-rpm-centos7-x86_64-basic/ref/master --serve-http=true --relative-url=ceph/giant/el7/fastcgi
+    pulp-admin rpm repo sync run --bg --repo-id=el7ceph-giant-fastcgi
+    ;;
+  
+  el6ceph-giant)
+    pulp-admin rpm repo create --repo-id=el6ceph-giant-x86_64 --feed=http://ceph.com/rpm-giant/el6/x86_64 --serve-http=true --relative-url=ceph/giant/el6/x86_64 
+    pulp-admin rpm repo sync run --bg --repo-id=el6ceph-giant-x86_64
+    pulp-admin rpm repo create --repo-id=el6ceph-giant-noarch --feed=http://ceph.com/rpm-giant/el6/noarch --serve-http=true --relative-url=ceph/giant/el6/noarch
+    pulp-admin rpm repo sync run --bg --repo-id=el6ceph-giant-noarch
+    pulp-admin rpm repo create --repo-id=el6ceph-giant-extras-x86_64 --feed=http://ceph.com/packages/ceph-extras/rpm/centos6/x86_64 --serve-http=true --relative-url=ceph/giant/el6/extras/x86_64
+    pulp-admin rpm repo sync run --bg --repo-id=el6ceph-giant-extras-x86_64
+    pulp-admin rpm repo create --repo-id=el6ceph-giant-extras-noarch --feed=http://ceph.com/packages/ceph-extras/rpm/centos6/noarch --serve-http=true --relative-url=ceph/giant/el6/extras/noarch
+    pulp-admin rpm repo sync run --bg --repo-id=el6ceph-giant-extras-noarch
+    pulp-admin rpm repo create --repo-id=el6ceph-giant-apache --feed=http://gitbuilder.ceph.com/apache2-rpm-centos6-x86_64-basic/ref/master --serve-http=true --relative-url=ceph/giant/el6/apache
+    pulp-admin rpm repo sync run --bg --repo-id=el6ceph-giant-apache
+    pulp-admin rpm repo create --repo-id=el6ceph-giant-fastcgi --feed=http://gitbuilder.ceph.com/mod_fastcgi-rpm-centos6-x86_64-basic/ref/master --serve-http=true --relative-url=ceph/giant/el6/fastcgi
+    pulp-admin rpm repo sync run --bg --repo-id=el6ceph-giant-fastcgi
     ;;
 
    *)
