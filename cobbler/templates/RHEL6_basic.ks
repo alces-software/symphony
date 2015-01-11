@@ -26,9 +26,6 @@ url --url=$url
 #repo --name rhel6optional --baseurl=http://symphony-repo/pulp/repos/$tree/optional/
 $yum_repo_stanza
 
-#NETWORK
-$SNIPPET('network_config')
-
 #DISK
 %include /tmp/disk.part
 
@@ -67,16 +64,17 @@ $SNIPPET('symphony/scrubifcfg')
 $yum_config_stanza
 # End yum configuration
 $SNIPPET('post_install_kernel_options')
-$SNIPPET('post_install_network_config')
 $SNIPPET('func_register_if_enabled')
 $SNIPPET('download_config_files')
 $SNIPPET('redhat_register')
 $SNIPPET('cobbler_register')
+$SNIPPET('symphony/enrollipa')
 # Enable post-install boot notification
 $SNIPPET('post_anamon')
-# Start final steps
+# Start final steps (before puppet run, as it will run the cobbler post scripts to sign cert)
 $SNIPPET('kickstart_done')
 # End final steps
-$SNIPPET('symphony/finalnetworkconfig')
-$SNIPPET('symphony/enrollipa')
 $SNIPPET('symphony/runpuppet')
+#Do this late as possible it might mess with resolv.conf
+$SNIPPET('post_install_network_config')
+$SNIPPET('symphony/finalnetworkconfig')

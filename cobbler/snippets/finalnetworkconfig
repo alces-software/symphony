@@ -2,3 +2,9 @@ if [ -f /etc/sysconfig/network-scripts/ifcfg-bmc ]; then
   sed -i -e 's/^ONBOOT=.*$/ONBOOT=no/g' /etc/sysconfig/network-scripts/ifcfg-bmc
 fi
 rm -v /etc/udev/rules.d/*-persistent-net.rules
+#force set hostname on el7
+if [ $os_version == 'rhel7' ]; then
+  if [ -f /etc/hostname ]; then
+    echo $hostname > /etc/hostname
+  fi
+fi
