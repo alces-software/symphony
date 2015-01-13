@@ -1,0 +1,70 @@
+cat << 'EOF' > /etc/init.d/symphony-firstrun
+#!/bin/bash
+# (c) Copyright 2007-2012 Alces Software Ltd & Stephen F Norledge.
+# chkconfig: 2345 99 1
+# alces-init: Run Alces install routines
+# description: Runs Alces install procedures at boot time
+#
+. /etc/rc.d/init.d/functions
+
+LOG=/var/log/symphony/firstrun.log
+
+SITE_SCRIPT=/var/lib/symphony/firstrun/bin/firstrun
+SITE_LOG=/var/log/symphony/firstrun.log
+
+export STAGE1=/etc/.syphonyfirstrun.stage1
+
+mkdir -p `dirname $LOG` &>/dev/null
+
+stage1()
+{
+  echo "SYMPHONY FIRSTTUN - STAGE1"; echo
+  echo -n "Running Firstrun script: "
+  (/bin/bash $SITE_SCRIPT < /dev/null) &>>$SITE_LOG && success || failure
+  echo
+  touch $STAGE1
+  /sbin/chkconfig symphony-firstrun off
+}
+
+start ()
+{
+  stage1
+  RETVAL=0
+}
+
+stop()
+{
+  echo -n "Stopping:"
+  success
+  RETVAL=0
+  echo
+}
+
+running()
+{
+  test -f $STAGE1 &>/dev/null
+}
+
+case "$1" in
+  start)
+    start
+  ;;
+  stop)
+    running && stop
+  ;;
+  restart)
+    stop
+    start
+  ;;
+  status)
+    running && echo "RUN" || (echo "NEVER RUN"; exit 3)
+  ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+esac
+
+exit $RETVAL
+EOF
+chmod 755 /etc/init.d/symphony-firstrun
+chkconfig --add symphony-firstrun
+chkconfig symphony-firstrun on

@@ -15,24 +15,9 @@ fi
 echo "Done!"
 echo "-------------------------------------------------------------------------------"
 EOF
-cat << EOF >> /etc/systemd/system/symphony-firstrun.service
-[Unit]
-Description=Symphony FirstRun service
-After=network.target
-Before=display-manager.service getty@tty1.service
-
-[Service]
-ExecStart=/bin/bash /var/lib/symphony/firstrun/bin/firstrun
-Type=oneshot
-ExecStartPost=/bin/systemctl disable symphony-firstrun.service
-SysVStartPriority=99
-TimeoutSec=0
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-EOF
-chmod 664 /etc/systemd/system/symphony-firstrun.service
-systemctl daemon-reload
-systemctl enable symphony-firstrun.service
+if ( [ -e /usr/bin/systemctl ] ); then
+  $SNIPPET('symphony/firstrun.el7') 
+else
+  $SNIPPET('symphony/firstrun.el6')
+fi
 touch /var/lib/symphony/firstrun/RUN
