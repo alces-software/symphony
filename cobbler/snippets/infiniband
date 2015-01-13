@@ -1,7 +1,7 @@
 #Mellanox infiniband tweaks
 if (lsmod | grep -q mlx4_core); then
   #install infiniband extras
-  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf install @infiniband infiniband-diags
+  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infiniband-diags
   #Force set all ports to infiniband type (not ethernet)
   cat << EOF > /etc/modprobe.d/symphony-mlx4.conf
 options mlx4_core log_num_mtt=24 log_mtts_per_seg=4 port_type_array=1,1
@@ -18,7 +18,7 @@ fi
 #QLogic/Intel infiniband tweaks
 if (lsmod | grep -q ib_qib); then
   #install infiniband pkgs
-  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf @infiniband infinipath-psm-devel infinipath-psm kernel-devel infiniband-diags
+  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infinipath-psm-devel infinipath-psm kernel-devel infiniband-diags
   if ( [ -e /usr/bin/systemctl ] ); then
     systemctl enable rdma
   else
