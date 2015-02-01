@@ -64,6 +64,9 @@ case $GROUP in
     #security
     pulp-admin rpm repo create --repo-id=sl7-security --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/x86_64/updates/security/ --serve-http=true --relative-url=sl/7/security
     pulp-admin rpm repo sync run --repo-id sl7-security --bg
+    #extras
+    pulp-admin rpm repo create --repo-id=sl7-extras --feed=http://anorien.csc.warwick.ac.uk/mirrors/scientific/7x/external_products/extras/x86_64/ --serve-http=true --relative-url=sl/7/extras
+    pulp-admin rpm repo sync run --repo-id sl7-extras --bg
     ;;
   rhel6)
     #Create a boot path from supplied iso
@@ -166,19 +169,19 @@ case $GROUP in
     pulp-admin rpm repo sync run --bg --repo-id=puppet-base-el7
     ;;
   el7symphony)
-    pulp-admin rpm repo create --repo-id=symphony-el7 --feed=http://download.alces-software.com/repos/symphony/el7/ --serve-http=true --relative-url=symphony/el7
+    pulp-admin rpm repo create --repo-id=symphony-el7 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/symphony/el7/ --serve-http=true --relative-url=symphony/el7
     pulp-admin rpm repo sync run --bg --repo-id=symphony-el7
     ;;
   el6symphony)
-    pulp-admin rpm repo create --repo-id=symphony-el6 --feed=http://download.alces-software.com/repos/symphony/el6/ --serve-http=true --relative-url=symphony/el6
+    pulp-admin rpm repo create --repo-id=symphony-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/symphony/el6/ --serve-http=true --relative-url=symphony/el6
     pulp-admin rpm repo sync run --bg --repo-id=symphony-el6
     ;;
   el6alceshpc)
-    pulp-admin rpm repo create --repo-id=alceshpc-base-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/base/ --serve-http=true --relative-url=alceshpc/el6/base
+    pulp-admin rpm repo create --repo-id=alceshpc-base-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/alces-hpc/base --serve-http=true --relative-url=alceshpc/el6/base
     pulp-admin rpm repo sync run --bg --repo-id=alceshpc-base-el6
-    pulp-admin rpm repo create --repo-id=alceshpc-extras-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/extras/ --serve-http=true --relative-url=alceshpc/el6/extras
+    pulp-admin rpm repo create --repo-id=alceshpc-extras-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/alces-hpc/extras/ --serve-http=true --relative-url=alceshpc/el6/extras
     pulp-admin rpm repo sync run --bg --repo-id=alceshpc-extras-el6
-    pulp-admin rpm repo create --repo-id=alceshpc-extraslustreserver-el6 --feed=http://download.alces-software.com/repos/alces/latest/rhel/6.5/alces-hpc/extras-lustreserver/ --serve-http=true --relative-url=alceshpc/el6/extraslustreserver/
+    pulp-admin rpm repo create --repo-id=alceshpc-extraslustreserver-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/alces-hpc/extras-lustreserver/ --serve-http=true --relative-url=alceshpc/el6/extraslustreserver/
     pulp-admin rpm repo sync run --bg --repo-id=alceshpc-extraslustreserver-el6
     ;;
   
