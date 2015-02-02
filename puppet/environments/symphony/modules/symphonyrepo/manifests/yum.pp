@@ -16,7 +16,7 @@ class symphonyrepo::yum (
       owner=>'root',
       group=>'root',
       replace=>'no',
-      content=>template("symphonyrepo/yum/$symphony_operatingsystem.erb"),
+      content=>template("symphonyrepo/yum/$symphony_operatingsystem_major.erb"),
       notify=>Exec['yumclean']
     }
     exec {"repoclean":

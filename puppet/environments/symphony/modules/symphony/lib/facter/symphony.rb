@@ -6,15 +6,27 @@
 #################################################################################
 require 'yaml'
 
+def symphony_operating_system
+  if File::exists? '/etc/redhat-release'
+    if ! File::read('/etc/redhat-release').to_s.match('ComputeNode').nil?
+      val={:name=>"RHELCOMPUTENODE",:major=>Facter.value('os')['release']['major'],:minor=>Facter.value('os')['release']['minor']}
+    end
+  end
+    val||={:name=>Facter.value('os')['name'],:major=>Facter.value('os')['release']['major'],:minor=>Facter.value('os')['release']['minor']}
+    val
+end
+
 Facter.add("symphony_operatingsystem") do
   setcode do
-    if File::exists? '/etc/redhat-release'
-      if ! File::read('/etc/redhat-release').to_s.match('ComputeNode').nil?
-        val="RHELCOMPUTENODE#{Facter.value('os')['release']['major']}.#{Facter.value('os')['release']['minor']}"
-      end
-    end
-    val||="#{Facter.value('os')['name']}#{Facter.value('os')['release']['major']}.#{Facter.value('os')['release']['minor']}"
-    val
+    os=symphony_operating_system
+    "#{os[:name]}#{os[:major]}.#{os[:minor]}"
+  end
+end
+
+Facter.add("symphony_operatingsystem_major") do
+  setcode do
+    os=symphony_operating_system
+    "#{os[:name]}#{os[:major]}"
   end
 end
 
