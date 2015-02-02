@@ -1,4 +1,4 @@
-
+/repo/etc/yum-sources.conf
 /cobbler/distro_files/*
 /puppet/environments/symphony/modules/multitemplate
 /puppet/environments/symphony/modules/stdlib
