@@ -3,3 +3,5 @@
 #For cobbler postscripts
 wget
 vconfig
+vim
+emacs
