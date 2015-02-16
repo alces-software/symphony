@@ -68,6 +68,8 @@ $SNIPPET('download_config_files')
 $SNIPPET('redhat_register')
 $SNIPPET('cobbler_register')
 $SNIPPET('symphony/enrollipa')
+$SNIPPET('symphony/sitescriptwrapper')
+$SNIPPET('symphony/alceshpc')
 # Enable post-install boot notification
 $SNIPPET('post_anamon')
 # Start final steps (before puppet run, as it will run the cobbler post scripts to sign cert)

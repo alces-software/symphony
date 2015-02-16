@@ -1,0 +1,15 @@
+# ENTER YOUR OWN CUSTOMISATIONS BELOW ########################
+# REMEMBER TO MAKE YOUR SCRIPT UNATTENDED
+# LOGS CAN BE FOUND IN:
+# /var/log/symphony/sitescript.log
+########### ENTER YOUR OWN CONFIGURATION HERE ###############
+
+#If symphony cluster tools are available via NFS copy in profile.d scripts 
+if [ -f /opt/clusterware/var/cache/clusterware/src/clusterware/etc/system/alces-clusterware.sh ]; then
+  cp -v /opt/clusterware/var/cache/clusterware/src/clusterware/etc/system/alces-clusterware.* /etc/profile.d/.
+fi
+
+ 
+ 
+ 
+#############################################################

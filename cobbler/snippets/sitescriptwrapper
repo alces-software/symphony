@@ -1,0 +1,7 @@
+cat << 'EOF' > /var/lib/symphony/firstrun/scripts/sitescript.bash
+cat << 'EOD' > /root/sitescript.symphony
+$SNIPPET('symphony/sitescript')
+EOD
+mkdir -p /var/log/symphony
+/bin/bash -x /root/sitescript.symphony > /var/log/symphony/sitescript.log 2>&1
+EOF

@@ -3,7 +3,7 @@ if (lsmod | grep -q mlx4_core); then
   #install infiniband extras
   yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infiniband-diags
   #Force set all ports to infiniband type (not ethernet)
-  cat << EOF > /etc/modprobe.d/symphony-mlx4.conf
+  cat << "EOF" > /etc/modprobe.d/symphony-mlx4.conf
 options mlx4_core log_num_mtt=24 log_mtts_per_seg=4 port_type_array=1,1
 EOF
   if ( [ -e /usr/bin/systemctl ] ); then
@@ -12,7 +12,14 @@ EOF
     chkconfig rdma on
   fi
   #Name host on fabric
-  echo "for dev in `ls -d /sys/class/infiniband/mlx4_*` ; do echo `hostname -s` > \$dev/node_desc; done" >> /etc/rc.local
+  echo "for dev in `ls -d /sys/class/infiniband/mlx4_*` ; do echo `hostname -s` > $dev/node_desc; done" >> /etc/rc.local
+  #Set card modes to IB
+  lspci | grep "Network controller: Mellanox Technologies" | cut -d ' ' -f 1 | while read l; do echo $l ib ib >> /etc/rdma/mlx4.conf; done
+  #auto load the modules
+  cat << EOF > /etc/modules-load.d/symphony-mlx4.conf
+mlx4_core
+mlx4_ib
+EOF
 fi
 
 #QLogic/Intel infiniband tweaks
@@ -25,7 +32,7 @@ if (lsmod | grep -q ib_qib); then
     chkconfig rdma on
   fi
   #Name host on fabric
-  echo "for dev in `ls -d /sys/class/infiniband/qib*` ; do echo `hostname -s` > \$dev/node_desc; done" >> /etc/rc.local
+  echo "for dev in `ls -d /sys/class/infiniband/qib*` ; do echo `hostname -s` > $dev/node_desc; done" >> /etc/rc.local
 fi
 
 cat << EOF > /etc/security/limits.d/99-symphonyinfiniband.conf

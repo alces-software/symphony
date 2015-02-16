@@ -1,12 +1,17 @@
 if ! [ -z $alceshpcmachine ]; then
   MACHINE=$alceshpcmachine
-else
-  MACHINE=genericmachine
-fi
 
-cat << EOF > /etc/alces_stack.yaml
+  cat << EOF > /etc/alces_stack.yaml
 ---
 :machine: $MACHINE
 :role: slave
 :hostname: `hostname -s`
 EOF
+
+  cat << EOF > /var/lib/symphony/firstrun/scripts/alceshpc.bash
+puppet agent -t --environment=alceshpc
+#toggle reboot flag
+touch /firstrun.reboot
+EOF
+
+fi

@@ -18,12 +18,17 @@ mkdir -p `dirname $LOG` &>/dev/null
 
 stage1()
 {
-  echo "SYMPHONY FIRSTTUN - STAGE1"; echo
+  echo "SYMPHONY FIRSTRUN - STAGE1"; echo
   echo -n "Running Firstrun script: "
   (/bin/bash $SITE_SCRIPT < /dev/null) &>>$SITE_LOG && success || failure
   echo
   touch $STAGE1
   /sbin/chkconfig symphony-firstrun off
+  if [ -f /firstrun.reboot ]; then
+    echo -n "Reboot flag set.. Rebooting.."
+    rm -f /firstrun.reboot
+    shutdown -r now
+  fi
 }
 
 start ()
