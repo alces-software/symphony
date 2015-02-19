@@ -8,6 +8,9 @@ class symphony::profile::generic (
 ) inherits ::symphony::profile
 {
   $profile='generic'
+  class { 'symphony':
+    stage=>configure,
+  }
   class { 'symphonyrepo': 
     stage=>init, 
   }

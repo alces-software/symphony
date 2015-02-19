@@ -4,9 +4,15 @@
 ## Copyright (c) 2008-2013 Alces Software Ltd
 ##
 ################################################################################
-class symphony
-{
-  class { 'symphony::nfs':
-    nfsimports => hiera('symphony::nfsimports',undef),
+class symphony::nfs (
+  $nfsimports,
+)
+{ 
+  package { 'nfs-utils':
+    ensure=>'installed'
+  }
+
+  if $nfsimports != undef {
+     create_resources( symphony::nfs::fsimport, $nfsimports )
   }
 }

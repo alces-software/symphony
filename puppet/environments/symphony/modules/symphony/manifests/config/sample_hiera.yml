@@ -1,0 +1,5 @@
+#site wide NFS imports
+#symphony::nfsimports:
+# 'storage:/opt/gridware':
+#   target: '/opt/gridware'
+#   options: intr,rsize=32768,wsize=32768,_netdev

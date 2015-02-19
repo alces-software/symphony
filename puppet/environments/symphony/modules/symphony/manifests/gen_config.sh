@@ -23,20 +23,15 @@
 # http://www.alces-software.org/symphony                                       #
 #                                                                              #
 ################################################################################
-SYMPHONY_HOME=/var/lib/symphony/
-ENV_HOME=/var/lib/symphony/puppet/environments/symphony/
 
-$ENV_HOME/modules/symphonyrepo/fetch_templates.sh
-cd $ENV_HOME/modules/symphony/
-./gen_config.sh > ../../hieradata/site.yaml
-cd $ENV_HOME/modules/symphonydirector/
-./gen_config.sh > ../../hieradata/site.yaml
-cd $ENV_HOME/modules/symphonyrepo/
-./gen_config.sh >> ../../hieradata/site.yaml
-./fetch_templates.sh
-cd $ENV_HOME/modules/symphonymonitor/
-./gen_config.sh >> ../../hieradata/site.yaml
-cd $ENV_HOME/modules/
-./fetch_modules.sh
+#DOMAIN=mgt.symphony.local
+#MAILRELAY=smtp.alces-software.com
+#MAILFROM='test@alces-software.com'
 
+#sed `dirname $0`/config/sample_hiera.yml \
+#-e "s|%DIRECTORKEY%|`cat /root/.ssh/id_symphony.pub | cut -f 2 -d ' '`|g" \
+#-e "s|%DOMAIN%|$DOMAIN|g" \
+#-e "s|%MAILRELAY%|$MAILRELAY|g" \
+#-e "s|%MAILFROM%|$MAILFROM|g" 
 
+cat `dirname $0`/config/sample_hiera.yml
