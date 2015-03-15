@@ -241,6 +241,8 @@ case $GROUP in
      pulp-admin rpm repo sync run --bg --repo-id=lustre-client-el6
      pulp-admin rpm repo create --repo-id=lustre-e2fsprogs-el6 --feed=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el6/RPMS/ --serve-http=true --relative-url=lustre/el6/e2fsprogs/
      pulp-admin rpm repo sync run --bg --repo-id=lustre-e2fsprogs-el6
+     pulp-admin rpm repo create --repo-id=lustre-extra-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/el6/extra/ --serve-http=true --relative-url=lustre/el6/extra/
+     pulp-admin rpm repo sync run --bg --repo-id=lustre-extra-el6
      ;;
    *)
     echo "Unknown Group" >&2
