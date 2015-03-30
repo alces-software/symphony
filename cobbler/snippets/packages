@@ -2,9 +2,14 @@ vim
 emacs
 xauth
 xhost
-@desktop
+xdpyinfo
+xterm
+xclock
+tigervnc-server
+ntpdate
 #Required for cobbler completion
 #For cobbler postscripts
 wget
 vconfig
-
+bridge-utils
+patch

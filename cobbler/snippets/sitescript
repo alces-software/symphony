@@ -9,7 +9,4 @@ if [ -f /opt/clusterware/var/cache/clusterware/src/clusterware/etc/system/alces-
   cp -v /opt/clusterware/var/cache/clusterware/src/clusterware/etc/system/alces-clusterware.* /etc/profile.d/.
 fi
 
- 
- 
- 
 #############################################################

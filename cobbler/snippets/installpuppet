@@ -1,26 +1,28 @@
-if [ -z "$hostname" ]; then
+realhost=$hostname
+puppethost=\${realhost,,}
+if [ -z "$puppethost" ]; then
   echo "WARNING: Unable to determine system hostname - you need to set a hostname for puppet to be auto-configured"
 else
-yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf --enablerepo epel --enablerepo puppet-base --enablerepo puppet-deps install puppet
+yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf --enablerepo epel --enablerepo puppet-base --enablerepo puppet-deps install puppet
 cat << EOF > /etc/puppet/puppet.conf
 [main]
 vardir = /var/lib/puppet
 logdir = /var/log/puppet
 rundir = /var/run/puppet
-ssldir = \$vardir/ssl
+ssldir = \\$vardir/ssl
 [agent]
 pluginsync      = true
 report          = false
 ignoreschedules = true
 daemon          = false
 ca_server       = symphony-director
-certname        = $hostname
+certname        = $puppethost
 environment     = production
 server          = symphony-director
 EOF
 
 systemctl enable puppet
 
-#Generate puppet signing request (cobbler will sort out the rest)
-/usr/bin/puppet agent --test --waitforcert 0 --server $server --certname $hostname
+#Generate puppet signing request (cobbler will sort out the rest) (lower case hostname)
+/usr/bin/puppet agent --test --waitforcert 0 --server $server --certname \$puppethost
 fi

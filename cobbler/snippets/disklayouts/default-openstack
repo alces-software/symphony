@@ -1,0 +1,14 @@
+zerombr
+bootloader --location=mbr --driveorder=$disk1 --append="$bootloaderappend"
+clearpart --all --initlabel
+
+#Disk partitioning information
+part /boot --fstype ext4 --size=4096 --asprimary --ondisk $disk1
+part pv.01 --size=1 --grow --asprimary --ondisk $disk1
+volgroup system pv.01
+logvol  /  --fstype ext4 --vgname=system  --size=65546  --name=root
+logvol  swap  --fstype swap --vgname=system  --size=16384  --name=swap1
+logvol  /var --fstype ext4 --vgname=system --size=65546 --name=var
+logvol  /tmp --fstype ext4 --vgname=system --size=16384 --name=tmp
+logvol  /var/lib/nova --fstype ext4 --vgname=system --size 1 --grow --name=nova
+

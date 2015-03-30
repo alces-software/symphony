@@ -1,7 +1,7 @@
 #Mellanox infiniband tweaks
 if (lsmod | grep -q mlx4_core); then
   #install infiniband extras
-  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infiniband-diags
+  yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infiniband-diags
   #Force set all ports to infiniband type (not ethernet)
   cat << "EOF" > /etc/modprobe.d/symphony-mlx4.conf
 options mlx4_core log_num_mtt=24 log_mtts_per_seg=4 port_type_array=1,1
@@ -25,7 +25,7 @@ fi
 #QLogic/Intel infiniband tweaks
 if (lsmod | grep -q ib_qib); then
   #install infiniband pkgs
-  yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infinipath-psm-devel infinipath-psm kernel-devel infiniband-diags
+  yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf -x compat-openmpi -x compat-openmpi-psm install @infiniband infinipath-psm-devel infinipath-psm kernel-devel infiniband-diags
   if ( [ -e /usr/bin/systemctl ] ); then
     systemctl enable rdma
   else
@@ -43,3 +43,26 @@ cat << EOF > /etc/security/limits.d/99-symphonyinfiniband.conf
 * soft memlock unlimited
 * hard memlock unlimited
 EOF
+#Don't stop ib drivers if lustre module is loaded (causes hang on shutdown)
+if [ -f /etc/init.d/rdma ]; then
+yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf install patch
+patch -p0 << 'EOD'
+--- /etc/init.d/rdma    2015-03-04 15:19:11.691026292 +0000
++++ /etc/init.d/rdma.lustrepatch        2015-03-04 15:18:15.069852927 +0000
+@@ -316,6 +316,14 @@
+        return 1
+     fi
+
++    if is_module ko2iblnd; then
++       echo "Lustre modules are still enabled."
++       echo "Please stop lustre and remove modules before stopping the rdma service."
++       echo_failure
++       echo
++       return 1
++    fi
++
+     if ! is_module ib_core; then
+        # Nothing to do, make sure lock file is gone and return
+        rm -f /var/lock/subsys/rdma
+EOD
+fi

@@ -15,7 +15,7 @@ if ! [ -z $ipmiset ]; then
   IPMI_PASSWORD="${power_pass}"
   if ! [ -z $power_address ]; then 
     #install and start ipmi tools
-    yum -e 0 -y --config http://symphony-repo/configs/$tree/yum.conf install ipmitool
+    yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf install ipmitool
     service ipmi start
     sleep 1
     #dump current settings so they are logged
