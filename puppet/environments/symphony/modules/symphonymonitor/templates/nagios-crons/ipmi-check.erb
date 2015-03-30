@@ -7,9 +7,9 @@
 
 . /etc/profile
 
+rm -f /root/.freeipmi/sdr-cache/*
 for node in `nodeattr -s ipmicheck`
 do
-   ipmi-sensors -h $node.bmc > /var/spool/nagios/ipmi-check/$node.ipmi.out 2>&1
+   ipmi-sensors -D LAN_2_0 -h $node.bmc > /var/spool/nagios/ipmi-check/$node.ipmi.out 2>&1
 done
-
 

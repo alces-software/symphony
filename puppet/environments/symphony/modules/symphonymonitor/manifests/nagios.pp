@@ -29,6 +29,16 @@ class symphonymonitor::nagios (
           require=>Package['nrpe'],
           notify=>Service['nrpe']
     }
+    file {'/etc/nrpe.d/nrpe-local.cfg':
+	  ensure=>present,
+          mode=>0644,
+          owner=>'nrpe',
+          group=>'nrpe',
+          content=>symphonytemplate("symphonymonitor/nagios/nrpe-local.erb"),
+          require=>Package['nrpe'],
+          notify=>Service['nrpe'],
+	  replace=>false,
+    }
 
     service {'nrpe':
              enable=>'true',
@@ -41,10 +51,10 @@ class symphonymonitor::nagios (
     }
 
   } else {
-    service {'nrpe':
-             enable=>'false',
-             ensure=>'stopped'
-    }
+    #service {'nrpe':
+    #         enable=>'false',
+    #         ensure=>'stopped'
+    #}
   }
   if $install_nagios {
     if $role == 'master' {
@@ -99,6 +109,39 @@ class symphonymonitor::nagios (
              require=>Package['nagios'],
              notify=>Service['nagios']
        }
+
+       # Separate local configuration files - do not overwrite if they already exist
+       file {'/etc/nagios/objects/alces/alces-hostgroups.cfg':
+             ensure=>present,
+             mode=>0644,
+             owner=>'nagios',
+             group=>'nagios',
+             content=>symphonytemplate("symphonymonitor/nagios/alces-hostgroups.cfg.erb"),
+             require=>Package['nagios'],
+             notify=>Service['nagios'],
+             replace=>false,
+       }
+       file {'/etc/nagios/objects/alces/alces-hosts.cfg':
+             ensure=>present,
+             mode=>0644,
+             owner=>'nagios',
+             group=>'nagios',
+             content=>symphonytemplate("symphonymonitor/nagios/alces-hosts.cfg.erb"),
+             require=>Package['nagios'],
+             notify=>Service['nagios'],
+             replace=>false,
+       }
+       file {'/etc/nagios/objects/alces/alces-services.cfg':
+             ensure=>present,
+             mode=>0644,
+             owner=>'nagios',
+             group=>'nagios',
+             content=>symphonytemplate("symphonymonitor/nagios/alces-services.cfg.erb"),
+             require=>Package['nagios'],
+             notify=>Service['nagios'],
+             replace=>false,
+       }
+
        file {'/etc/nagios/objects/commands.cfg':
              mode=>0644,
              owner=>'nagios',

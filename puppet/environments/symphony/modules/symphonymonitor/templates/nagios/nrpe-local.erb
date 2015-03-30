@@ -1,0 +1,67 @@
+# Generic NRPE commands
+command[check_users]=/usr/lib64/nagios/plugins/check_users -w 50 -c 100
+command[check_load]=/usr/lib64/nagios/plugins/check_load -w 170,150,130 -c 200,170,150
+command[check_disk]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /
+command[check_disk_var]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /var
+command[check_disk_tmp]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /tmp
+command[check_disk_users]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /users
+command[check_disk_alces]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /opt/alces
+command[check_disk_gridware]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /opt/gridware
+command[check_zombie_procs]=/usr/lib64/nagios/plugins/check_procs -w 5 -c 10 -s Z
+command[check_total_procs]=/usr/lib64/nagios/plugins/check_procs -w 2000 -c 3000
+
+# Site specfic commands
+command[check_smart_attributes_sda]=/usr/bin/sudo /usr/lib64/nagios/plugins/check_smart_attributes --ata --text --drive=/dev/sda
+command[check_smart_attributes_sdb]=/usr/bin/sudo /usr/lib64/nagios/plugins/check_smart_attributes --ata --text --drive=/dev/sdb
+
+# Hardware specific commands
+command[check_PERC_H7X0_00]=sudo /usr/lib64/nagios/plugins/alces/check_PERC_H7X0 0 0
+command[check_PERC_H7X0_10]=sudo /usr/lib64/nagios/plugins/alces/check_PERC_H7X0 1 0
+command[check_PERC_H7X0_01]=sudo /usr/lib64/nagios/plugins/alces/check_PERC_H7X0 0 1
+command[check_PERC_H7X0_11]=sudo /usr/lib64/nagios/plugins/alces/check_PERC_H7X0 1 1
+command[check_PERC_H7X0_21]=sudo /usr/lib64/nagios/plugins/alces/check_PERC_H7X0 2 1
+
+command[check_H7X0_PF]=sudo /usr/lib64/nagios/plugins/alces/check_H7X0_PF
+command[check_PSUs]=sudo /usr/lib64/nagios/plugins/alces/check_PSUs
+
+# Site specfic commands
+command[check_metaary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray master2ary1
+command[check_hablockH1-ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray hablockH1-ary1
+command[check_hablockH2-ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray hablockH2-ary1
+command[check_hablockI1-ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray hablockI1-ary1
+command[check_hablockI2-ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray hablockI2-ary1
+command[check_master1ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray master1ary1
+command[check_master2ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray master2ary1
+command[check_hablockE1-ary1]=sudo /usr/lib64/nagios/plugins/alces/check_dellMDarray hablockE1-ary1
+
+# RCM commands
+command[check_rcm_service_mdt]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service mdt1
+command[check_rcm_service_osth1-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetH1-1
+command[check_rcm_service_osth1-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetH1-2
+command[check_rcm_service_osth2-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetH2-1
+command[check_rcm_service_osth2-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetH2-2
+command[check_rcm_service_osti1-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetI1-1
+command[check_rcm_service_osti1-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetI1-2
+command[check_rcm_service_osti2-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetI2-1
+command[check_rcm_service_osti2-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm service ostsetI2-2
+
+command[check_rcm_member_meta1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member meta1.prv.rosalind.compute.estate
+command[check_rcm_member_meta2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member meta2.prv.rosalind.compute.estate
+command[check_rcm_member_hablockh1-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablockh1-1.prv.rosalind.compute.estate
+command[check_rcm_member_hablockh1-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablockh1-2.prv.rosalind.compute.estate
+command[check_rcm_member_hablockh2-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablockh2-1.prv.rosalind.compute.estate
+command[check_rcm_member_hablockh2-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablockh2-2.prv.rosalind.compute.estate
+command[check_rcm_member_hablocki1-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablocki1-1.prv.rosalind.compute.estate
+command[check_rcm_member_hablocki1-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablocki1-2.prv.rosalind.compute.estate
+command[check_rcm_member_hablocki2-1]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablocki2-1.prv.rosalind.compute.estate
+command[check_rcm_member_hablocki2-2]=sudo /usr/lib64/nagios/plugins/alces/check_rcm member hablocki2-2.prv.rosalind.compute.estate
+
+# corosync
+command[check_corosync]=sudo /usr/lib64/nagios/plugins/alces/check_corosync
+
+# Ceph
+command[check_ceph_rgw]=sudo /usr/lib64/nagios/plugins/alces/check_ceph_rgw
+command[check_ceph_health]=sudo /usr/lib64/nagios/plugins/alces/check_ceph_health
+command[check_ceph_mon]=sudo /usr/lib64/nagios/plugins/alces/check_ceph_mon 3
+command[check_ceph_osd]=sudo /usr/lib64/nagios/plugins/alces/check_ceph_osd 36
+

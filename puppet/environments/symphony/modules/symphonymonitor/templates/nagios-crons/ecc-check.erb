@@ -2,14 +2,12 @@
 
 # script to check for ECC errors via IPMI network connections
 
-[[ ! -x /usr/bin/nodeattr ]] && exit 0
 [[ ! -d /var/spool/nagios/ecc-check ]] && mkdir -p /var/spool/nagios/ecc-check && chown nagios /var/spool/nagios/ecc-check
-[[ -x /opt/alces/opt/symphony/bin/symphony ]] || exit 0
 
 . /etc/profile
 
-for node in `nodeattr -s cluster`
+rm -f /root/.freeipmi/sdr-cache/*
+for node in `nodeattr -s ipmicheck`
 do
-   alces ipmi $node -c 'sel elist' 2> /dev/null > /var/spool/nagios/ecc-check/$node.ecc.out 2>&1
+   ipmi-sel -D LAN_2_0 -h $node.bmc 2> /dev/null > /var/spool/nagios/ecc-check/$node.ecc.out 2>&1
 done
-

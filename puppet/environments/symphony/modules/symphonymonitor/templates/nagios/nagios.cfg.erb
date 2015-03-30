@@ -49,12 +49,13 @@ cfg_file=/etc/nagios/objects/cluster.cfg
 # extension) in a particular directory by using the cfg_dir
 # directive as shown below:
 
+# Import all config files from Alces directory
+cfg_dir=/etc/nagios/objects/alces
+
 #cfg_dir=/etc/nagios/servers
 #cfg_dir=/etc/nagios/printers
 #cfg_dir=/etc/nagios/switches
 #cfg_dir=/etc/nagios/routers
-
-
 
 
 # OBJECT CACHE FILE
@@ -740,7 +741,7 @@ check_for_updates=1
 # this data to determine the number of users running specific version of
 # Nagios.  Enable this option if you do not want this information to be sent.
 
-bare_update_check=0
+bare_update_check=1
 
 
 

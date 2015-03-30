@@ -1,0 +1,150 @@
+define hostgroup{
+        hostgroup_name  symphonytrio
+        alias           Symphony service nodes
+        members         symphony-director,symphony-repo,symphony-monitor,directory1
+        }
+
+#define hostgroup{
+#        hostgroup_name	generic
+#        alias		Generic nodes
+#        members		
+#}
+
+define hostgroup{
+	hostgroup_name	headnodes
+	alias		Headnode systems
+	members		headnode1
+	}
+
+define hostgroup{
+        hostgroup_name  masters
+        alias           Service master systems
+        members         master1-1,master1-2,master2-1,master2-2
+        }
+
+define hostgroup{
+        hostgroup_name  lustremeta
+        alias           Lustre metadata servers
+        members         meta1,meta2
+        }
+
+define hostgroup{
+	hostgroup_name	lustreoss
+	alias		Lustre OSS nodes
+	members 	hablockh1-1,hablockh1-2,hablockh2-1,hablockh2-2,hablocki1-1,hablocki1-2,hablocki2-1,hablocki2-2
+	}
+
+define hostgroup{
+        hostgroup_name  cinder
+        alias           Cinder and Glance servers
+        members         hablocke1-1,hablocke1-2,hablocke1-3,hablocke1-4
+        }
+
+define hostgroup{
+        hostgroup_name  cephosd
+        alias           Ceph OSD servers
+        members         blockf1,blockg1,blockh1,blockh2,blockh3,blocki1,blocki2,blocki3,blockj1,blockj2,blockj3,blockj4
+        }
+
+define hostgroup{
+        hostgroup_name  cephmon
+        alias           Ceph monitor servers
+        members         stgmasterh1,stgmasteri1,stgmasterj1
+        }
+
+define hostgroup{
+        hostgroup_name  cephgw
+        alias           Ceph RADOS gateway servers
+        members         stggw1,stggw2
+        }
+
+define hostgroup{
+        hostgroup_name  storage
+        alias           Storage servers
+        hostgroup_members lustremeta,lustreoss,cinder,cephosd,cephmon,cephgw
+        }
+
+define hostgroup{
+        hostgroup_name  computeA
+        alias           Compute node systems in rackA
+        members         nodea01,nodea02,nodea03,nodea04,nodea05,nodea06,nodea07,nodea08,nodea09,nodea10,nodea11,nodea12,nodea13,nodea14,nodea15,nodea16,nodea17,nodea18,nodea19,nodea20,nodea21,nodea22,nodea23,nodea24
+        }
+
+define hostgroup{
+        hostgroup_name  computeB
+        alias           Compute node systems in rackB
+        members         nodeb01,nodeb02,nodeb03,nodeb04,nodeb05,nodeb06,nodeb07,nodeb08,nodeb09,nodeb10,nodeb11,nodeb12,nodeb13,nodeb14,nodeb15,nodeb16,nodeb17,nodeb18,nodeb19,nodeb20,nodeb21,nodeb22,nodeb23,nodeb24
+        }
+
+define hostgroup{
+        hostgroup_name  computeC
+        alias           Compute node systems in rackC
+        members         nodec01,nodec02,nodec03,nodec04,nodec05,nodec06,nodec07,nodec08,nodec09,nodec10,nodec11,nodec12,nodec13,nodec14,nodec15,nodec16,nodec17,nodec18,nodec19,nodec20,nodec21,nodec22,nodec23,nodec24
+        }
+
+define hostgroup{
+        hostgroup_name  computeD
+        alias           Compute node systems in rackD
+        members         noded01,noded02,noded03,noded04,noded05,noded06,noded07,noded08,noded09,noded10,noded11,noded12,noded13,noded14,noded15,noded16,noded17,noded18,noded19,noded20,noded21,noded22,noded23,noded24
+        }
+
+define hostgroup{
+        hostgroup_name  computeF
+        alias           Compute node systems in rackF
+        members         nodef01,nodef02,nodef03,nodef04,nodef05,nodef06,nodef07,nodef08,nodef09,nodef10,nodef11,nodef12,nodef13,nodef14,nodef15,nodef16,nodef17,nodef18,nodef19,nodef20,nodef21,nodef22
+        }
+
+define hostgroup{
+        hostgroup_name  computeG
+        alias           Compute node systems in rackG
+        members         cg1n01,cg1n02,cg1n03,cg1n04,cg1n05,cg1n06,cg1n07,cg1n08,cg1n09,cg1n10,cg1n11,cg1n12,cg1n13,cg1n14,cg1n15,cg1n16,nodeg01,nodeg02,nodeg03,nodeg04,nodeg05,nodeg06,nodeg07,nodeg08,nodeg09,nodeg10
+        }
+
+define hostgroup{
+        hostgroup_name  HPCcompute
+        alias           All HPC compute nodes
+        hostgroup_members computeA,computeB,computeC,computeD
+        }
+
+define hostgroup{
+        hostgroup_name  NOVAcompute
+        alias           All OpenStack Nova hosts
+        hostgroup_members computeF,computeG
+        }
+
+define hostgroup{
+	hostgroup_name	Dellcompute
+	alias		All Dell compute nodes
+	hostgroup_members HPCcompute,computeF
+	members		nodeg01,nodeg02,nodeg03,nodeg04,nodeg05,nodeg06,nodeg07,nodeg08,nodeg09,nodeg10
+	}
+
+define hostgroup{
+	hostgroup_name	compute
+	alias		All compute nodes
+	hostgroup_members HPCcompute,NOVAcompute
+	}
+
+define hostgroup{
+        hostgroup_name  logins
+        alias           HPC Login node systems
+        members         login1,login2
+        }
+
+define hostgroup{
+        hostgroup_name  network
+        alias           OpenStack Network node systems
+        members         router1,network1
+        }
+
+define hostgroup{
+	hostgroup_name	oshosts
+	alias		OpenStack service hosts
+	members		storage1,controller1,network1,router1
+	}
+
+define hostgroup{
+        hostgroup_name  symphony
+        alias           Symphony nodes
+        hostgroup_members symphonytrio,oshosts
+        }

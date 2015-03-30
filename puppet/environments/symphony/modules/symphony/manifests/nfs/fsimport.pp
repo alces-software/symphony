@@ -10,11 +10,14 @@ define symphony::nfs::fsimport (
   $options="intr,rsize=32768,wsize=32768,_netdev",
 )
 {
+  exec { "create_mountdir_${target}":
+    command => "mkdir -p ${target}",
+    creates => $target,
+    before=>[File["dir-$target"]]
+  }
   file { "dir-${target}":
-    name=>$target,
-    ensure=>'directory',
-    owner=>'root',
-    group=>'root',
+    path=>$target,
+    ensure=>'directory'
   }
   mount { "mount-${source}":
     require=>[File["dir-${target}"],Package['nfs-utils']],

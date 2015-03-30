@@ -1,0 +1,414 @@
+define service{
+        use                             local-service
+        hostgroup_name                  symphony,headnodes,compute,logins,masters,storage
+        service_description             PING
+	check_command			check_ping!100.0,20%!500.0,60%
+        }
+
+define service{
+	use 			nrpe-service
+	hostgroup_name 		symphony,headnodes,logins,masters,storage
+	service_description 	load
+	check_command 		check_nrpe!check_load
+}
+
+define service{
+	use 			nrpe-service
+	hostgroup_name		headnodes
+	service_description 	gridware partition
+	check_command 		check_nrpe!check_disk_gridware
+}
+
+define service{
+	use 			nrpe-service
+	hostgroup_name		symphony,headnodes,logins,masters,storage
+	service_description 	root disk
+	check_command 		check_nrpe!check_disk
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          headnodes,logins,storage,masters
+        service_description     storage var partition
+        check_command           check_nrpe!check_disk_var
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          headnodes,logins,storage,masters
+        service_description     storage tmp partition
+        check_command           check_nrpe!check_disk_tmp
+}
+
+define service{
+        use                     nrpe-service
+        host			symphony-repo
+        service_description     storage DB partition
+        check_command           check_nrpe!check_disk_db
+}
+
+define service{
+        use                     nrpe-service
+        host			symphony-repo
+        service_description     storage pulp partition
+        check_command           check_nrpe!check_disk_pulp
+}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     storage opt-alces partition
+#        check_command           check_nrpe!check_disk_alces
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          symphony
+#        service_description     storage opt-gridware partition
+#        check_command           check_nrpe!check_disk_gridware
+#}
+
+define service{
+	use 			nrpe-service
+	hostgroup_name 		symphony,headnodes,logins,storage,masters
+	service_description 	zombie procs
+	check_command 		check_nrpe!check_zombie_procs
+}
+
+define service{
+	use 			nrpe-service
+	hostgroup_name		symphony,headnodes,logins,storage,masters
+	service_description 	total procs
+	check_command 		check_nrpe!check_total_procs
+}
+
+define service{
+        use                     daily-service
+        hostgroup_name          masters,compute,storage
+        service_description     Check for memory ECC errors
+        check_command           check_ECC-IPMI!$HOSTNAME$
+        }
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          masters,storage,network,Dellcompute,logins
+        service_description     Power supply redundancy
+        check_command           check_PSUs!$HOSTNAME$
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          masters,storage,logins,network
+        service_description     PERC H7X0 system disk status
+        check_command           check_nrpe!check_PERC_H7X0_00
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          masters,cephosd
+        service_description     PERC H7X0 secondary disk status
+        check_command           check_nrpe!check_PERC_H7X0_10
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          cephosd
+        service_description     PERC H8X0 external volume 1
+        check_command           check_nrpe!check_PERC_H7X0_01
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          cephosd
+        service_description     PERC H8X0 external volume 2
+        check_command           check_nrpe!check_PERC_H7X0_11
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          cephosd
+        service_description     PERC H8X0 external volume 3
+        check_command           check_nrpe!check_PERC_H7X0_21
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          cephosd
+        service_description     External storage status
+        check_command           check_nrpe!check_MegaRAID
+}
+
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          headnodes
+#        service_description     HP MSA system disk status
+#        check_command           check_nrpe!check_HPSA_P400
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          headnodes
+#        service_description     HP MSA backup disk status
+#        check_command           check_nrpe!check_HPSA_P400_1
+#}
+
+define service{
+        use                     local-service
+        hostgroup_name          headnodes
+        service_description     Check grid-engine status
+        check_command           check_nrpe!check_GE
+        }
+
+#define service{
+#        use                     daily-service
+#        hostgroup_name          headnodes
+#        service_description     Check dirvish backup status
+#        check_command           check_nrpe!check_dirvish
+#        }
+
+#define service{
+#        use                     local-service
+#        hostgroup_name          compute
+#        service_description     Check for high load via ganglia
+#        check_command           check_load_ganglia!$HOSTNAME$
+#        }
+
+define service{
+        use                     local-service
+        hostgroup_name          masters,compute
+        service_description     Check for air inlet temperature
+        check_command           check_inlettemp!$HOSTNAME$
+        }
+
+#define service{
+#        use                             nrpe-service
+#        name                            check_smart_attributes_sda
+#        hostgroup_name                  compute
+#        service_description             SMART data for disk SDA
+#        check_command                   check_nrpe!check_smart_attributes_sda
+#        }
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          headnodes
+#        service_description     headdsk1 array status
+#        check_command           check_nrpe!check_msa!10.78.0.83
+#}
+
+#define service{
+#        use                     nrpe-service
+#        hostgroup_name          headnodes
+#        service_description     Cluster UPS status
+#        check_command           check_nrpe!check_nut
+#}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name		masters
+        service_description     Check high-availability services
+        check_command           check_nrpe!check_corosync
+        }
+
+define service{
+        use                     nrpe-service
+        hostgroup_name		lustreoss
+        service_description     Check high-availability ostsetH1-1
+        check_command           check_nrpe!check_rcm_service_osth1-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostsetH1-2
+        check_command           check_nrpe!check_rcm_service_osth1-2
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostsetH2-1
+        check_command           check_nrpe!check_rcm_service_osth2-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostsetH2-2
+        check_command           check_nrpe!check_rcm_service_osth2-2
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostsetI1-1
+        check_command           check_nrpe!check_rcm_service_osti1-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostsetI1-2
+        check_command           check_nrpe!check_rcm_service_osti1-2
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostseti2-1
+        check_command           check_nrpe!check_rcm_service_osti2-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability ostseti2-2
+        check_command           check_nrpe!check_rcm_service_osth1-1
+        }
+
+define service{
+        use                     nrpe-service
+        host                    meta1,meta2
+        service_description     Check high-availability MDT
+        check_command           check_nrpe!check_rcm_service_mdt
+        }
+
+define service{
+        use                     nrpe-service
+        host			meta1,meta2
+        service_description     Check high-availability member meta1
+        check_command           check_nrpe!check_rcm_member_meta1
+        }
+
+define service{
+        use                     nrpe-service
+        host			meta1,meta2
+        service_description     Check high-availability member meta2
+        check_command           check_nrpe!check_rcm_member_meta2
+        }
+
+define service{
+        use                     nrpe-service
+        hostgroup_name		lustreoss
+        service_description     Check high-availability member hablockh1-1
+        check_command           check_nrpe!check_rcm_member_hablockh1-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablockh1-2
+        check_command           check_nrpe!check_rcm_member_hablockh1-2
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablockh2-1
+        check_command           check_nrpe!check_rcm_member_hablockh2-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablockh2-2
+        check_command           check_nrpe!check_rcm_member_hablockh2-2
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablocki1-1
+        check_command           check_nrpe!check_rcm_member_hablocki1-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablocki1-2 
+        check_command           check_nrpe!check_rcm_member_hablocki1-2
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablocki2-1
+        check_command           check_nrpe!check_rcm_member_hablocki2-1
+        }
+define service{
+        use                     nrpe-service
+        hostgroup_name          lustreoss
+        service_description     Check high-availability member hablocki2-2
+        check_command           check_nrpe!check_rcm_member_hablocki2-2
+        }
+
+define service{
+        use                     nrpe-service
+        host			meta1,meta2
+        service_description     Metadata disk array status
+        check_command           check_nrpe!check_metaary1
+}
+
+define service{
+        use                     nrpe-service
+        host                    hablockh1-1,hablockh1-2
+        service_description     Lustre OSS array hablockH1-ary1 status
+        check_command           check_nrpe!check_hablockH1-ary1
+}
+define service{
+        use                     nrpe-service
+        host                    hablockh2-1,hablockh2-2
+        service_description     Lustre OSS array hablockH2-ary1 status
+        check_command           check_nrpe!check_hablockH2-ary1
+}
+define service{
+        use                     nrpe-service
+        host                    hablocki1-1,hablocki1-2
+        service_description     Lustre OSS array hablockI1-ary1 status
+        check_command           check_nrpe!check_hablockI1-ary1
+}
+define service{
+        use                     nrpe-service
+        host                    hablocki2-1,hablocki2-2
+        service_description     Lustre OSS array hablockI2-ary1 status
+        check_command           check_nrpe!check_hablockI2-ary1
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name		masters                    
+        service_description     Cinder array hablockE1-ary1 status
+        check_command           check_nrpe!check_hablockE1-ary1
+}
+
+
+define service{
+        use                     nrpe-service
+        hostgroup_name		masters
+        service_description     Master1 disk array status
+        check_command           check_nrpe!check_master1ary1
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          masters
+        service_description     Master2 disk array status
+        check_command           check_nrpe!check_master2ary1
+}
+
+define service{
+	use 			nrpe-service
+	hostgroup_name		cephmon
+	service_description	Ceph filesystem health
+	check_command		check_nrpe!check_ceph_health
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          cephmon
+        service_description     Ceph monitor health
+        check_command           check_nrpe!check_ceph_mon
+}
+
+define service{
+        use                     nrpe-service
+        hostgroup_name          cephmon
+        service_description     Ceph object storage device health
+        check_command           check_nrpe!check_ceph_osd
+}
+
+define service{
+        use                     nrpe-service
+#        hostgroup_name          cephgw
+	host			stggw1
+        service_description     Ceph RADOS gateway health
+        check_command           check_nrpe!check_ceph_rgw
+}
+

@@ -1,0 +1,1172 @@
+
+define host{
+        use                     generic
+        host_name               symphony-director
+        alias                   symphony-director.mgt.symphony.local
+        address                 symphony-director
+        }
+
+define host{
+        use                     generic
+        host_name               symphony-repo
+        alias                   symphony-repo.mgt.symphony.local
+        address                 symphony-repo
+        }
+
+# This machine is defined in the base nagios config (/etc/nagios/objects/cluster.cfg)
+# so don't define it again.
+#define host{
+#        use                     generic
+#        host_name               symphony-monitor
+#        alias                   symphony-monitor.mgt.symphony.local
+#        address                 symphony-monitor
+#        }
+
+define host{
+        use                     generic
+        host_name               directory1
+        alias                   directory1.mgt.symphony.local
+        address                 directory1
+        }
+
+###################################################################################
+# Cluster hosts 
+###################################################################################
+
+define host{
+	use			generic
+	host_name		headnode1
+	alias			headnode1.mgt.symphony.local
+	address			headnode1
+	}
+
+define host{
+        use                     generic
+        host_name               master1-1
+        alias                   master1-1.mgt.symphony.local
+        address                 master1-1
+        }
+
+define host{
+        use                     generic
+        host_name               master1-2
+        alias                   master1-2.mgt.symphony.local
+        address                 master1-2
+        }
+
+define host{
+        use                     generic
+        host_name               master2-1
+        alias                   master2-1.mgt.symphony.local
+        address                 master2-1
+        }
+
+define host{
+        use                     generic
+        host_name               master2-2
+        alias                   master2-2.mgt.symphony.local
+        address                 master2-2
+        }
+
+define host{
+        use                     generic
+        host_name               meta1
+        alias                   meta1.mgt.symphony.local
+        address                 meta1
+        }
+
+define host{
+        use                     generic
+        host_name               meta2
+        alias                   meta2.mgt.symphony.local
+        address                 meta2
+        }
+
+define host{
+        use                     generic
+        host_name               hablocke1-1
+        alias                   hablocke1-1.mgt.symphony.local
+        address                 hablocke1-1
+        }
+
+define host{
+        use                     generic
+        host_name               hablocke1-2
+        alias                   hablocke1-2.mgt.symphony.local
+        address                 hablocke1-2
+        }
+
+define host{
+        use                     generic
+        host_name               hablocke1-3
+        alias                   hablocke1-3.mgt.symphony.local
+        address                 hablocke1-3
+        }
+
+define host{
+        use                     generic
+        host_name               hablocke1-4
+        alias                   hablocke1-4.mgt.symphony.local
+        address                 hablocke1-4
+        }
+
+define host{
+        use                     generic
+        host_name               hablockh1-1
+        alias                   hablockh1-1.mgt.symphony.local
+        address                 hablockh1-1
+        }
+
+define host{
+        use                     generic
+        host_name               hablockh1-2
+        alias                   hablockh1-2.mgt.symphony.local
+        address                 hablockh1-2
+        }
+
+define host{
+        use                     generic
+        host_name               hablockh2-1
+        alias                   hablockh2-1.mgt.symphony.local
+        address                 hablockh2-1
+        }
+
+define host{
+        use                     generic
+        host_name               hablockh2-2
+        alias                   hablockh2-2.mgt.symphony.local
+        address                 hablockh2-2
+        }
+
+define host{
+        use                     generic
+        host_name               hablocki1-1
+        alias                   hablocki1-1.mgt.symphony.local
+        address                 hablocki1-1
+        }
+
+define host{
+        use                     generic
+        host_name               hablocki1-2
+        alias                   hablocki1-2.mgt.symphony.local
+        address                 hablocki1-2
+        }
+
+define host{
+        use                     generic
+        host_name               hablocki2-1
+        alias                   hablocki2-1.mgt.symphony.local
+        address                 hablocki2-1
+        }
+
+define host{
+        use                     generic
+        host_name               hablocki2-2
+        alias                   hablocki2-2.mgt.symphony.local
+        address                 hablocki2-2
+        }
+
+define host{
+        use                     generic
+        host_name               cg1n01
+        alias                   cg1n01.mgt.symphony.local
+        address                 cg1n01
+        }
+define host{
+        use                     generic
+        host_name               cg1n02
+        alias                   cg1n02.mgt.symphony.local
+        address                 cg1n02
+        }
+define host{
+        use                     generic
+        host_name               cg1n03
+        alias                   cg1n03.mgt.symphony.local
+        address                 cg1n03
+        }
+define host{
+        use                     generic
+        host_name               cg1n04
+        alias                   cg1n04.mgt.symphony.local
+        address                 cg1n04
+        }
+define host{
+        use                     generic
+        host_name               cg1n05
+        alias                   cg1n05.mgt.symphony.local
+        address                 cg1n05
+        }
+define host{
+        use                     generic
+        host_name               cg1n06
+        alias                   cg1n06.mgt.symphony.local
+        address                 cg1n06
+        }
+define host{
+        use                     generic
+        host_name               cg1n07
+        alias                   cg1n07.mgt.symphony.local
+        address                 cg1n07
+        }
+define host{
+        use                     generic
+        host_name               cg1n08
+        alias                   cg1n08.mgt.symphony.local
+        address                 cg1n08
+        }
+define host{
+        use                     generic
+        host_name               cg1n09
+        alias                   cg1n09.mgt.symphony.local
+        address                 cg1n09
+        }
+define host{
+        use                     generic
+        host_name               cg1n10
+        alias                   cg1n10.mgt.symphony.local
+        address                 cg1n10
+        }
+define host{
+        use                     generic
+        host_name               cg1n11
+        alias                   cg1n11.mgt.symphony.local
+        address                 cg1n11
+        }
+define host{
+        use                     generic
+        host_name               cg1n12
+        alias                   cg1n12.mgt.symphony.local
+        address                 cg1n12
+        }
+define host{
+        use                     generic
+        host_name               cg1n13
+        alias                   cg1n13.mgt.symphony.local
+        address                 cg1n13
+        }
+define host{
+        use                     generic
+        host_name               cg1n14
+        alias                   cg1n14.mgt.symphony.local
+        address                 cg1n14
+        }
+define host{
+        use                     generic
+        host_name               cg1n15
+        alias                   cg1n15.mgt.symphony.local
+        address                 cg1n15
+        }
+define host{
+        use                     generic
+        host_name               cg1n16
+        alias                   cg1n16.mgt.symphony.local
+        address                 cg1n16
+        }
+define host{
+        use                     generic
+        host_name               nodea01
+        alias                   nodea01.mgt.symphony.local
+        address                 nodea01
+        }
+define host{
+        use                     generic
+        host_name               nodea02
+        alias                   nodea02.mgt.symphony.local
+        address                 nodea02
+        }
+define host{
+        use                     generic
+        host_name               nodea03
+        alias                   nodea03.mgt.symphony.local
+        address                 nodea03
+        }
+define host{
+        use                     generic
+        host_name               nodea04
+        alias                   nodea04.mgt.symphony.local
+        address                 nodea04
+        }
+define host{
+        use                     generic
+        host_name               nodea05
+        alias                   nodea05.mgt.symphony.local
+        address                 nodea05
+        }
+define host{
+        use                     generic
+        host_name               nodea06
+        alias                   nodea06.mgt.symphony.local
+        address                 nodea06
+        }
+define host{
+        use                     generic
+        host_name               nodea07
+        alias                   nodea07.mgt.symphony.local
+        address                 nodea07
+        }
+define host{
+        use                     generic
+        host_name               nodea08
+        alias                   nodea08.mgt.symphony.local
+        address                 nodea08
+        }
+define host{
+        use                     generic
+        host_name               nodea09
+        alias                   nodea09.mgt.symphony.local
+        address                 nodea09
+        }
+define host{
+        use                     generic
+        host_name               nodea10
+        alias                   nodea10.mgt.symphony.local
+        address                 nodea10
+        }
+define host{
+        use                     generic
+        host_name               nodea11
+        alias                   nodea11.mgt.symphony.local
+        address                 nodea11
+        }
+define host{
+        use                     generic
+        host_name               nodea12
+        alias                   nodea12.mgt.symphony.local
+        address                 nodea12
+        }
+define host{
+        use                     generic
+        host_name               nodea13
+        alias                   nodea13.mgt.symphony.local
+        address                 nodea13
+        }
+define host{
+        use                     generic
+        host_name               nodea14
+        alias                   nodea14.mgt.symphony.local
+        address                 nodea14
+        }
+define host{
+        use                     generic
+        host_name               nodea15
+        alias                   nodea15.mgt.symphony.local
+        address                 nodea15
+        }
+define host{
+        use                     generic
+        host_name               nodea16
+        alias                   nodea16.mgt.symphony.local
+        address                 nodea16
+        }
+define host{
+        use                     generic
+        host_name               nodea17
+        alias                   nodea17.mgt.symphony.local
+        address                 nodea17
+        }
+define host{
+        use                     generic
+        host_name               nodea18
+        alias                   nodea18.mgt.symphony.local
+        address                 nodea18
+        }
+define host{
+        use                     generic
+        host_name               nodea19
+        alias                   nodea19.mgt.symphony.local
+        address                 nodea19
+        }
+define host{
+        use                     generic
+        host_name               nodea20
+        alias                   nodea20.mgt.symphony.local
+        address                 nodea20
+        }
+define host{
+        use                     generic
+        host_name               nodea21
+        alias                   nodea21.mgt.symphony.local
+        address                 nodea21
+        }
+define host{
+        use                     generic
+        host_name               nodea22
+        alias                   nodea22.mgt.symphony.local
+        address                 nodea22
+        }
+define host{
+        use                     generic
+        host_name               nodea23
+        alias                   nodea23.mgt.symphony.local
+        address                 nodea23
+        }
+define host{
+        use                     generic
+        host_name               nodea24
+        alias                   nodea24.mgt.symphony.local
+        address                 nodea24
+        }
+define host{
+        use                     generic
+        host_name               nodeb01
+        alias                   nodeb01.mgt.symphony.local
+        address                 nodeb01
+        }
+define host{
+        use                     generic
+        host_name               nodeb02
+        alias                   nodeb02.mgt.symphony.local
+        address                 nodeb02
+        }
+define host{
+        use                     generic
+        host_name               nodeb03
+        alias                   nodeb03.mgt.symphony.local
+        address                 nodeb03
+        }
+define host{
+        use                     generic
+        host_name               nodeb04
+        alias                   nodeb04.mgt.symphony.local
+        address                 nodeb04
+        }
+define host{
+        use                     generic
+        host_name               nodeb05
+        alias                   nodeb05.mgt.symphony.local
+        address                 nodeb05
+        }
+define host{
+        use                     generic
+        host_name               nodeb06
+        alias                   nodeb06.mgt.symphony.local
+        address                 nodeb06
+        }
+define host{
+        use                     generic
+        host_name               nodeb07
+        alias                   nodeb07.mgt.symphony.local
+        address                 nodeb07
+        }
+define host{
+        use                     generic
+        host_name               nodeb08
+        alias                   nodeb08.mgt.symphony.local
+        address                 nodeb08
+        }
+define host{
+        use                     generic
+        host_name               nodeb09
+        alias                   nodeb09.mgt.symphony.local
+        address                 nodeb09
+        }
+define host{
+        use                     generic
+        host_name               nodeb10
+        alias                   nodeb10.mgt.symphony.local
+        address                 nodeb10
+        }
+define host{
+        use                     generic
+        host_name               nodeb11
+        alias                   nodeb11.mgt.symphony.local
+        address                 nodeb11
+        }
+define host{
+        use                     generic
+        host_name               nodeb12
+        alias                   nodeb12.mgt.symphony.local
+        address                 nodeb12
+        }
+define host{
+        use                     generic
+        host_name               nodeb13
+        alias                   nodeb13.mgt.symphony.local
+        address                 nodeb13
+        }
+define host{
+        use                     generic
+        host_name               nodeb14
+        alias                   nodeb14.mgt.symphony.local
+        address                 nodeb14
+        }
+define host{
+        use                     generic
+        host_name               nodeb15
+        alias                   nodeb15.mgt.symphony.local
+        address                 nodeb15
+        }
+define host{
+        use                     generic
+        host_name               nodeb16
+        alias                   nodeb16.mgt.symphony.local
+        address                 nodeb16
+        }
+define host{
+        use                     generic
+        host_name               nodeb17
+        alias                   nodeb17.mgt.symphony.local
+        address                 nodeb17
+        }
+define host{
+        use                     generic
+        host_name               nodeb18
+        alias                   nodeb18.mgt.symphony.local
+        address                 nodeb18
+        }
+define host{
+        use                     generic
+        host_name               nodeb19
+        alias                   nodeb19.mgt.symphony.local
+        address                 nodeb19
+        }
+define host{
+        use                     generic
+        host_name               nodeb20
+        alias                   nodeb20.mgt.symphony.local
+        address                 nodeb20
+        }
+define host{
+        use                     generic
+        host_name               nodeb21
+        alias                   nodeb21.mgt.symphony.local
+        address                 nodeb21
+        }
+define host{
+        use                     generic
+        host_name               nodeb22
+        alias                   nodeb22.mgt.symphony.local
+        address                 nodeb22
+        }
+define host{
+        use                     generic
+        host_name               nodeb23
+        alias                   nodeb23.mgt.symphony.local
+        address                 nodeb23
+        }
+define host{
+        use                     generic
+        host_name               nodeb24
+        alias                   nodeb24.mgt.symphony.local
+        address                 nodeb24
+        }
+define host{
+        use                     generic
+        host_name               nodec01
+        alias                   nodec01.mgt.symphony.local
+        address                 nodec01
+        }
+define host{
+        use                     generic
+        host_name               nodec02
+        alias                   nodec02.mgt.symphony.local
+        address                 nodec02
+        }
+define host{
+        use                     generic
+        host_name               nodec03
+        alias                   nodec03.mgt.symphony.local
+        address                 nodec03
+        }
+define host{
+        use                     generic
+        host_name               nodec04
+        alias                   nodec04.mgt.symphony.local
+        address                 nodec04
+        }
+define host{
+        use                     generic
+        host_name               nodec05
+        alias                   nodec05.mgt.symphony.local
+        address                 nodec05
+        }
+define host{
+        use                     generic
+        host_name               nodec06
+        alias                   nodec06.mgt.symphony.local
+        address                 nodec06
+        }
+define host{
+        use                     generic
+        host_name               nodec07
+        alias                   nodec07.mgt.symphony.local
+        address                 nodec07
+        }
+define host{
+        use                     generic
+        host_name               nodec08
+        alias                   nodec08.mgt.symphony.local
+        address                 nodec08
+        }
+define host{
+        use                     generic
+        host_name               nodec09
+        alias                   nodec09.mgt.symphony.local
+        address                 nodec09
+        }
+define host{
+        use                     generic
+        host_name               nodec10
+        alias                   nodec10.mgt.symphony.local
+        address                 nodec10
+        }
+define host{
+        use                     generic
+        host_name               nodec11
+        alias                   nodec11.mgt.symphony.local
+        address                 nodec11
+        }
+define host{
+        use                     generic
+        host_name               nodec12
+        alias                   nodec12.mgt.symphony.local
+        address                 nodec12
+        }
+define host{
+        use                     generic
+        host_name               nodec13
+        alias                   nodec13.mgt.symphony.local
+        address                 nodec13
+        }
+define host{
+        use                     generic
+        host_name               nodec14
+        alias                   nodec14.mgt.symphony.local
+        address                 nodec14
+        }
+define host{
+        use                     generic
+        host_name               nodec15
+        alias                   nodec15.mgt.symphony.local
+        address                 nodec15
+        }
+define host{
+        use                     generic
+        host_name               nodec16
+        alias                   nodec16.mgt.symphony.local
+        address                 nodec16
+        }
+define host{
+        use                     generic
+        host_name               nodec17
+        alias                   nodec17.mgt.symphony.local
+        address                 nodec17
+        }
+define host{
+        use                     generic
+        host_name               nodec18
+        alias                   nodec18.mgt.symphony.local
+        address                 nodec18
+        }
+define host{
+        use                     generic
+        host_name               nodec19
+        alias                   nodec19.mgt.symphony.local
+        address                 nodec19
+        }
+define host{
+        use                     generic
+        host_name               nodec20
+        alias                   nodec20.mgt.symphony.local
+        address                 nodec20
+        }
+define host{
+        use                     generic
+        host_name               nodec21
+        alias                   nodec21.mgt.symphony.local
+        address                 nodec21
+        }
+define host{
+        use                     generic
+        host_name               nodec22
+        alias                   nodec22.mgt.symphony.local
+        address                 nodec22
+        }
+define host{
+        use                     generic
+        host_name               nodec23
+        alias                   nodec23.mgt.symphony.local
+        address                 nodec23
+        }
+define host{
+        use                     generic
+        host_name               nodec24
+        alias                   nodec24.mgt.symphony.local
+        address                 nodec24
+        }
+define host{
+        use                     generic
+        host_name               noded01
+        alias                   noded01.mgt.symphony.local
+        address                 noded01
+        }
+define host{
+        use                     generic
+        host_name               noded02
+        alias                   noded02.mgt.symphony.local
+        address                 noded02
+        }
+define host{
+        use                     generic
+        host_name               noded03
+        alias                   noded03.mgt.symphony.local
+        address                 noded03
+        }
+define host{
+        use                     generic
+        host_name               noded04
+        alias                   noded04.mgt.symphony.local
+        address                 noded04
+        }
+define host{
+        use                     generic
+        host_name               noded05
+        alias                   noded05.mgt.symphony.local
+        address                 noded05
+        }
+define host{
+        use                     generic
+        host_name               noded06
+        alias                   noded06.mgt.symphony.local
+        address                 noded06
+        }
+define host{
+        use                     generic
+        host_name               noded07
+        alias                   noded07.mgt.symphony.local
+        address                 noded07
+        }
+define host{
+        use                     generic
+        host_name               noded08
+        alias                   noded08.mgt.symphony.local
+        address                 noded08
+        }
+define host{
+        use                     generic
+        host_name               noded09
+        alias                   noded09.mgt.symphony.local
+        address                 noded09
+        }
+define host{
+        use                     generic
+        host_name               noded10
+        alias                   noded10.mgt.symphony.local
+        address                 noded10
+        }
+define host{
+        use                     generic
+        host_name               noded11
+        alias                   noded11.mgt.symphony.local
+        address                 noded11
+        }
+define host{
+        use                     generic
+        host_name               noded12
+        alias                   noded12.mgt.symphony.local
+        address                 noded12
+        }
+define host{
+        use                     generic
+        host_name               noded13
+        alias                   noded13.mgt.symphony.local
+        address                 noded13
+        }
+define host{
+        use                     generic
+        host_name               noded14
+        alias                   noded14.mgt.symphony.local
+        address                 noded14
+        }
+define host{
+        use                     generic
+        host_name               noded15
+        alias                   noded15.mgt.symphony.local
+        address                 noded15
+        }
+define host{
+        use                     generic
+        host_name               noded16
+        alias                   noded16.mgt.symphony.local
+        address                 noded16
+        }
+define host{
+        use                     generic
+        host_name               noded17
+        alias                   noded17.mgt.symphony.local
+        address                 noded17
+        }
+define host{
+        use                     generic
+        host_name               noded18
+        alias                   noded18.mgt.symphony.local
+        address                 noded18
+        }
+define host{
+        use                     generic
+        host_name               noded19
+        alias                   noded19.mgt.symphony.local
+        address                 noded19
+        }
+define host{
+        use                     generic
+        host_name               noded20
+        alias                   noded20.mgt.symphony.local
+        address                 noded20
+        }
+define host{
+        use                     generic
+        host_name               noded21
+        alias                   noded21.mgt.symphony.local
+        address                 noded21
+        }
+define host{
+        use                     generic
+        host_name               noded22
+        alias                   noded22.mgt.symphony.local
+        address                 noded22
+        }
+define host{
+        use                     generic
+        host_name               noded23
+        alias                   noded23.mgt.symphony.local
+        address                 noded23
+        }
+define host{
+        use                     generic
+        host_name               noded24
+        alias                   noded24.mgt.symphony.local
+        address                 noded24
+        }
+define host{
+        use                     generic
+        host_name               nodef01
+        alias                   nodef01.mgt.symphony.local
+        address                 nodef01
+        }
+define host{
+        use                     generic
+        host_name               nodef02
+        alias                   nodef02.mgt.symphony.local
+        address                 nodef02
+        }
+define host{
+        use                     generic
+        host_name               nodef03
+        alias                   nodef03.mgt.symphony.local
+        address                 nodef03
+        }
+define host{
+        use                     generic
+        host_name               nodef04
+        alias                   nodef04.mgt.symphony.local
+        address                 nodef04
+        }
+define host{
+        use                     generic
+        host_name               nodef05
+        alias                   nodef05.mgt.symphony.local
+        address                 nodef05
+        }
+define host{
+        use                     generic
+        host_name               nodef06
+        alias                   nodef06.mgt.symphony.local
+        address                 nodef06
+        }
+define host{
+        use                     generic
+        host_name               nodef07
+        alias                   nodef07.mgt.symphony.local
+        address                 nodef07
+        }
+define host{
+        use                     generic
+        host_name               nodef08
+        alias                   nodef08.mgt.symphony.local
+        address                 nodef08
+        }
+define host{
+        use                     generic
+        host_name               nodef09
+        alias                   nodef09.mgt.symphony.local
+        address                 nodef09
+        }
+define host{
+        use                     generic
+        host_name               nodef10
+        alias                   nodef10.mgt.symphony.local
+        address                 nodef10
+        }
+define host{
+        use                     generic
+        host_name               nodef11
+        alias                   nodef11.mgt.symphony.local
+        address                 nodef11
+        }
+define host{
+        use                     generic
+        host_name               nodef12
+        alias                   nodef12.mgt.symphony.local
+        address                 nodef12
+        }
+define host{
+        use                     generic
+        host_name               nodef13
+        alias                   nodef13.mgt.symphony.local
+        address                 nodef13
+        }
+define host{
+        use                     generic
+        host_name               nodef14
+        alias                   nodef14.mgt.symphony.local
+        address                 nodef14
+        }
+define host{
+        use                     generic
+        host_name               nodef15
+        alias                   nodef15.mgt.symphony.local
+        address                 nodef15
+        }
+define host{
+        use                     generic
+        host_name               nodef16
+        alias                   nodef16.mgt.symphony.local
+        address                 nodef16
+        }
+define host{
+        use                     generic
+        host_name               nodef17
+        alias                   nodef17.mgt.symphony.local
+        address                 nodef17
+        }
+define host{
+        use                     generic
+        host_name               nodef18
+        alias                   nodef18.mgt.symphony.local
+        address                 nodef18
+        }
+define host{
+        use                     generic
+        host_name               nodef19
+        alias                   nodef19.mgt.symphony.local
+        address                 nodef19
+        }
+define host{
+        use                     generic
+        host_name               nodef20
+        alias                   nodef20.mgt.symphony.local
+        address                 nodef20
+        }
+define host{
+        use                     generic
+        host_name               nodef21
+        alias                   nodef21.mgt.symphony.local
+        address                 nodef21
+        }
+define host{
+        use                     generic
+        host_name               nodef22
+        alias                   nodef22.mgt.symphony.local
+        address                 nodef22
+        }
+define host{
+        use                     generic
+        host_name               nodeg01
+        alias                   nodeg01.mgt.symphony.local
+        address                 nodeg01
+        }
+define host{
+        use                     generic
+        host_name               nodeg02
+        alias                   nodeg02.mgt.symphony.local
+        address                 nodeg02
+        }
+define host{
+        use                     generic
+        host_name               nodeg03
+        alias                   nodeg03.mgt.symphony.local
+        address                 nodeg03
+        }
+define host{
+        use                     generic
+        host_name               nodeg04
+        alias                   nodeg04.mgt.symphony.local
+        address                 nodeg04
+        }
+define host{
+        use                     generic
+        host_name               nodeg05
+        alias                   nodeg05.mgt.symphony.local
+        address                 nodeg05
+        }
+define host{
+        use                     generic
+        host_name               nodeg06
+        alias                   nodeg06.mgt.symphony.local
+        address                 nodeg06
+        }
+define host{
+        use                     generic
+        host_name               nodeg07
+        alias                   nodeg07.mgt.symphony.local
+        address                 nodeg07
+        }
+define host{
+        use                     generic
+        host_name               nodeg08
+        alias                   nodeg08.mgt.symphony.local
+        address                 nodeg08
+        }
+define host{
+        use                     generic
+        host_name               nodeg09
+        alias                   nodeg09.mgt.symphony.local
+        address                 nodeg09
+        }
+define host{
+        use                     generic
+        host_name               nodeg10
+        alias                   nodeg10.mgt.symphony.local
+        address                 nodeg10
+        }
+
+define host{
+        use                     generic
+        host_name               login1
+        alias                   login1.mgt.symphony.local
+        address                 login1
+        }
+
+define host{
+        use                     generic
+        host_name               login2
+        alias                   login2.mgt.symphony.local
+        address                 login2
+        }
+define host{
+        use                     generic
+        host_name               blockf1
+        alias                   blockf1.mgt.symphony.local
+        address                 blockf1
+        }
+define host{
+        use                     generic
+        host_name               blockg1
+        alias                   blockg1.mgt.symphony.local
+        address                 blockg1
+        }
+define host{
+        use                     generic
+        host_name               blockh1
+        alias                   blockh1.mgt.symphony.local
+        address                 blockh1
+        }
+define host{
+        use                     generic
+        host_name               blockh2
+        alias                   blockh2.mgt.symphony.local
+        address                 blockh2
+        }
+define host{
+        use                     generic
+        host_name               blockh3
+        alias                   blockh3.mgt.symphony.local
+        address                 blockh3
+        }
+define host{
+        use                     generic
+        host_name               blocki1
+        alias                   blocki1.mgt.symphony.local
+        address                 blocki1
+        }
+define host{
+        use                     generic
+        host_name               blocki2
+        alias                   blocki2.mgt.symphony.local
+        address                 blocki2
+        }
+define host{
+        use                     generic
+        host_name               blocki3
+        alias                   blocki3.mgt.symphony.local
+        address                 blocki3
+        }
+define host{
+        use                     generic
+        host_name               blockj1
+        alias                   blockj1.mgt.symphony.local
+        address                 blockj1
+        }
+define host{
+        use                     generic
+        host_name               blockj2
+        alias                   blockj2.mgt.symphony.local
+        address                 blockj2
+        }
+define host{
+        use                     generic
+        host_name               blockj3
+        alias                   blockj3.mgt.symphony.local
+        address                 blockj3
+        }
+define host{
+        use                     generic
+        host_name               blockj4
+        alias                   blockj4.mgt.symphony.local
+        address                 blockj4
+        }
+define host{
+        use                     generic
+        host_name               stggw1
+        alias                   stggw1.mgt.symphony.local
+        address                 stggw1
+        }
+define host{
+        use                     generic
+        host_name               stggw2
+        alias                   stggw2.mgt.symphony.local
+        address                 stggw2
+        }
+define host{
+        use                     generic
+        host_name               stgmasterh1
+        alias                   stgmasterh1.mgt.symphony.local
+        address                 stgmasterh1
+        }
+define host{
+        use                     generic
+        host_name               stgmasteri1
+        alias                   stgmasteri1.mgt.symphony.local
+        address                 stgmasteri1
+        }
+define host{
+        use                     generic
+        host_name               stgmasterj1
+        alias                   stgmasterj1.mgt.symphony.local
+        address                 stgmasterj1
+        }
+define host{
+        use                     generic
+        host_name               router1
+        alias                   router1.mgt.symphony.local
+        address                 router1
+        }
+define host{
+        use                     generic
+        host_name               network1
+        alias                   network1.mgt.symphony.local
+        address                 network1
+        }
+define host{
+        use                     generic
+        host_name               storage1
+        alias                   storage1.mgt.symphony.local
+        address                 storage1
+        }
+define host{
+        use                     generic
+        host_name               controller1
+        alias                   controller1.mgt.symphony.local
+        address                 controller1
+        }

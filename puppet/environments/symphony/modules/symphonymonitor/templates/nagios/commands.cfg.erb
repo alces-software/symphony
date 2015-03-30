@@ -249,70 +249,70 @@ define command{
 # check_ECC-IPMI command definition
 define command{
         command_name    check_ECC-IPMI
-        command_line    sudo /var/lib/alces/share/nagios/plugins/check_ECC-IPMI $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_ECC-IPMI $ARG1$
 }
 
 # check_rcm command definition
 define command{
         command_name    check_rcm
-        command_line    sudo /var/lib/alces/share/nagios/plugins/check_rcm $ARG1$ $ARG2$
+        command_line    sudo /usr/lib64/nagios/plugins/alces/check_rcm $ARG1$ $ARG2$
 }
 
 # check_ql12300 command definition
 define command{
         command_name    check_ql12300
-        command_line    /var/lib/alces/share/nagios/plugins/check_QL12300 $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_QL12300 $ARG1$
 }
 
 define command{
         command_name    check_GE
-        command_line    /var/lib/alces/share/nagios/plugins/check_GE
+        command_line    /usr/lib64/nagios/plugins/alces/check_GE
 }
 
 # check_dirvish command definition
 define command{
         command_name    check_dirvish
-        command_line    sudo /var/lib/alces/share/nagios/plugins/check_dirvish
+        command_line    sudo /usr/lib64/nagios/plugins/alces/check_dirvish
         }
 
 # check_RAM_GE command definition
 define command{
         command_name    check_RAM_GE
-        command_line    /var/lib/alces/share/nagios/plugins/check_RAM_GE $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_RAM_GE $ARG1$
         }
 
 # check_load_ganglia command definition
 define command{
         command_name    check_load_ganglia
-        command_line    /var/lib/alces/share/nagios/plugins/check_load_ganglia $ARG1$ 150
+        command_line    /usr/lib64/nagios/plugins/alces/check_load_ganglia $ARG1$ 150
         }
 
 # check_inlettemp command definition
 define command{
         command_name    check_inlettemp
-        command_line    /var/lib/alces/share/nagios/plugins/check_inlettemp $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_inlettemp $ARG1$
 }
 
 # check_userjobs command definition
 define command{
         command_name    check_userjobs
-        command_line    /var/lib/alces/share/nagios/plugins/check_userjobs $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_userjobs $ARG1$
 }
 
 # check_node_RAID command definition
 define command{
         command_name    check_node_RAID
-        command_line    /var/lib/alces/share/nagios/plugins/check_node_RAID $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_node_RAID $ARG1$
 }
 
 # check_PSUs command definition
 define command{
         command_name    check_PSUs
-        command_line    /var/lib/alces/share/nagios/plugins/check_PSUs $ARG1$
+        command_line    /usr/lib64/nagios/plugins/alces/check_PSUs $ARG1$
 }
 
 # check_nodeRAID command definition
 define command{
        command_name    check_nodeRAID
-       command_line    /var/lib/alces/share/nagios/plugins/check_nodeRAID $ARG1$
+       command_line    /usr/lib64/nagios/plugins/alces/check_nodeRAID $ARG1$
 }
