@@ -48,7 +48,8 @@ function centos6 {
    el6symphony
    el6alceshpc
    el6rdoicehouse
-   el6ceph-giant
+   el6cephgiant
+   el6lustre
 }
 
 function rhel6 {
@@ -62,6 +63,7 @@ function rhel6 {
    el6symphony
    el6alceshpc
    el6rdoicehouse
+   el6lustre
 }
 function rhelcomputenode6 {
    STATE=$RHELCOMPUTENODE6
@@ -74,6 +76,7 @@ function rhelcomputenode6 {
    el6symphony
    el6alceshpc
    el6rdoicehouse
+   el6lustre
 }
 
 function centos7 {
@@ -87,7 +90,8 @@ function centos7 {
    el7symphony
    el7rdojuno
    el7rdoicehouse
-   el7ceph-giant
+   el7cephgiant
+   el7lustre
 }
 
 function sl6 {
@@ -101,7 +105,8 @@ function sl6 {
    el6symphony
    el6alceshpc
    el6rdoicehouse
-   el6ceph-giant
+   el6cephgiant
+   el6lustre
 }
 
 function sl7 {
@@ -115,7 +120,8 @@ function sl7 {
    el7symphony
    el7rdojuno
    el7rdoicehouse
-   el7ceph-giant
+   el7cephgiant
+   el7lustre
 }
 
 #REPOSITORY GROUP
@@ -137,6 +143,10 @@ function el6symphony {
 function el6alceshpc {
    STATE=$EL6ALCESHPC
    alceshpc $STATE $CONFDIR $VERS
+}
+function el6lustre {
+   STATE=$EL6LUSTRE
+   lustre $STATE $CONFDIR $VERS
 }
 
 function el7other {
@@ -168,14 +178,18 @@ function el7rdoicehouse {
    rdoicehouse $STATE $CONFDIR $VERS
 }
 
-function el6ceph-giant {
+function el6cephgiant {
     STATE=$EL6CEPHGIANT
-    ceph-giant $STATE $CONFDIR $VERS
+    cephgiant $STATE $CONFDIR $VERS
 }
 
-function el7ceph-giant {
+function el7cephgiant {
     STATE=$EL7CEPHGIANT
-    ceph-giant $STATE $CONFDIR $VERS
+    cephgiant $STATE $CONFDIR $VERS
+}
+function el7lustre {
+    STATE=$EL7LUSTRE
+    lustre $STATE $CONFDIR $VERS
 }
 
 #PACKAGE REPOSITORIES
@@ -225,9 +239,14 @@ function rdoicehouse {
    cat $BASEDIR/../yumconfigs/rdo/icehouse/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
-function ceph-giant {
+function cephgiant {
    cat $BASEDIR/../yumconfigs/ceph/giant/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
    cat $BASEDIR/../yumconfigs/ceph/giant/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
+}
+
+function lustre {
+   cat $BASEDIR/../yumconfigs/lustre/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/lustre/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 #FUNCTIONS TO RUN
