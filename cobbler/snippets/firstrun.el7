@@ -7,7 +7,7 @@ Before=display-manager.service getty@tty1.service
 [Service]
 ExecStart=/bin/bash /var/lib/symphony/firstrun/bin/firstrun
 Type=oneshot
-ExecStartPost=/bin/systemctl disable symphony-firstrun.service
+ExecStartPost=/bin/bash /var/lib/symphony/firstrun/bin/firstrun-stop
 SysVStartPriority=99
 TimeoutSec=0
 RemainAfterExit=yes

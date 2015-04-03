@@ -15,6 +15,15 @@ fi
 echo "Done!"
 echo "-------------------------------------------------------------------------------"
 EOF
+cat << EOF > /var/lib/symphony/firstrun/bin/firstrun-stop
+#!/bin/bash
+/bin/systemctl disable symphony-firstrun.service
+if [ -f /firsttrun.reboot ]; then
+  echo -n "Reboot flag set.. Rebooting.."
+  rm -f /firstrun.rebooot
+  shutdown -r now
+fi
+EOF
 if ( [ -e /usr/bin/systemctl ] ); then
   $SNIPPET('symphony/firstrun.el7') 
 else
