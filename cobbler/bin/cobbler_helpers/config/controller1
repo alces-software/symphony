@@ -1,0 +1,32 @@
+#Main info
+NAME=controller1
+IPQUAD3=5
+IPQUAD4=10
+
+#vm or hw
+HOSTTYPE=vm
+PROFILE=CentOS7
+
+#IP ADDRESSES
+IPBUILD=10.78.$IPQUAD3.$IPQUAD4
+IPBMC=10.111.$IPQUAD3.$IPQUAD4
+IPMGT=10.111.`expr $IPQUAD3 + 1`.$IPQUAD4
+IPPRV=10.110.$IPQUAD3.$IPQUAD4
+IPIB=10.112.$IPQUAD3.$IPQUAD4
+
+#Interface names (leave blank if no interface on relating network)
+PRV_INT=eth0
+IB_INT=
+#required
+BUILD_INT=eth1
+MGT_INT=
+DMZ_INT=eth2
+
+BUILD_MAC=52:54:00:01:6e:12
+
+#Disk info
+DISKLAYOUT=default
+#usually sda for a hw machines or vda for a vm
+DISK=vda
+#Leave blank if none (used for multidisk layouts)
+DISK2=

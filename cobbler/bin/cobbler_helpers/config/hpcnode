@@ -1,0 +1,30 @@
+#vm or hw
+HOSTTYPE=hw
+PROFILE=SL6
+
+#IP ADDRESSES
+IPBUILD=10.78.$IPQUAD3.$IPQUAD4
+IPBMC=10.111.$IPQUAD3.$IPQUAD4
+IPMGT=10.111.`expr $IPQUAD3 + 1`.$IPQUAD4
+IPPRV=10.110.$IPQUAD3.$IPQUAD4
+IPIB=10.112.$IPQUAD3.$IPQUAD4
+
+#Interface names (leave blank if no interface on relating network)
+PRV_INT=em1.2
+IB_INT=ib0
+#required
+BUILD_INT=em1
+#Special case only! (eg masters, HA nodes)
+MGT_INT=
+
+#Disk info
+DISKLAYOUT=default
+#usually sda for a hw machines or vda for a vm
+DISK=sda
+#Leave blank if none (used for multidisk layouts)
+DISK2=
+
+#Bonding
+#BONDS="bond0"
+#bond0SLAVES="p2p1 em1"
+#bond0OPTIONS="mode=1 miimon=80 primary=p2p1"
