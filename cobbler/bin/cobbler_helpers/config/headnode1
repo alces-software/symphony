@@ -22,10 +22,8 @@ BUILD_INT=eth1
 MGT_INT=eth2
 
 #Disk info
-DISKLAYOUT=default
+DISKLAYOUT=default-small
 #usually sda for a hw machines or vda for a vm
 DISK=vda
 #Leave blank if none (used for multidisk layouts)
 DISK2=
-
-BUILD_MAC='52:54:00:b9:7e:b3'

@@ -111,6 +111,13 @@ class symphonymonitor::nagios (
        }
 
        # Separate local configuration files - do not overwrite if they already exist
+       file {'/etc/nagios/objects/alces':
+	     ensure=>directory,
+	     mode=>0755,
+	     owner=>'nagios',
+             group=>'nagios',
+       }
+
        file {'/etc/nagios/objects/alces/alces-hostgroups.cfg':
              ensure=>present,
              mode=>0644,
