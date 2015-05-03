@@ -68,6 +68,7 @@ $SNIPPET('cobbler_register')
 $SNIPPET('symphony/enrollipa')
 $SNIPPET('symphony/sitescriptwrapper')
 $SNIPPET('symphony/alceshpc')
+$SNIPPET('symphony/lustre')
 $SNIPPET('symphony/installnova')
 # Enable post-install boot notification
 $SNIPPET('post_anamon')

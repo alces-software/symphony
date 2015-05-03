@@ -1,0 +1,39 @@
+if ! [ -z "$lustre" ]; then
+  TYPE=$lustre
+  if [ "$TYPE" == "client" ]; then 
+    cat << EOF > /var/lib/symphony/firstrun/scripts/lustre.bash
+yum -y install lustre-client lustre-client-modules kernel
+#toggle reboot flag
+touch /firstrun.reboot
+EOF
+  else
+    cat << EOF > /var/lib/symphony/firstrun/scripts/lustre.bash
+yum -y  update
+yum -y install lustre kernel lustre-osd-ldiskfs lustre-modules e2fsprogs e2fsprogs-devel
+#toggle reboot flag
+touch /firstrun.reboot
+EOF
+    cat << EOF >> /etc/modprobe.d/symphony-lustre.conf
+#LIMIT MDS LOAD
+options mdt mds_num_threads=96
+#LIMIT OSS LOAD
+options ost oss_num_threads=96
+EOF
+  fi
+
+  if ! [ -z "$lustretcp" ]; then
+    networks="tcp0(${lustretcp})"
+  fi
+  if ! [ -z "$lustreib" ]; then
+    if ! [ -z "$networks" ]; then
+      networks="${networks},"
+    fi
+    networks="${networks}o2ib0(${lustreib})"
+  fi
+
+  cat << EOF >> /etc/modprobe.d/symphony-lustre.conf
+#IB LNET
+options lnet networks=$networks
+EOF
+
+fi
