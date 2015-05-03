@@ -6,4 +6,6 @@ clearpart --all --initlabel
 part /boot --fstype ext4 --size=512 --asprimary --ondisk $disk1
 part pv.01 --size=1 --grow --asprimary --ondisk $disk1
 volgroup system pv.01
-logvol  /  --fstype ext4 --vgname=system  --size=1 --grow  --name=root
+logvol  /  --fstype ext4 --vgname=system  --size=32768  --name=root
+logvol  swap  --fstype swap --vgname=system  --size=8096  --name=swap1
+logvol  /var  --fstype ext4 --vgname=system  --size=1 --grow  --name=var
