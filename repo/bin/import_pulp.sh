@@ -165,7 +165,7 @@ case $GROUP in
     ;;
   el7other)
     #epel
-    pulp-admin rpm repo create --repo-id=epel7 --feed=http://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/ --serve-http=true --relative-url=epel7 $proxy
+    pulp-admin rpm repo create --repo-id=epel7 --feed=http://anorien.csc.warwick.ac.uk/mirrors/epel/7/x86_64/ --serve-http=true --relative-url=epel7 --skip erratum $proxy
     pulp-admin rpm repo sync run --bg --repo-id=epel7
     #cobbler
     pulp-admin rpm repo create --repo-id=cobbler-el7 --feed=http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/CentOS_CentOS-7/ --serve-http=true --relative-url=cobbler/el7 $proxy
