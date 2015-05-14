@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdojuno el6rdoicehouse el7rdoicehouse el6ceph-giant el7ceph-giant lustre"
+AVAILABLE_GROUPS="centos6 el6other centos7 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc sl6 sl7 el7rdokilo el7rdojuno el6rdoicehouse el7rdoicehouse el6ceph-giant el7ceph-giant lustre"
 
 GROUP=$1
 
@@ -196,7 +196,10 @@ case $GROUP in
     pulp-admin rpm repo create --repo-id=alceshpc-extraslustreserver-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/alces-hpc/extras-lustreserver/ --serve-http=true --relative-url=alceshpc/el6/extraslustreserver/ $proxy
     pulp-admin rpm repo sync run --bg --repo-id=alceshpc-extraslustreserver-el6
     ;;
-  
+  el7rdokilo)
+    pulp-admin rpm repo create --repo-id=el7rdokilo --feed=https://repos.fedorapeople.org/repos/openstack/openstack-kilo/el7/ --serve-http=true --relative-url=rdo/kilo/el7 $proxy
+    pulp-admin rpm repo sync run --bg --repo-id=el7rdokilo
+    ;; 
   el7rdojuno)
     pulp-admin rpm repo create --repo-id=el7rdojuno --feed=https://repos.fedorapeople.org/repos/openstack/openstack-juno/epel-7/ --serve-http=true --relative-url=rdo/juno/el7 $proxy
     pulp-admin rpm repo sync run --bg --repo-id=el7rdojuno

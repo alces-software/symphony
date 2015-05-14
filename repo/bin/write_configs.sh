@@ -90,6 +90,7 @@ function centos7 {
    el7symphony
    el7rdojuno
    el7rdoicehouse
+   el7rdokilo
    el7cephgiant
    el7lustre
 }
@@ -120,6 +121,7 @@ function sl7 {
    el7symphony
    el7rdojuno
    el7rdoicehouse
+   el7rdokilo
    el7cephgiant
    el7lustre
 }
@@ -161,6 +163,11 @@ function el7other {
 function el7symphony {
    STATE=$EL7SYMPHONY
    symphony $STATE $CONFDIR $VERS
+}
+
+unction el7rdokilo {
+   STATE=$EL7RDOKILO
+   rdokilo $STATE $CONFDIR $VERS
 }
 
 function el7rdojuno {
@@ -227,6 +234,11 @@ function symphony {
 function alceshpc {
    cat $BASEDIR/../yumconfigs/alces/alceshpc/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
    cat $BASEDIR/../yumconfigs/alces/alceshpc/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
+}
+
+function rdokilo {
+   cat $BASEDIR/../yumconfigs/rdo/kilo/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/rdo/kilo/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function rdojuno {
