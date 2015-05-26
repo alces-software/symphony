@@ -165,7 +165,7 @@ function el7symphony {
    symphony $STATE $CONFDIR $VERS
 }
 
-unction el7rdokilo {
+function el7rdokilo {
    STATE=$EL7RDOKILO
    rdokilo $STATE $CONFDIR $VERS
 }
