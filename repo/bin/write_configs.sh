@@ -88,6 +88,7 @@ function centos7 {
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el7other
    el7symphony
+   el7alceshpc
    el7rdojuno
    el7rdoicehouse
    el7rdokilo
@@ -119,6 +120,7 @@ function sl7 {
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el7other
    el7symphony
+   el7alceshpc
    el7rdojuno
    el7rdoicehouse
    el7rdokilo
