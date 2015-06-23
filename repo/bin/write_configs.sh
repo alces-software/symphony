@@ -146,6 +146,12 @@ function el6alceshpc {
    STATE=$EL6ALCESHPC
    alceshpc $STATE $CONFDIR $VERS
 }
+
+function el7alceshpc {
+   STATE=$EL7ALCESHPC
+   alceshpc $STATE $CONFDIR $VERS
+}
+
 function el6lustre {
    STATE=$EL6LUSTRE
    lustre $STATE $CONFDIR $VERS
