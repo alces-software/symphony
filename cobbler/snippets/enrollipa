@@ -1,6 +1,6 @@
 if ! [ -z "$ipa_realm" ] && ! [ -z "$ipa_server" ] && ! [ -z "$ipa_password" ] && ! [ -z "$ipa_domain" ]; then
   yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf --enablerepo epel install ipa-client ipa-admintools
   cat << EOF > /var/lib/symphony/firstrun/scripts/enrollipa.bash
-ipa-client-install --no-ntp --mkhomedir --ssh-trust-dns --force-join --realm="$ipa_realm" --server="$ipa_server" -w "$ipa_password" --domain="$ipa_domain" --unattended
+ipa-client-install --no-ntp --mkhomedir --no-ssh --no-sshd --force-join --realm="$ipa_realm" --server="$ipa_server" -w "$ipa_password" --domain="$ipa_domain" --unattended
 EOF
 fi
