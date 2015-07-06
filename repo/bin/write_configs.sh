@@ -88,6 +88,7 @@ function centos7 {
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el7other
    el7symphony
+   el7alceshpc
    el7rdojuno
    el7rdoicehouse
    el7rdokilo
@@ -119,6 +120,7 @@ function sl7 {
    cat $BASEDIR/../yumconfigs/$CONFDIR/yum-repos-$STATE.conf > $BASEDIR/../yumconfigs/$CONFDIR/yum-repos.conf
    el7other
    el7symphony
+   el7alceshpc
    el7rdojuno
    el7rdoicehouse
    el7rdokilo
@@ -146,6 +148,12 @@ function el6alceshpc {
    STATE=$EL6ALCESHPC
    alceshpc $STATE $CONFDIR $VERS
 }
+
+function el7alceshpc {
+   STATE=$EL7ALCESHPC
+   alceshpc $STATE $CONFDIR $VERS
+}
+
 function el6lustre {
    STATE=$EL6LUSTRE
    lustre $STATE $CONFDIR $VERS
