@@ -8,3 +8,5 @@ if [ $os_version == 'rhel7' ]; then
     echo $hostname > /etc/hostname
   fi
 fi
+
+systemctl disable firewalld
