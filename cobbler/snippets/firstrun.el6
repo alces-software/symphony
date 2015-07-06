@@ -4,6 +4,7 @@ cat << 'EOF' > /etc/init.d/symphony-firstrun
 # chkconfig: 2345 99 1
 # alces-init: Run Alces install routines
 # description: Runs Alces install procedures at boot time
+# Required-Start:    $remote_fs $syslog
 #
 . /etc/rc.d/init.d/functions
 

@@ -1,7 +1,7 @@
 cat << EOF >> /etc/systemd/system/symphony-firstrun.service
 [Unit]
 Description=Symphony FirstRun service
-After=network.target
+After=network.target remote-fs.target
 Before=display-manager.service getty@tty1.service
 
 [Service]
