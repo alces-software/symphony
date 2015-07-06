@@ -1,0 +1,10 @@
+if ! [ -z $symphonyprofile ]; then
+  case $symphonyprofile in
+    compute)
+      yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf groupinstall "Compute Node" "Development Tools" 
+    ;;
+    *)
+
+    ;;
+  esac
+fi
