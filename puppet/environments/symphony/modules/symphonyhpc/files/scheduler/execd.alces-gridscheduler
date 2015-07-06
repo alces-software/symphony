@@ -26,6 +26,7 @@
 # chkconfig: - 50 50
 # execd: start/stop grid scheduler execd
 # description: start/stop grid scheduler execd
+# Required-Start:    $remote_fs $syslog
 
 . /etc/rc.d/init.d/functions
 
