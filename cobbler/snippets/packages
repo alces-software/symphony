@@ -13,3 +13,4 @@ wget
 vconfig
 bridge-utils
 patch
+tcl-devel
