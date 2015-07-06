@@ -15,4 +15,9 @@ class symphony::nfs (
   if $nfsimports != undef {
      create_resources( symphony::nfs::fsimport, $nfsimports )
   }
+  service {'rpcbind':
+    enable=>'true',
+    ensure=>'running',
+    require=>Package['nfs-utils']
+  }
 }

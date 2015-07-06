@@ -21,4 +21,7 @@ class symphony::profile::generic (
     profile=>$profile,
     stage=>configure,
   }
+  class { 'symphonyhpc':
+    stage=>configure,
+  }
 }
