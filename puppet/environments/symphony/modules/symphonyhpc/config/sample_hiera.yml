@@ -1,0 +1,4 @@
+#gridscheduler role
+symphonyhpc::scheduler::gridscheduler::role: slave
+#enable gridscheduler
+symphonyhpc::scheduler::gridscheduler: true

@@ -1,0 +1,164 @@
+#!/bin/bash
+################################################################################
+# (c) Copyright 2007-2012 Alces Software Ltd & Stephen F Norledge.             #
+#                                                                              #
+# HPC Cluster Toolkit                                                          #
+#                                                                              #
+# This file/package is part of the HPC Cluster Toolkit                         #
+#                                                                              #
+# This is free software: you can redistribute it and/or modify it under        #
+# the terms of the GNU Affero General Public License as published by the Free  #
+# Software Foundation, either version 3 of the License, or (at your option)    #
+# any later version.                                                           #
+#                                                                              #
+# This file is distributed in the hope that it will be useful, but WITHOUT     #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License #
+# for more details.                                                            #
+#                                                                              #
+# You should have received a copy of the GNU Affero General Public License     #
+# along with this product.  If not, see <http://www.gnu.org/licenses/>.        #
+#                                                                              #
+# For more information on Alces Software, please visit:                        #
+# http://www.alces-software.org/                                               #
+#                                                                              #
+################################################################################
+# chkconfig: - 50 50
+# execd: start/stop grid scheduler execd
+# description: start/stop grid scheduler execd
+
+. /etc/rc.d/init.d/functions
+
+if [ -z "$HOME" ]; then
+  export HOME=/root
+fi
+
+if [ -f /etc/profile.d/modules.sh ]; then
+  . /etc/profile.d/modules.sh
+fi
+
+if [ -f /etc/profile.d/alces-clusterware.sh ]; then
+  . /etc/profile.d/alces-clusterware.sh
+fi
+
+alces_silence_modules  &>/dev/null
+
+module purge 2> /dev/null
+module use /opt/service/etc/modules
+module load services/gridscheduler
+
+# UQHOST is the local host name (unqualified name)
+arch=`$SGE_ROOT/util/arch`
+UQHOST=`$SGE_ROOT/utilbin/$arch/gethostname -name | cut -f1 -d.`
+EXECD_SPOOL_DIR=`qconf -sconf $UQHOST 2>/dev/null | grep execd_spool_dir | awk '{ print $2 }'`
+if [ "$EXECD_SPOOL_DIR" = "" ]; then
+  EXECD_SPOOL_DIR=`qconf -sconf | grep execd_spool_dir | awk '{ print $2 }'`
+fi
+
+check_config() {
+    if [ "$EXECD_SPOOL_DIR" = "" ]; then
+	echo -n "Grid Scheduler execd; could not find spool directory"
+	failure
+        # using exit 6 for 'unconfigured'
+	exit 6
+    elif [ ! -e "$EXECD_SPOOL_DIR" ]; then
+	mkdir -p "$EXECD_SPOOL_DIR"
+	chown geadmin:geadmin "$EXECD_SPOOL_DIR"
+    fi
+}
+
+PID_FILE=$EXECD_SPOOL_DIR/$UQHOST/execd.pid
+DAEMON_CMD=$SGE_ROOT/sbin/execdctl
+CTL_LOG=/var/log/execdctl.log
+
+start()
+{
+  check_config
+  $DAEMON_CMD start >> $CTL_LOG 2>&1
+  c=0
+  while ! running; do
+    c=$(($c+1))
+    if [[ c -gt 30 ]]; then
+      failure
+      echo
+      RETVAL=1
+      return
+    else
+      sleep 1
+    fi
+  done
+  success
+  echo
+  RETVAL=0
+}
+
+restart()
+{
+  echo -n Restarting Grid Scheduler execd:
+  # XXX - softstop only when restarting
+  $DAEMON_CMD softstop >> $CTL_LOG 2>&1
+  start
+}
+
+stop()
+{
+  check_config
+  echo -n "Stopping Grid Scheduler execd:"
+
+  $DAEMON_CMD ${1}stop >> $CTL_LOG 2>&1
+
+  c=0
+  while running; do
+    c=$(($c+1))
+    if [[ c -gt 30 ]]; then
+      failure
+      echo
+      RETVAL=1
+      return
+    else
+      sleep 1
+    fi
+  done
+  rm -f /var/lock/subsys/sgeexecd
+  rm -f $PID_FILE
+  success
+  echo
+  RETVAL=0
+}
+
+running()
+{
+  if [ -f $PID_FILE ]; then
+    status -p $PID_FILE sge_execd >/dev/null 2>&1
+  else
+    pgrep sge_execd >/dev/null 2>&1
+  fi
+}
+
+case "$1" in
+  start)
+    if running; then
+      echo Already started!
+    else
+      echo -n Starting Grid Scheduler execd:
+      start
+    fi
+  ;;
+  stop)
+    # XXX - we default to 'softstop' so running jobs continue
+    running && stop 'soft' || echo Not yet started!
+  ;;
+  hardstop)
+    running && stop || echo Not yet started!
+  ;;
+  restart)
+    restart
+  ;;
+  status)
+    running && echo "RUNNING" || (echo "NOT STARTED"; exit 3)
+  ;;
+  *)
+    echo "Usage: $0 {start|stop|hardstop|restart|status}"
+esac
+
+exit $RETVAL
