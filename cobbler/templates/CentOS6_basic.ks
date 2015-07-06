@@ -48,12 +48,12 @@ $SNIPPET('symphony/fixtime')
 
 %post
 $SNIPPET('log_ks_post')
+$SNIPPET('symphony/hardhostfile')
 $SNIPPET('symphony/firstrun')
 $SNIPPET('symphony/yumupdate')
 $SNIPPET('symphony/symphonyrepoinstall')
 $SNIPPET('symphony/disablenetworkmanager')
 $SNIPPET('symphony/installpuppet')
-$SNIPPET('symphony/hardhostfile')
 $SNIPPET('symphony/infiniband')
 $SNIPPET('symphony/ipmi')
 $SNIPPET('symphony/scrubifcfg')

@@ -21,8 +21,8 @@ $SNIPPET('kickstart_start')
 #PACKAGES
 
 #POSTSCRIPTS
-$SNIPPET('symphony/hardhostfile')
 $SNIPPET('log_ks_post')
+$SNIPPET('symphony/hardhostfile')
 $SNIPPET('symphony/fixtime')
 $SNIPPET('symphony/firstrun')
 $SNIPPET('symphony/yumupdate')
