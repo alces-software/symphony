@@ -31,6 +31,9 @@ case $RELEASE in
   "CentOS Linux release 7.0.1406 (Core) ")
     TREE=centos/7
     ;;
+  "CentOS Linux release 7.1.1503 (Core) ")
+    TREE=centos/7
+    ;;
   *)
     echo "Unable to determine distro tree" >&2
     exit 1
