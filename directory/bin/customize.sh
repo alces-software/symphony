@@ -39,7 +39,7 @@ if ! [ -z "$PRVDOMAIN" ]; then
   ipa dnsrecord-add $DOMAIN symphony-director --a-ip-address=10.78.254.1
   ipa dnsrecord-add $DOMAIN. $EXTRADOMAINHEADER  --ns-rec=symphony-director
   ipa dnsrecord-add $DOMAIN. $MGTDOMAINHEADER --ns-rec=symphony-director
-
+  ipa dnsrecord-add $PRVDOMAIN symphony-directory --a-ip-address=10.110.254.2
   ipa config-mod --defaultshell /bin/bash
   ipa config-mod --homedirectory /users
   ipa group-add ClusterUsers --desc="Generic Cluster Users"
