@@ -37,6 +37,16 @@ if ! [ -z "$PRVDOMAIN" ]; then
   ipa dnsforwardzone-add $EXTRADOMAIN. --forwarder 10.78.254.1 --forward-policy=only
   ipa dnsrecord-add $DOMAIN. $PRVDOMAINHEADER --ns-rec=symphony-directory.mgt.symphony.local.
   ipa dnsrecord-add $DOMAIN symphony-director --a-ip-address=10.78.254.1
+  ipa dnsrecord-add mgt.symphony.local symphony-director --a-ip-address=10.78.254.1
+  ipa dnsrecord-add mgt.symphony.local symphony-repo --a-ip-address=10.78.254.3
+  ipa dnsrecord-add mgt.symphony.local symphony-monitor --a-ip-address=10.78.254.4
+  ipa dnsrecord-add mgt.symphony.local symphony-app --a-ip-address=10.78.254.5
+
+  ipa dnsrecord-add 10.in-addr.arpa. 1.254.78 --ptr-hostname symphony-director.mgt.symphony.local.
+  ipa dnsrecord-add 10.in-addr.arpa. 3.254.78 --ptr-hostname symphony-repo.mgt.symphony.local.
+  ipa dnsrecord-add 10.in-addr.arpa. 4.254.78 --ptr-hostname symphony-monitor.mgt.symphony.local.
+  ipa dnsrecord-add 10.in-addr.arpa. 5.254.78 --ptr-hostname symphony-app.mgt.symphony.local.
+
   ipa dnsrecord-add $DOMAIN. $EXTRADOMAINHEADER  --ns-rec=symphony-director
   ipa dnsrecord-add $DOMAIN. $MGTDOMAINHEADER --ns-rec=symphony-director
   ipa dnsrecord-add $PRVDOMAIN symphony-directory --a-ip-address=10.110.254.2
