@@ -1,0 +1,43 @@
+#Client name string
+symphonydirector::clientname: unconfigured
+#RSA ssh key for root@director
+symphonydirector::customization::directorkey: AAAAB3NzaC1yc2EAAAADAQABAAABAQC4KLcghujZgI3Ms0CokWbtYYdEeso+PWojXU7Wx9WjM19NPQkkRiWeHXvdGDh6KvUwjc4viAzp1iQ4hIRAyyZPFKbR5nMT7dBgywmTKAo1fvOJh7OErfckatH7mawophPiKAsmh1R6WWgEPtrJaNzSFTyhQFZqabCPlhNjp3RpAgzUSRxjqX515Dzsp/h8tPOGEgH6IaTkoUZMhluVemyW7NzTm3XHv4TwYeQtT1YudqC1PuiBlx4Zrj7rWvZporxkWm5N8IVTVszD+Z/IA96sPf7nE/iW3mz06ORqHtsEK8DORxNl4R9U0NxXh9f1sdD059G7yEW03c3SP9AG8+EV
+#Install director ssh key to root
+symphonydirector::customization::install_directorkey: true
+#Enable syslog pushing
+symphonydirector::customization::install_syslog: true
+
+#TIME
+#Enable ntp config
+symphonydirector::time::install_ntp: true
+#Add additional ntp servers (to os default)
+#symphonydirector::time::additionalntpservers: 
+# - '0.centos.pool.ntp.org'
+
+#MAIL
+#Enable postfix setup
+symphonydirector::mail::install_postfix: true
+#External mail relay for your domain
+symphonydirector::mail::externalrelay: smtp.alces-software.com
+#Internal mail domain to send mail as
+symphonydirector::mail::maildomain: mgt.symphony.local
+#Mail from address - this usually needs to be an email address your relay server will relay for
+symphonydirector::mail::mailfrom: test@alces-software.com
+#Enable configuration of yum repos via pulp on symphony-repo (default:true)
+symphonyrepo::yum::install_repoconfigs: true
+#which symphony repos to enable
+symphonyrepo::yum::enable_symphonyrepos:
+ - epel
+ - symphony
+#Enable install/config of ganglia (default:true)
+symphonymonitor::ganglia::install_ganglia: true
+#Enable install/config of nagios (default:true)
+symphonymonitor::nagios::install_nagios: true
+#Symphony APP nfs imports
+symphony::nfsimports:
+ 'symphony-app.mgt.symphony.local:/opt/gridware':
+   target: '/opt/gridware'
+   options: intr,rsize=32768,wsize=32768,_netdev
+ 'symphony-app.mgt.symphony.local:/opt/clusterware':
+   target: '/opt/clusterware'
+   options: intr,rsize=32768,wsize=32768,_netdev
