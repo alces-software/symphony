@@ -7,5 +7,6 @@ part /boot --fstype ext4 --size=512 --asprimary --ondisk $disk1
 part pv.01 --size=1 --grow --asprimary --ondisk $disk1
 volgroup system pv.01
 logvol  /  --fstype ext4 --vgname=system  --size=16384  --name=root
+logvol  /tmp --fstype ext4 --vgname=system  --size=8096  --name=tmp
 logvol  swap  --fstype swap --vgname=system  --size=8096  --name=swap1
 logvol  /var  --fstype ext4 --vgname=system  --size=1 --grow  --name=var
