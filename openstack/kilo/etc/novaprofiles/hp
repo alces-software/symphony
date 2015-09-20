@@ -1,0 +1,5 @@
+PRV=vi0
+BUILD=vi1
+DMZBR=eno1.4
+PRVBR=eno1.2
+BUILDBR=eno1
