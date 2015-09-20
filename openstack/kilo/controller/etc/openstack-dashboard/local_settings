@@ -125,9 +125,10 @@ SECRET_KEY='16509f7eebcf5ec6cf9a'
 #}
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    }
+   'default': {
+       'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+       'LOCATION': '127.0.0.1:11211',
+   }
 }
 
 # Send email to the console by default
