@@ -39,5 +39,5 @@ sed $src \
 -e "s/%GLANCEUUID%/$GLANCEUUID/g" \
 -e "s/%KEYSTONEADMINTOKEN%/$KEYSTONEADMINTOKEN/g" \
 -e "s/%SERVICEUSERID%/$SERVICEUSERID/g" \
--e "s/%MY_PRVIP%/$MY_PRVIP/g" \
+-e "s/%MY_IP%/$MY_IP/g" \
 -e "s/%MY_FQDN%/$MY_FQDN/g" > $dest
