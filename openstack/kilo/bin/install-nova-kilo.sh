@@ -1,10 +1,6 @@
-BUILDIP=10.78.
-BUILDNETMASK=255.255.0.0
+BUILDIP=`facter ipaddress_eth0`
+BUILDNETMASK=`facter netmask_eth0`
 DNS=10.78.254.1
-
-#SYMPHONY SYNC
-scp -pr symphony-director:/var/lib/symphony /var/lib/.
-cd /var/lib/symphony && git pull
 
 #IPTABLES
 systemctl disable firewalld.service
@@ -29,6 +25,7 @@ cat << EOF > /etc/sysconfig/iptables
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
+EOF
 systemctl stop iptables; systemctl start iptables
 
 #NETWORK
@@ -100,7 +97,7 @@ chkconfig neutron-openvswitch-agent on
 
 #NFS
 . /var/lib/symphony/openstack/kilo/bin/vars
-Configure the glance NFS mount
+#Configure the glance NFS mount
 mkdir -p /var/lib/glance/images
 echo "$STORAGE_IP:/var/lib/glance/images /var/lib/glance/images nfs defaults 0 0" >> /etc/fstab
 mount /var/lib/glance/images
