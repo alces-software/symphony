@@ -1,5 +1,5 @@
-BUILDIP=`facter ipaddress_eth0`
-BUILDNETMASK=`facter netmask_eth0`
+BUILDIP=10.78.10.1
+BUILDNETMASK=255.255.0.0
 DNS=10.78.254.1
 
 #IPTABLES
