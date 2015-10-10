@@ -248,7 +248,7 @@ case $GROUP in
      pulp-admin rpm repo sync run --bg --repo-id=lustre-server-el6
      pulp-admin rpm repo create --repo-id=lustre-client-el6 --feed=https://downloads.hpdd.intel.com/public/lustre/latest-maintenance-release/el6/client/ --serve-http=true --relative-url=lustre/el6/client/
      pulp-admin rpm repo sync run --bg --repo-id=lustre-client-el6
-     pulp-admin rpm repo create --repo-id=lustre-e2fsprogs-el6 --feed=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el6/RPMS/ --serve-http=true --relative-url=lustre/el6/e2fsprogs/
+     pulp-admin rpm repo create --repo-id=lustre-e2fsprogs-el6 --feed=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el6/ --serve-http=true --relative-url=lustre/el6/e2fsprogs/
      pulp-admin rpm repo sync run --bg --repo-id=lustre-e2fsprogs-el6
      pulp-admin rpm repo create --repo-id=lustre-extra-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/el6/extra/ --serve-http=true --relative-url=lustre/el6/extra/
      pulp-admin rpm repo sync run --bg --repo-id=lustre-extra-el6
@@ -258,7 +258,7 @@ case $GROUP in
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-server-el6
      pulp-admin rpm repo create --repo-id=intellustre-client-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.3.0.0/client/el6/ --serve-http=true --relative-url=intellustre/el6/client/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-client-el6
-     pulp-admin rpm repo create --repo-id=intellustre-e2fsprogs-el6 --feed=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el6/RPMS/ --serve-http=true --relative-url=intellustre/el6/e2fsprogs/
+     pulp-admin rpm repo create --repo-id=intellustre-e2fsprogs-el6 --feed=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el6/ --serve-http=true --relative-url=intellustre/el6/e2fsprogs/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-e2fsprogs-el6
      pulp-admin rpm repo create --repo-id=intellustre-extra-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.3.0.0/extra/el6/ --serve-http=true --relative-url=intellustre/el6/extra/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-extra-el6
