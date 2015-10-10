@@ -1,4 +1,5 @@
 mkdir -p /var/lib/symphony/firstrun/{bin,scripts}
+mkdir -p /var/log/symphony/
 cat << EOF > /var/lib/symphony/firstrun/bin/firstrun
 #!/bin/bash
 echo "-------------------------------------------------------------------------------"
