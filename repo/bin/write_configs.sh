@@ -50,6 +50,7 @@ function centos6 {
    el6rdoicehouse
    el6cephgiant
    el6lustre
+   el6intellustre
 }
 
 function rhel6 {
@@ -64,6 +65,7 @@ function rhel6 {
    el6alceshpc
    el6rdoicehouse
    el6lustre
+   el6intellustre
 }
 function rhelcomputenode6 {
    STATE=$RHELCOMPUTENODE6
@@ -77,6 +79,7 @@ function rhelcomputenode6 {
    el6alceshpc
    el6rdoicehouse
    el6lustre
+   el6intellustre
 }
 
 function centos7 {
@@ -94,6 +97,7 @@ function centos7 {
    el7rdokilo
    el7cephgiant
    el7lustre
+   el7intellustre
 }
 
 function sl6 {
@@ -109,6 +113,7 @@ function sl6 {
    el6rdoicehouse
    el6cephgiant
    el6lustre
+   el6intellustre
 }
 
 function sl7 {
@@ -126,6 +131,7 @@ function sl7 {
    el7rdokilo
    el7cephgiant
    el7lustre
+   el7intellustre
 }
 
 #REPOSITORY GROUP
@@ -157,6 +163,11 @@ function el7alceshpc {
 function el6lustre {
    STATE=$EL6LUSTRE
    lustre $STATE $CONFDIR $VERS
+}
+
+function el6intellustre {
+   STATE=$EL6INTELLUSTRE
+   intellustre $STATE $CONFDIR $VERS
 }
 
 function el7other {
@@ -206,6 +217,11 @@ function el7lustre {
     STATE=$EL7LUSTRE
     lustre $STATE $CONFDIR $VERS
 }
+function el7intellustre {
+    STATE=$EL7INTELLUSTRE
+    intellustre $STATE $CONFDIR $VERS
+}
+
 
 #PACKAGE REPOSITORIES
 
@@ -267,6 +283,11 @@ function cephgiant {
 function lustre {
    cat $BASEDIR/../yumconfigs/lustre/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
    cat $BASEDIR/../yumconfigs/lustre/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
+}
+
+function intellustre {
+   cat $BASEDIR/../yumconfigs/intellustre/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/intellustre/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 #FUNCTIONS TO RUN
