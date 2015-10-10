@@ -1,7 +1,7 @@
 if ! [ -z $clusterware ]; then
 
   cat << 'EOF' > /var/lib/symphony/firstrun/scripts/clusterware.bash
-  curl -sL http://git.io/clusterware-installer | sudo alces_OS=el6 /bin/bash &>/var/log/symphony/clusterwareinstall.log
+  curl -sL http://git.io/clusterware-installer | alces_OS=el6 /bin/bash &>/var/log/symphony/clusterwareinstall.log
 
 EOF
 
