@@ -28,6 +28,9 @@ symphony::nfsimports:
  'symphony-app.mgt.symphony.local:/opt/gridware':
    target: '/opt/gridware'
    options: intr,rsize=32768,wsize=32768,_netdev
- 'symphony-app.mgt.symphony.local:/opt/clusterware':
-   target: '/opt/clusterware'
-   options: intr,rsize=32768,wsize=32768,_netdev
+# 'storage1.prv.<CLUSTERNAME>.compute.estate:/export/apps':
+#   target: '/opt/apps'
+#   options: intr,rsize=32768,wsize=32768,_netdev
+# 'storage1.prv.<CLUSTERNAME>.compute.estate:/export/users':
+#   target: '/users'
+#   options: intr,rsize=32768,wsize=32768,_netdev
