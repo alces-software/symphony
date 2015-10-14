@@ -5,6 +5,12 @@ if ! [ -z "$lustre" ]; then
 yum -y install lustre-client lustre-client-modules kernel
 #toggle reboot flag
 touch /firstrun.reboot
+#if $varExists('lustremounts')
+#set $template = "symphony/" + $lustremounts
+$SNIPPET($template)
+#else
+$SNIPPET('symphony/lustremounts')
+#end if
 EOF
   else
     cat << EOF > /var/lib/symphony/firstrun/scripts/lustre.bash
@@ -35,5 +41,4 @@ EOF
 #IB LNET
 options lnet networks=$networks
 EOF
-
 fi

@@ -1,0 +1,9 @@
+#mkdir -p /mnt/tier1
+#mkdir -p /mnt/tier2
+#mkdir -p /mnt/scratch
+cat << EOD >> /etc/fstab
+#Lustre
+#10.112.2.11@o2ib0:10.112.2.12@o2ib0:/scratch	  /mnt/scratch	  lustre  defaults,_netdev	0 0
+#10.112.2.11@o2ib0:10.112.2.12@o2ib0:/tier1        /mnt/tier1      lustre  defaults,_netdev        0 0
+#10.112.2.11@o2ib0:10.112.2.12@o2ib0:/tier2        /mnt/tier2      lustre  defaults,_netdev        0 0
+EOD
