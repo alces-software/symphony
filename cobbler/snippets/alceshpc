@@ -10,6 +10,7 @@ EOF
 
   cat << EOF > /var/lib/symphony/firstrun/scripts/alceshpc.bash
 puppet agent -t --environment=alceshpc
+rpm -e environment-modules compat-openmpi
 #toggle reboot flag
 touch /firstrun.reboot
 EOF
