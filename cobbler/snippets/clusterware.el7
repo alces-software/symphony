@@ -1,8 +1,28 @@
 if ! [ -z $clusterware ]; then
-
-  cat << 'EOF' > /var/lib/symphony/firstrun/scripts/clusterware.bash
-  curl -sL http://git.io/clusterware-installer | alces_OS=el7 /bin/bash &>/var/log/symphony/clusterwareinstall.log
-
+  if [ "$clusterware" == "local" ]; then
+    dest="http://symphony-app.mgt.symphony.local/clusterware/bootstrap"
+  else
+    dest="http://git.io/clusterware-installer"
+  fi
+  cat << EOF > /var/lib/symphony/firstrun/scripts/clusterware.bash
+  curl -sL $dest | alces_OS=el7 /bin/bash &>/var/log/symphony/clusterwareinstall.log
 EOF
-
+cat << EOD > /opt/clusterware/etc/config.yml
+---
+cluster:
+  files:
+  - url: http://symphony-app.mgt.symphony.local/clusterware/config/genders
+    target: etc/genders
+    mode: "0644"
+    owner: root:root
+  - url: http://symphony-app.mgt.symphony.local/clusterware/config/modulespath
+    target: etc/modulespath
+    mode: "0644"
+    owner: root:root
+  - url: http://symphony-app.mgt.symphony.local/clusterware/config/modules
+    target: etc/skel/modules
+    mode: "0644"
+    owner: root:root
+EOD
+EOF
 fi
