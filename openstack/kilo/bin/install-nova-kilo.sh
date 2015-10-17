@@ -1,6 +1,19 @@
-BUILDIP=10.78.10.1
-BUILDNETMASK=255.255.0.0
+#DNS
 DNS=10.78.254.1
+#My interface on the build network
+BUILDINT=`test -z "$1" && echo "eth0" || echo "$1"`
+#My interface on the private network
+PRVINT=`test -z "$2" && echo "eth1" || echo "$2"`
+
+#Build IP of the machine being configured
+BUILDIP=`facter ipaddress_$BUILDINT`
+#Netmask of the build interface
+BUILDNETMASK=`facter netmask_$BUILDINT`
+
+#Private IP of the machine being configured
+PRVIP=`facter ipaddress_$PRVINT`
+#Netmask of the build interface
+PRVNETMASK=`facter netmask_$PRVINT`
 
 #IPTABLES
 systemctl disable firewalld.service
@@ -29,8 +42,8 @@ EOF
 systemctl stop iptables; systemctl start iptables
 
 #NETWORK
-cat << EOF > /etc/sysconfig/network-scripts/ifcfg-eth0
-DEVICE=eth0
+cat << EOF > /etc/sysconfig/network-scripts/ifcfg-$BUILDINT
+DEVICE=$BUILDINT
 ONBOOT=yes
 DEVICETYPE=ovs
 TYPE=OVSPort
@@ -38,8 +51,11 @@ OVS_BRIDGE=br-build
 BOOTPROTO=none
 HOTPLUG=no
 EOF
-cat << EOF > /etc/sysconfig/network-scripts/ifcfg-eth1
-DEVICE=eth1
+if ( echo $BUILDINT | grep -qe "^.*\.[0-9]*" ); then
+  echo VLAN=yes >> /etc/sysconfig/network-scripts/ifcfg-$BUILDINT
+fi
+cat << EOF > /etc/sysconfig/network-scripts/ifcfg-$PRVINT
+DEVICE=$PRVINT
 ONBOOT=yes
 DEVICETYPE=ovs
 TYPE=OVSPort
@@ -47,12 +63,18 @@ OVS_BRIDGE=br-prv
 BOOTPROTO=none
 HOTPLUG=no
 EOF
+if ( echo $PRVINT | grep -qe "^.*\.[0-9]*" ); then
+  echo VLAN=yes >> /etc/sysconfig/network-scripts/ifcfg-$PRVINT
+fi
 cat << EOF > /etc/sysconfig/network-scripts/ifcfg-br-prv
 DEVICE=br-prv
 DEVICETYPE=ovs
 TYPE=OVSBridge
 ONBOOT=yes
 BOOTPROTO=none
+IPADDR=$PRVIP
+NETMASK=$PRVNETMASK
+DNS1=$DNS
 EOF
 cat << EOF > /etc/sysconfig/network-scripts/ifcfg-br-build
 DEVICE=br-build
@@ -61,7 +83,7 @@ TYPE=OVSBridge
 ONBOOT=yes
 BOOTPROTO=none
 IPADDR=$BUILDIP
-NETMASK=$NETMASK
+NETMASK=$BUILDNETMASK
 DNS1=$DNS
 EOF
 cat > /etc/sysconfig/network-scripts/ifcfg-br-int << EOF
