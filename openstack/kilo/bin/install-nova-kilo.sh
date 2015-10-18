@@ -17,7 +17,7 @@ PRVNETMASK=`facter netmask_$PRVINT`
 
 #IPTABLES
 systemctl disable firewalld.service
-yum install -y iptables-services iptables-utils
+yum install -y iptables-services iptables-utils syslinux
 systemctl stop firewalld.service
 systemctl enable iptables
 cat << EOF > /etc/sysconfig/iptables
