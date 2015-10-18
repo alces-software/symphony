@@ -17,3 +17,5 @@ source ./vars
 ./pkitool --initca
 ./pkitool --server server
 ./build-dh
+
+echo vpn:$ADMINPASS | chpasswd
