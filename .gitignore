@@ -11,3 +11,4 @@
 /repo/iso/*
 /puppet/environments/symphony/hieradata/site.yaml
 /puppet/environments/symphony/hieradata/*
+openstack/kilo/bin/vars
