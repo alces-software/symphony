@@ -10,3 +10,10 @@ sh /var/lib/symphony/openstack/kilo/bin/install.sh network/etc/neutron/dhcp_agen
 sh /var/lib/symphony/openstack/kilo/bin/install.sh network/etc/neutron/neutron.conf /etc/neutron/neutron.conf
 sh /var/lib/symphony/openstack/kilo/bin/install.sh network/etc/neutron/metadata_agent.ini /etc/neutron/metadata_agent.ini
 
+#scrub openvpn certs
+cd /etc/openvpn/easyrsa/
+source ./vars
+./clean-all
+./pkitool --initca
+./pkitool --server server
+./build-dh
