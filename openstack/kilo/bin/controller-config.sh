@@ -80,3 +80,8 @@ openstack endpoint create \
          --publicurl "https://$FQDN:8080/neutron" \
          --adminurl "http://$GATEWAY_IP:9696" \
          --internalurl "http://$GATEWAY_IP:9696"
+
+openstack user set --password $ADMINPASS openstackservices
+openstack user set --password $ADMINPASS stackadmin
+openstack user set --password $ADMINPASS prvadmin
+openstack user set --password $ADMINPASS alcesstack
