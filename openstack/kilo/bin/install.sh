@@ -26,6 +26,8 @@ fi
 
 if ! [ -f "${dest}.bak" ]; then
   cp -v $dest "${dest}.bak"
+else
+  cp -v $dest "${dest}.bak.`date +%Y%m%d%H%M%S`"
 fi 
 
 sed $src \
