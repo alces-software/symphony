@@ -96,6 +96,7 @@ function centos7 {
    el7rdoicehouse
    el7rdokilo
    el7cephgiant
+   el7cephhammer
    el7lustre
    el7intellustre
 }
@@ -130,6 +131,7 @@ function sl7 {
    el7rdoicehouse
    el7rdokilo
    el7cephgiant
+   el7cephhammer
    el7lustre
    el7intellustre
 }
@@ -213,6 +215,11 @@ function el7cephgiant {
     STATE=$EL7CEPHGIANT
     cephgiant $STATE $CONFDIR $VERS
 }
+
+function el7cephhammer {
+    STATE=$EL7CEPHHAMMER
+    cephhammer $STATE $CONFDIR $VERS
+}
 function el7lustre {
     STATE=$EL7LUSTRE
     lustre $STATE $CONFDIR $VERS
@@ -278,6 +285,11 @@ function rdoicehouse {
 function cephgiant {
    cat $BASEDIR/../yumconfigs/ceph/giant/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
    cat $BASEDIR/../yumconfigs/ceph/giant/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
+}
+
+function cephhammer {
+   cat $BASEDIR/../yumconfigs/ceph/hammer/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum.conf
+   cat $BASEDIR/../yumconfigs/ceph/hammer/el$3/yum-repos-$1.conf >> $BASEDIR/../yumconfigs/$2/yum-repos.conf
 }
 
 function lustre {
