@@ -6,7 +6,6 @@ if ! [ -z $clusterware ]; then
   fi
   cat << EOF > /var/lib/symphony/firstrun/scripts/clusterware.bash
   curl -sL $dest | alces_OS=el7 /bin/bash &>/var/log/symphony/clusterwareinstall.log
-EOF
 cat << EOD > /opt/clusterware/etc/config.yml
 ---
 cluster:
