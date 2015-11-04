@@ -28,8 +28,8 @@ SYMPHONY_HOME=/var/lib/symphony/
 
 if ! [ -z "$PRVDOMAIN" ]; then
   #Add PRV zone to cobbler dns management
-  sed -ri /etc/cobbler/settings -e "s/^#?manage_forward_zones.*/manage_forward_zones: ['mgt.symphony.local','$PRVDOMAIN']/g"
-  sed -ri /etc/cobbler/settings -e "s/^#?manage_reverse_zones.*/manage_reverse_zones: ['10.78','10.110']/g"
+  sed -ri /etc/cobbler/settings -e "s/^#?manage_forward_zones.*/manage_forward_zones: ['mgt.symphony.local','$PRVDOMAIN','$MGTDOMAIN','$PUBDOMAIN']/g"
+  sed -ri /etc/cobbler/settings -e "s/^#?manage_reverse_zones.*/manage_reverse_zones: ['10.78','10.110','10.111','10.77']/g"
 cat << EOF > /etc/cobbler/zone_templates/$PRVDOMAIN
 \\\$TTL 300
 @                       IN      SOA     \$cobbler_server. nobody.example.com. (
