@@ -5,6 +5,7 @@ if ! [ -z $clusterware ]; then
     dest="http://git.io/clusterware-installer"
   fi
   cat << EOF > /var/lib/symphony/firstrun/scripts/clusterware.bash
+  export alces_DISABLE_SPINNER=true
   curl -sL $dest | alces_OS=el7 /bin/bash &>/var/log/symphony/clusterwareinstall.log
 cat << EOD > /opt/clusterware/etc/config.yml
 ---
