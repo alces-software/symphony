@@ -35,6 +35,7 @@ if ! [ -z "$PRVDOMAIN" ]; then
   ipa dnszone-add $PRVDOMAIN --name-server symphony-directory.mgt.symphony.local.
   ipa dnsforwardzone-add $MGTDOMAIN. --forwarder 10.78.254.1 --forward-policy=only
   ipa dnsforwardzone-add $EXTRADOMAIN. --forwarder 10.78.254.1 --forward-policy=only
+  ipa dnsforwardzone-add $PUBDOMAIN. --forwarder 10.78.254.1 --forward-policy=only
   ipa dnsrecord-add $DOMAIN. $PRVDOMAINHEADER --ns-rec=symphony-directory.mgt.symphony.local.
   ipa dnsrecord-add $DOMAIN symphony-director --a-ip-address=10.78.254.1
   ipa dnsrecord-add mgt.symphony.local symphony-director --a-ip-address=10.78.254.1
@@ -55,6 +56,7 @@ if ! [ -z "$PRVDOMAIN" ]; then
 
   ipa dnsrecord-add $DOMAIN. $EXTRADOMAINHEADER  --ns-rec=symphony-director
   ipa dnsrecord-add $DOMAIN. $MGTDOMAINHEADER --ns-rec=symphony-director
+  ipa dnsrecord-add $DOMAIN. $PUBDOMAINHEADER --ns-rec=symphony-director
   ipa dnsrecord-add $PRVDOMAIN symphony-directory --a-ip-address=10.110.254.2
   ipa config-mod --defaultshell /bin/bash
   ipa config-mod --homedirectory /users
