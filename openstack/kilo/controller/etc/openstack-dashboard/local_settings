@@ -642,3 +642,5 @@ REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES']
 # and are not encrypted on the browser. This is an experimental API and
 # may be deprecated in the future without notice.
 #REST_API_ADDITIONAL_SETTINGS = []
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+AUTH_USER_MODEL = 'openstack_auth.User'

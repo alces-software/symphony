@@ -57,6 +57,7 @@ if ! [ -z "$PRVDOMAIN" ]; then
   ipa dnsrecord-add $DOMAIN. $EXTRADOMAINHEADER  --ns-rec=symphony-director
   ipa dnsrecord-add $DOMAIN. $MGTDOMAINHEADER --ns-rec=symphony-director
   ipa dnsrecord-add $DOMAIN. $PUBDOMAINHEADER --ns-rec=symphony-director
+  ipa dnsrecord-add $DOMAIN. openstack --ns-rec=symphony-director
   ipa dnsrecord-add $PRVDOMAIN symphony-directory --a-ip-address=10.110.254.2
 
   ipa dnsrecord-add $DOMAIN @ --mx-preference=0 --mx-exchanger=symphony-director
