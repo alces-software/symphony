@@ -54,11 +54,15 @@ patch -p0 << 'EOD'
      fi
 
 +    if is_module ko2iblnd; then
-+       echo "Lustre modules are still enabled."
-+       echo "Please stop lustre and remove modules before stopping the rdma service."
-+       echo_failure
-+       echo
-+       return 1
++      echo "Lustre modules are still enabled."
++      if ( mount | grep -q "type lustre" ); then
++        echo "Lustre is still mounted - attempting unmount."
++        echo "Please stop lustre and remove modules before stopping the rdma service."
++        /bin/umount -a -f -t lustre
++      fi
++      /usr/sbin/lustre_rmmod
++      sleep 20
++      return 0
 +    fi
 +
      if ! is_module ib_core; then
