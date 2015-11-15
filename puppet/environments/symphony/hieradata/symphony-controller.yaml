@@ -1,0 +1,5 @@
+symphonyrepo::yum::enable_symphonyrepos:
+ - epel
+ - symphony
+ - rdo-kilo
+symphony::nfsimports:
