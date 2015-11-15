@@ -1,7 +1,7 @@
 #Client name string
-symphonydirector::clientname: fabian
+symphonydirector::clientname: unconfigured
 #RSA ssh key for root@director
-symphonydirector::customization::directorkey: AAAAB3NzaC1yc2EAAAADAQABAAABAQDPcoDb/FXvj1rp5F+5TONj1jbWFKe/U54SWKNyvAnJNpcNt64aB5zQwrOBcuYTYXSbN424+3jqAOK7F4yk6RDQoinuy0DAm8IX1pUnsRMBOz5qb9g7qhp5pvysWNJXvhhMnHuVipyAPz6gI7TJ7fghJcwWlJ7rtVZaggxf9ykW6chjmFq0XiWtVdRawfdVpec91uYJwxSJn+G9VJgiNuzybJJnXIYOHZvppTrvWDDHnBdHUrekVmRMOiMs2m0C9db/SHy6jCdPMZySyl0BXvaGw4slQWSa2o93XAuK5lpPmJWEdirJ+qldbHavtBzV1aS7p8Aptqdr/3yACpOHyqWR
+symphonydirector::customization::directorkey: AAAAB3NzaC1yc2EAAAADAQABAAABAQC4KLcghujZgI3Ms0CokWbtYYdEeso+PWojXU7Wx9WjM19NPQkkRiWeHXvdGDh6KvUwjc4viAzp1iQ4hIRAyyZPFKbR5nMT7dBgywmTKAo1fvOJh7OErfckatH7mawophPiKAsmh1R6WWgEPtrJaNzSFTyhQFZqabCPlhNjp3RpAgzUSRxjqX515Dzsp/h8tPOGEgH6IaTkoUZMhluVemyW7NzTm3XHv4TwYeQtT1YudqC1PuiBlx4Zrj7rWvZporxkWm5N8IVTVszD+Z/IA96sPf7nE/iW3mz06ORqHtsEK8DORxNl4R9U0NxXh9f1sdD059G7yEW03c3SP9AG8+EV
 #Install director ssh key to root
 symphonydirector::customization::install_directorkey: true
 #Enable syslog pushing
@@ -28,6 +28,9 @@ symphony::nfsimports:
  'symphony-app.mgt.symphony.local:/opt/gridware':
    target: '/opt/gridware'
    options: intr,rsize=32768,wsize=32768,_netdev
+# 'storage1.prv.<CLUSTERNAME>.compute.estate:/export/gridware':
+#   target: '/opt/gridware'
+#   options: intr,rsize=32768,wsize=32768,_netdev
 # 'storage1.prv.<CLUSTERNAME>.compute.estate:/export/apps':
 #   target: '/opt/apps'
 #   options: intr,rsize=32768,wsize=32768,_netdev
