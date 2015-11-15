@@ -370,6 +370,7 @@ POLICY_FILES_PATH = '/etc/openstack-dashboard'
 # Change this patch to the appropriate static directory containing
 # two files: _variables.scss and _styles.scss
 #CUSTOM_THEME_PATH = 'static/themes/default'
+CUSTOM_THEME_PATH = 'static/themes/alces'
 
 LOGGING = {
     'version': 1,
