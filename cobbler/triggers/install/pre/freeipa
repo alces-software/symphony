@@ -1,0 +1,9 @@
+#!/bin/bash
+. /var/lib/symphony/cobbler/bin/cobbler_helpers/config/site
+HOSTNAME="$2.$PRVDOMAIN"
+IP=`dig +short $HOSTNAME`
+kinit -kt /root/cobbler.keytab cobbler@FABIAN.COMPUTE.ESTATE
+ipa host-disable $HOSTNAME
+ipa host-add $HOSTNAME --ip-address $IP
+ipa host-mod $HOSTNAME --password "$IPAPASSWORD"
+kdestroy
