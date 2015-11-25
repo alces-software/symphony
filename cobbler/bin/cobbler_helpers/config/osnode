@@ -31,3 +31,6 @@ DISK2=
 #BONDS="bond0"
 #bond0SLAVES="em1 em2"
 #bond0OPTIONS="miimon=100 mode=4 lacp_rate=1"
+
+#Nova hosts should not join IPA realm
+IDMIP=
