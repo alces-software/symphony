@@ -5,8 +5,8 @@ echo "Have you copeid <clientname>.key.pem to /etc/certs/nova_key.pem"
 echo "Have you updates /var/lib/symphony/openstack/kilo/bin/vars with CLUSTER ADMINPASS" 
 echo "Press any key to continue.."; read
 
-NEWTOKEN=`openssl rand -hex 10`
-sed -i /var/lib/symphony/openstack/kilo/bin/vars -e "s/^KEYSTONEADMINTOKEN=.*$/KEYSTONEADMINTOKEN=$NEWTOKEN/g"
+#NEWTOKEN=`openssl rand -hex 10`
+#sed -i /var/lib/symphony/openstack/kilo/bin/vars -e "s/^KEYSTONEADMINTOKEN=.*$/KEYSTONEADMINTOKEN=$NEWTOKEN/g"
 
 . /var/lib/symphony/openstack/kilo/bin/vars
 
@@ -32,6 +32,7 @@ cat /etc/certs/ca_crt >> /etc/certs/apache_crt.pem
 cat /etc/certs/ca_crt >> /etc/certs/nginx_crt.pem
 cp -pav /etc/certs/nova_key.pem /etc/certs/apache_key.pem
 cp -pav /etc/certs/nova_key.pem /etc/certs/nginx_key.pem
+chown nova:nova /etc/certs/nova*
 chown nginx:nginx /etc/certs/nginx*
 chmod 600 /etc/certs/*
 
