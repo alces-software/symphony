@@ -1,4 +1,4 @@
-if ! [ -z $clusterware ]; then
+if ! [ -z "$clusterware" ]; then
   if [ "$clusterware" == "local" ]; then
     dest="http://symphony-app.mgt.symphony.local/clusterware/bootstrap"
   else
