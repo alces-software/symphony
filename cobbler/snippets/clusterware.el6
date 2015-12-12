@@ -1,4 +1,6 @@
 if ! [ -z "$clusterware" ]; then
+  #Install Development Tools for better gridware support
+  yum -e 0 -y --config http://symphony-repo.mgt.symphony.local/configs/$tree/yum.conf groupinstall "Development Tools"
   if [ "$clusterware" == "local" ]; then
     dest="http://symphony-app.mgt.symphony.local/clusterware/bootstrap"
   else
