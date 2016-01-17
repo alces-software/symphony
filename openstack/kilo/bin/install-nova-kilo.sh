@@ -19,6 +19,7 @@ PRVNETMASK=`facter netmask_$PRVINT`
 systemctl disable firewalld.service
 yum install -y iptables-services iptables-utils syslinux
 systemctl stop firewalld.service
+systemctl stop iptables
 systemctl enable iptables
 cat << EOF > /etc/sysconfig/iptables
 *filter
@@ -39,7 +40,6 @@ cat << EOF > /etc/sysconfig/iptables
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 EOF
-systemctl stop iptables; systemctl start iptables
 
 #NETWORK
 cat << EOF > /etc/sysconfig/network-scripts/ifcfg-$BUILDINT
@@ -108,13 +108,13 @@ yum -y  install python-novaclient crudini openstack-utils openstack-neutron open
 /var/lib/symphony/openstack/kilo/bin/install.sh nova/etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
 /var/lib/symphony/openstack/kilo/bin/install.sh nova/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini
 ln -snf /etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugin.ini
-service openstack-nova-compute start
-service libvirtd start
+#service openstack-nova-compute start
+#service libvirtd start
 chkconfig openstack-nova-compute on
 chkconfig libvirtd on
-service openvswitch start
+#service openvswitch start
 chkconfig openvswitch on
-service neutron-openvswitch-agent start
+#service neutron-openvswitch-agent start
 chkconfig neutron-openvswitch-agent on
 
 #NFS
