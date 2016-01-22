@@ -24,6 +24,7 @@ sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/nginx/nginx.co
 sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/nova/nova.conf /etc/nova/nova.conf
 sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/httpd/conf.d/redirect-to-https.conf /etc/httpd/conf.d/redirect.conf
 sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf
+sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/heat/heat.conf /etc/heat/heat.conf
 
 #Fixup Certs
 cp /etc/certs/nova_crt.pem /etc/certs/apache_crt.pem
@@ -81,8 +82,20 @@ openstack endpoint create \
          --publicurl "https://$FQDN:8080/neutron" \
          --adminurl "http://$GATEWAY_IP:9696" \
          --internalurl "http://$GATEWAY_IP:9696"
+openstack endpoint create \
+  orchestration \
+  --publicurl "https://$FQDN:8080/heat/v1/%(tenant_id)s" \
+   --internalurl "http://$GATEWAY_IP:8004/v1/%(tenant_id)s" \
+   --adminurl "http://$GATEWAY_IP:8004/v1/%(tenant_id)s"
+openstack endpoint create \
+  --publicurl "https://$FQDN:8080/cloudformation/v1" \
+  --internalurl "http://$GATEWAY_IP:8000/v1" \
+  --adminurl "http://$GATEWAY_IP:8000/v1" \
+  --region RegionOne \
+  cloudformation
 
 openstack user set --password $ADMINPASS openstackservices
 openstack user set --password $ADMINPASS stackadmin
 openstack user set --password $ADMINPASS prvadmin
 openstack user set --password $ADMINPASS alcesstack
+openstack user set --password $ADMINPASS heat
