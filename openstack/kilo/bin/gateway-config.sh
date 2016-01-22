@@ -18,4 +18,4 @@ source ./vars
 ./pkitool --server server
 ./build-dh
 
-echo vpn:$ADMINPASS | chpasswd
+echo admin:$ADMINPASS | chpasswd
