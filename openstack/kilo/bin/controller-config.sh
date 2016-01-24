@@ -27,12 +27,12 @@ sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/httpd/conf.d/s
 sh /var/lib/symphony/openstack/kilo/bin/install.sh controller/etc/heat/heat.conf /etc/heat/heat.conf
 
 #Fixup Certs
-cp /etc/certs/nova_crt.pem /etc/certs/apache_crt.pem
-cp /etc/certs/nova_crt.pem /etc/certs/nginx_crt.pem
+cp -f /etc/certs/nova_crt.pem /etc/certs/apache_crt.pem
+cp -f /etc/certs/nova_crt.pem /etc/certs/nginx_crt.pem
 cat /etc/certs/ca_crt >> /etc/certs/apache_crt.pem
 cat /etc/certs/ca_crt >> /etc/certs/nginx_crt.pem
-cp -pav /etc/certs/nova_key.pem /etc/certs/apache_key.pem
-cp -pav /etc/certs/nova_key.pem /etc/certs/nginx_key.pem
+cp -fpav /etc/certs/nova_key.pem /etc/certs/apache_key.pem
+cp -fpav /etc/certs/nova_key.pem /etc/certs/nginx_key.pem
 chown nova:nova /etc/certs/nova*
 chown nginx:nginx /etc/certs/nginx*
 chmod 600 /etc/certs/*
@@ -91,7 +91,6 @@ openstack endpoint create \
   --publicurl "https://$FQDN:8080/cloudformation/v1" \
   --internalurl "http://$GATEWAY_IP:8000/v1" \
   --adminurl "http://$GATEWAY_IP:8000/v1" \
-  --region RegionOne \
   cloudformation
 
 openstack user set --password $ADMINPASS openstackservices
