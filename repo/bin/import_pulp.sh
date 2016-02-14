@@ -25,7 +25,7 @@
 ################################################################################
 SYMPHONY_HOME=/var/lib/symphony/
 
-AVAILABLE_GROUPS="centos6 el6other centos7 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc el7alceshpc sl6 sl7 el7rdokilo el7rdojuno el6rdoicehouse el7rdoicehouse el6ceph-giant el7ceph-giant el7ceph-hammer el6lustre el7lustre intellustre"
+AVAILABLE_GROUPS="centos6 el6other centos7 el7other el6symphony el7symphony rhel6 rhelhpcnode6 el6alceshpc el7alceshpc sl6 sl7 el7rdokilo el7rdojuno el6rdoicehouse el7rdoicehouse el6ceph-giant el7ceph-giant el7ceph-hammer el6lustre el7lustre intellustre el7intellustre"
 
 GROUP=$1
 
@@ -269,14 +269,20 @@ case $GROUP in
      pulp-admin rpm repo sync run --bg --repo-id=lustre-extra-el7
      ;;
    intellustre)
-     pulp-admin rpm repo create --repo-id=intellustre-server-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.3.0.0/server/el6/ --serve-http=true --relative-url=intellustre/el6/server/
+     pulp-admin rpm repo create --repo-id=intellustre-server-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.4.1.1/server/el6/ --serve-http=true --relative-url=intellustre/el6/server/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-server-el6
-     pulp-admin rpm repo create --repo-id=intellustre-client-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.3.0.0/client/el6/ --serve-http=true --relative-url=intellustre/el6/client/
+     pulp-admin rpm repo create --repo-id=intellustre-client-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.4.1.1/client/el6/ --serve-http=true --relative-url=intellustre/el6/client/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-client-el6
      pulp-admin rpm repo create --repo-id=intellustre-e2fsprogs-el6 --feed=https://downloads.hpdd.intel.com/public/e2fsprogs/latest/el6/ --serve-http=true --relative-url=intellustre/el6/e2fsprogs/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-e2fsprogs-el6
-     pulp-admin rpm repo create --repo-id=intellustre-extra-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.3.0.0/extra/el6/ --serve-http=true --relative-url=intellustre/el6/extra/
+     pulp-admin rpm repo create --repo-id=intellustre-extra-el6 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.4.1.1/extra/el6/ --serve-http=true --relative-url=intellustre/el6/extra/
      pulp-admin rpm repo sync run --bg --repo-id=intellustre-extra-el6
+     ;;
+   el7intellustre)
+     pulp-admin rpm repo create --repo-id=intellustre-client-el7 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.4.1.1/client/el7/ --serve-http=true --relative-url=intellustre/el7/client/
+     pulp-admin rpm repo sync run --bg --repo-id=intellustre-client-el7
+     pulp-admin rpm repo create --repo-id=intellustre-extra-el7 --feed=https://s3-eu-west-1.amazonaws.com/repos.alces-software.com/lustre/intel/2.4.1.1/extra/el7/ --serve-http=true --relative-url=intellustre/el7/extra/
+     pulp-admin rpm repo sync run --bg --repo-id=intellustre-extra-el7
      ;;
    *)
     echo "Unknown Group" >&2
