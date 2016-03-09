@@ -1,9 +1,11 @@
 #DNS
 DNS=10.78.254.1
 #My interface on the build network
-BUILDINT=`test -z "$1" && echo "eth0" || echo "$1"`
+BUILDINT=`test -z "$1" && echo "em1" || echo "$1"`
 #My interface on the private network
-PRVINT=`test -z "$2" && echo "eth1" || echo "$2"`
+PRVINT=`test -z "$2" && echo "em1.2" || echo "$2"`
+#My interface on the mgt network
+MGTINT=`test -z "$3" && echo "em1.1" || echo "$3"`
 
 #Build IP of the machine being configured
 BUILDIP=`facter ipaddress_$BUILDINT`
@@ -14,6 +16,11 @@ BUILDNETMASK=`facter netmask_$BUILDINT`
 PRVIP=`facter ipaddress_$PRVINT`
 #Netmask of the build interface
 PRVNETMASK=`facter netmask_$PRVINT`
+
+#MGT IP of the machine being configured
+MGTIP=`facter ipaddress_$MGTINT`
+#Netmask of the build interface
+MGTNETMASK=`facter netmask_$MGTINT`
 
 #IPTABLES
 systemctl disable firewalld.service
@@ -66,6 +73,18 @@ EOF
 if ( echo $PRVINT | grep -qe "^.*\.[0-9]*" ); then
   echo VLAN=yes >> /etc/sysconfig/network-scripts/ifcfg-$PRVINT
 fi
+cat << EOF > /etc/sysconfig/network-scripts/ifcfg-$MGTINT
+DEVICE=$MGTINT
+ONBOOT=yes
+DEVICETYPE=ovs
+TYPE=OVSPort
+OVS_BRIDGE=br-mgt
+BOOTPROTO=none
+HOTPLUG=no
+EOF
+if ( echo $MGTINT | grep -qe "^.*\.[0-9]*" ); then
+  echo VLAN=yes >> /etc/sysconfig/network-scripts/ifcfg-$MGTINT
+fi
 cat << EOF > /etc/sysconfig/network-scripts/ifcfg-br-prv
 DEVICE=br-prv
 DEVICETYPE=ovs
@@ -84,6 +103,16 @@ ONBOOT=yes
 BOOTPROTO=none
 IPADDR=$BUILDIP
 NETMASK=$BUILDNETMASK
+DNS1=$DNS
+EOF
+cat << EOF > /etc/sysconfig/network-scripts/ifcfg-br-mgt
+DEVICE=br-mgt
+DEVICETYPE=ovs
+TYPE=OVSBridge
+ONBOOT=yes
+BOOTPROTO=none
+IPADDR=$MGTIP
+NETMASK=$MGTNETMASK
 DNS1=$DNS
 EOF
 cat > /etc/sysconfig/network-scripts/ifcfg-br-int << EOF
