@@ -5,5 +5,5 @@ The Alces Software Symphony deployment framework is a set of tools and conventio
 Symphony is designed to deploy, manage and monitor research compute environments - it is designed for administrators to deploy persistent research compute environments either in the Cloud or on baremetal.
 
 ##Documentation
-[Symphony Wiki](https://github.com/alces-software.com/symphony/wiki/)
+[Symphony Wiki](https://github.com/alces-software/symphony/wiki/)
 
